@@ -1,10 +1,14 @@
-using yourFirstJobFront.Entidades.Request; 
-using yourFirstJobFront.Utilitarios
+using Newtonsoft.Json;
+using System.Text;
+using yourFirstJobFront.Entidades.Request;
+using yourFirstJobFront.Entidades.Response;
+using yourFirstJobFront.Utilitarios;
 namespace yourFirstJobFront;
 
 public partial class Login : ContentPage
 {
-	public Login()
+    String laURL = "https://localhost:44364/";
+    public Login()
 	{
 		InitializeComponent();
 	}
@@ -15,7 +19,7 @@ public partial class Login : ContentPage
         {
             ReqLogin req = new ReqLogin();
 
-            req.correoElectronico = txtCorreo.Text;
+            req.username = txtUsername.Text;
             req.password = txtPassword.Text;
 
             var jsonContent = new StringContent(JsonConvert.SerializeObject(req), Encoding.UTF8, "application/json");
@@ -31,13 +35,16 @@ public partial class Login : ContentPage
 
                 res = JsonConvert.DeserializeObject<ResLogin>(responseContent);
 
-                if (res.result)
+                if (res.resultado)
                 {
 
-                    Sesion.usuarioSesion.id = res.usuario.id;
-                    Sesion.usuarioSesion.correoElectronico = res.usuario.correoElectronico;
-                    Sesion.usuarioSesion.nombre = res.usuario.nombre;
+                    
+
+                    Sesion.usuarioSesion.idUsuario = res.usuario.idUsuario;
+                    Sesion.usuarioSesion.nombreUsuario = res.usuario.nombreUsuario;
                     Sesion.usuarioSesion.apellidos = res.usuario.apellidos;
+                    Sesion.usuarioSesion.correo = res.usuario.correo;
+                    
 
                     Navigation.PushAsync(new MainPage());
 
@@ -49,13 +56,20 @@ public partial class Login : ContentPage
             }
             else
             {
-                await DisplayAlert("No se encontró el backend", "Error en la conexión con el EndPoint", "Aceptar");
-            }
+                await DisplayAlert("Error", "Error en el servidor", "Aceptar");
+            
+        }
 
         }
         catch (Exception ex)
         {
-            await DisplayAlert("Error interno", "Error en la aplicación: " + ex.StackTrace.ToString(), "Aceptar");
+            await DisplayAlert("Error Grave", "Elimine la aplicacion", "Aceptar");
         }
     }
+    private void OnRegisterClicked(object sender, EventArgs e)
+    {
+        // Navigate to the registration page
+        Navigation.PushAsync(new Registrar());
+    }
+
 }

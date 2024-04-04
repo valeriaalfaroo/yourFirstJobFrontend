@@ -14,7 +14,7 @@
                 <Entry
              x:Name="txtUsername"
              Keyboard="Text"/>
-                <Label Text="Contraseña"/>
+                <Label Text="Contraseña"/>  
                 <Entry
              x:Name="txtPassword"
              IsPassword="True"
@@ -23,6 +23,10 @@
              x:Name="btnIngresar"
              Text="Ingresar"
              Clicked="btnIngresar_Clicked"/>
+
+                <Label Text="No tienes una cuenta? Has click en el boton de abajo"  VerticalOptions="Center" />
+                <Button Text="Registrarse" Clicked="OnRegisterClicked" TextColor="Blue" BackgroundColor="Transparent" BorderColor="Transparent" />
+
             </VerticalStackLayout>
         </Frame>
 

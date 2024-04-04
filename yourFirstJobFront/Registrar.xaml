@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="yourFirstJobFront.Registrar"
+             Title="Registrar">
+    <ScrollView>
+           <Grid x:Name="Contenedor" BackgroundColor="White">
+    <Frame Margin="10,0,10,0" VerticalOptions="Center">
+        <VerticalStackLayout Spacing="15" VerticalOptions="Center">
+            <Label FontAttributes="Bold"
+         FontSize="Large"
+         HorizontalOptions="Center"
+         Text="yourFirstJob."/>
+            <Label Text="Username"/>
+            <Entry
+         x:Name="txtUsername"
+         Keyboard="Text"/>
+                <Label Text="Apellidos"/>
+                <Entry
+                 x:Name="txtApellidos"
+                 Keyboard="Text"/>
+                <Label Text="Correo"/>
+                <Entry
+                 x:Name="txtCorreo"
+                 Keyboard="Email"/>
+                <Label Text="Telefono"/>
+                <Entry
+                 x:Name="txtTelefono"
+                 Keyboard="Telephone"/>
+                <Label Text="Fecha de nacimiento"/>
+                <Entry
+                 x:Name="txtFechaNacimiento"
+                 Keyboard="Numeric"/>
+                <Label Text="Region"/>
+
+                    <StackLayout Orientation="Vertical">
+                        <RadioButton Content="Costa Rica" GroupName="region" Value="1" CheckedChanged="RadioButton_CheckedChanged" />
+                        <RadioButton Content="Panama" GroupName="region" Value="2" CheckedChanged="RadioButton_CheckedChanged" />
+                        <RadioButton Content="Mexico" GroupName="region" Value="3" CheckedChanged="RadioButton_CheckedChanged" />
+                    </StackLayout>
+
+
+
+
+
+                    <Label Text="Contraseña"/>
+            <Entry
+         x:Name="txtPassword"
+         IsPassword="True"
+         Keyboard="Text"/>
+            <Button 
+         x:Name="btnIngresar"
+         Text="Ingresar"
+         Clicked="btnIngresar_Clicked"/>
+        </VerticalStackLayout>
+    </Frame>
+
+</Grid>
+    </ScrollView>
+   
+</ContentPage>
