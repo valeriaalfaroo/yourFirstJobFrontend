@@ -17,7 +17,7 @@ HeightRequest="30"/>
 HeightRequest="30"/>
             </HorizontalStackLayout>
 
-            <ListView x:Name="empleosListView" Grid.Row="1">
+            <ListView x:Name="empleosListView">
 
 
                 <ListView.ItemTemplate>

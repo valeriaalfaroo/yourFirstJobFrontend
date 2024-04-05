@@ -66,8 +66,11 @@ namespace yourFirstJobFront
         }
 
         private void btnIngresarOfertaEmpleo_Clicked(object sender, EventArgs e)
+
         {
-            Navigation.PushAsync(new VerEmpleo());
+            var selectedItem = (sender as Button).BindingContext as Empleo;
+            int idOfertas = selectedItem.idOfertas;
+            Navigation.PushAsync(new VerEmpleo(idOfertas));
         }
 
         private void Homebtn_Clicked(object sender, EventArgs e)
