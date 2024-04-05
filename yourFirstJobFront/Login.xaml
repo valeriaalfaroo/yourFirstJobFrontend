@@ -22,10 +22,10 @@
                 <Button
              x:Name="btnIngresar"
              Text="Ingresar"
-             Clicked="btnIngresar_Clicked"/>
+             Clicked="btnIngresar_Clicked" BackgroundColor="OrangeRed"/>
 
                 <Label Text="No tienes una cuenta? Has click en el boton de abajo"  VerticalOptions="Center" />
-                <Button Text="Registrarse" Clicked="OnRegisterClicked" TextColor="Blue" BackgroundColor="Transparent" BorderColor="Transparent" />
+                <Button Text="Registrarse" Clicked="OnRegisterClicked" TextColor="OrangeRed" BackgroundColor="Transparent" BorderColor="Transparent" />
 
             </VerticalStackLayout>
         </Frame>

@@ -13,7 +13,7 @@ namespace yourFirstJobFront.Entidades.entities
         public int idOferta { get; set; }
         public string nombreArchivo { get; set; }
 
-        public BinaryReader archivo { get; set; }
+        public string archivo { get; set; }
 
         public string tipo { get; set; }
 

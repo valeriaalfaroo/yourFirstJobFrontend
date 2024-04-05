@@ -1,77 +1,80 @@
-namespace yourFirstJobFront;
 using yourFirstJobFront.Entidades.Request;
 using yourFirstJobFront.Entidades.Response;
 using yourFirstJobFront.Utilitarios;
 using Newtonsoft.Json;
 using System.Text;
 using yourFirstJobFront.Entidades.entities;
-
-public partial class Registrar : ContentPage
+namespace yourFirstJobFront
 {
-    String laURL = "https://localhost:44364/";
-    int selectedRadio = -1; 
-    public Registrar()
+    public partial class Registrar : ContentPage
     {
-        InitializeComponent();
-    }
-
-    private async void btnIngresar_Clicked(object sender, EventArgs e)
-    {
-        try
+        String laURL = "https://localhost:44364/";
+        int selectedRadio = -1;
+        public Registrar()
         {
-            ReqIngresarUsuario req = new ReqIngresarUsuario();
+            InitializeComponent();
+        }
 
-            req.nombreUsuario = txtUsername.Text;
-            req.apellidos = txtApellidos.Text;
-            req.correo= txtCorreo.Text;
-            req.telefono = int.Parse(txtTelefono.Text);
-            req.fechaNacimiento = DateTime.Parse(txtFechaNacimiento.Text);
-            req.idRegion = selectedRadio;
-            req.contrasena = txtPassword.Text;
-
-            
-            var jsonContent = new StringContent(JsonConvert.SerializeObject(req), Encoding.UTF8, "application/json");
-
-            HttpClient httpClient = new HttpClient();
-
-            var response = await httpClient.PostAsync(laURL + "api/usuario/ingresarUsuario", jsonContent);
-
-            if (response.IsSuccessStatusCode)
+        private async void btnIngresar_Clicked(object sender, EventArgs e)
+        {
+            try
             {
-                var responseContent = await response.Content.ReadAsStringAsync();
-                ResIngresarUsuario res = new ResIngresarUsuario();
+                ReqIngresarUsuario req = new ReqIngresarUsuario();
 
-                res = JsonConvert.DeserializeObject<ResIngresarUsuario>(responseContent);
+                req.nombreUsuario = txtUsername.Text;
+                req.apellidos = txtApellidos.Text;
+                req.correo = txtCorreo.Text;
+                req.telefono = int.Parse(txtTelefono.Text);
+                req.fechaNacimiento = DateTime.Parse(txtFechaNacimiento.Text);
+                req.idRegion = selectedRadio;
+                req.contrasena = txtPassword.Text;
 
-                if (res.resultado)
+
+                var jsonContent = new StringContent(JsonConvert.SerializeObject(req), Encoding.UTF8, "application/json");
+
+                HttpClient httpClient = new HttpClient();
+
+                var response = await httpClient.PostAsync(laURL + "api/usuario/ingresarUsuario", jsonContent);
+
+                if (response.IsSuccessStatusCode)
                 {
+                    var responseContent = await response.Content.ReadAsStringAsync();
+                    ResIngresarUsuario res = new ResIngresarUsuario();
 
-                    Navigation.PushAsync(new MainPage());
+                    res = JsonConvert.DeserializeObject<ResIngresarUsuario>(responseContent);
 
+                    if (res.resultado)
+                    {
+
+                        Navigation.PushAsync(new MainPage());
+
+                    }
+                    else
+                    {
+                        await DisplayAlert("Error", "No se pudo ingresar la informacion en el registrar", "Aceptar");
+                    }
                 }
                 else
                 {
-                    await DisplayAlert("Error", "No se pudo ingresar la informacion en el registrar", "Aceptar");
+                    await DisplayAlert("Error", "Error en el servidor", "Aceptar");
                 }
+
             }
-            else
+            catch (Exception ex)
             {
-                await DisplayAlert("Error", "Error en el servidor", "Aceptar");
+                await DisplayAlert("Error Grave", "Elimine la aplicacion", "Aceptar");
             }
-
         }
-        catch (Exception ex)
+
+
+        private void RadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            await DisplayAlert("Error Grave", "Elimine la aplicacion", "Aceptar");
+            RadioButton radioButton = (RadioButton)sender;
+            selectedRadio = Convert.ToInt32(radioButton.Value);
         }
+
+
     }
-
-
-    private void RadioButton_CheckedChanged(object sender, EventArgs e)
-    {
-        RadioButton radioButton = (RadioButton)sender;
-        selectedRadio = Convert.ToInt32(radioButton.Value);
-    }
-
-
 }
+
+
