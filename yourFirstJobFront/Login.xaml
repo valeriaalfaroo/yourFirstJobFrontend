@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="yourFirstJobFront.Login"
-             Title="Login">
+             Title="">
     <Grid x:Name="Contenedor" BackgroundColor="White">
         <Frame Margin="10,0,10,0" VerticalOptions="Center">
             <VerticalStackLayout Spacing="15" VerticalOptions="Center">

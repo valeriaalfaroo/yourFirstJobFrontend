@@ -67,7 +67,27 @@ namespace yourFirstJobFront
 
         private void btnIngresarOfertaEmpleo_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new IngresarEmpleo());
+            Navigation.PushAsync(new VerEmpleo());
+        }
+
+        private void Homebtn_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new MainPage());
+        }
+
+        private void Searchbtn_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new MainPage());
+        }
+
+        private void Applicationbtn_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new MainPage());
+        }
+
+        private void Profilebtn_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new MainPage());
         }
     }
 

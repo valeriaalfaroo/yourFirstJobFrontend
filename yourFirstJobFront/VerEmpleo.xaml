@@ -1,12 +1,13 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="yourFirstJobFront.MainPage">
+             x:Class="yourFirstJobFront.VerEmpleo"
+             Title="">
 
     <ScrollView>
 
-        <VerticalStackLayout >
-            <HorizontalStackLayout Spacing="150" HorizontalOptions="Center">
+        <VerticalStackLayout>
+            <HorizontalStackLayout Spacing="150"  HorizontalOptions="Center">
                 <ImageButton x:Name="Homebtn" Source="home.png" Clicked="Homebtn_Clicked"  WidthRequest="30" 
              HeightRequest="30"/>
                 <ImageButton x:Name="Searchbtn" Source="search.png" Clicked="Searchbtn_Clicked"  WidthRequest="30" 
@@ -17,13 +18,7 @@ HeightRequest="30"/>
 HeightRequest="30"/>
             </HorizontalStackLayout>
 
-            <ListView x:Name="empleosListView" Grid.Row="1">
-
-
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Grid x:Name="Contenedor" BackgroundColor="LightGray">
+            <Grid x:Name="Contenedor" BackgroundColor="LightGray">
                                 <Frame Margin="20,10,20,10" VerticalOptions="Center" BackgroundColor="White">
                                     <VerticalStackLayout Spacing="50" VerticalOptions="Center" Padding="10" BackgroundColor="White">
                                         <Label Text="{Binding tituloEmpleo}" TextColor="Black" FontSize="Header" FontAttributes="Bold"/>
@@ -32,24 +27,18 @@ HeightRequest="30"/>
                                         <Label Text="{Binding descripcionEmpleo,StringFormat='Descripción: {0}'}" TextColor="Black"/>
 
                                         <Button
-                x:Name="btnIngresarOfertaEmpleo"
-                Text="Ver Oferta de Empleo"
-                Clicked="btnIngresarOfertaEmpleo_Clicked" BackgroundColor="Black" TextColor="White"/>
+                                         x:Name="btnAplicar"
+                                         Text="Aplicar"
+                                         BackgroundColor="Black" TextColor="White" Clicked="btnAplicar_Clicked"/>
                                     </VerticalStackLayout>
                                 </Frame>
 
                             </Grid>
-                        </ViewCell>
+                       
 
-                    </DataTemplate>
-                </ListView.ItemTemplate>
 
-            </ListView>
-
-           
         </VerticalStackLayout>
     </ScrollView>
-
 
 
 </ContentPage>
