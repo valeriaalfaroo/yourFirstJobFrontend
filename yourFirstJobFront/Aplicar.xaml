@@ -3,10 +3,107 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="yourFirstJobFront.Aplicar"
              Title="Aplicar">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <ScrollView>
+
+        <VerticalStackLayout>
+            <HorizontalStackLayout Spacing="150"  HorizontalOptions="Center">
+                <ImageButton x:Name="Homebtn" Source="home.png" Clicked="Homebtn_Clicked"  WidthRequest="30" 
+             HeightRequest="30"/>
+                <ImageButton x:Name="Searchbtn" Source="search.png" Clicked="Searchbtn_Clicked"  WidthRequest="30" 
+HeightRequest="30"/>
+                <ImageButton x:Name="Applicationbtn" Source="application.png" Clicked="Applicationbtn_Clicked"  WidthRequest="30" 
+HeightRequest="30"/>
+                <ImageButton x:Name="Profilebtn" Source="profile.png" Clicked="Profilebtn_Clicked"  WidthRequest="30" 
+HeightRequest="30"/>
+            </HorizontalStackLayout>
+
+            <ListView x:Name="usuarioListView">
+
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid x:Name="Contenedor" BackgroundColor="LightGray">
+                                <Frame Margin="20,10,20,10" VerticalOptions="Center" BackgroundColor="White">
+                                    <VerticalStackLayout Spacing="20" VerticalOptions="Center" Padding="10" BackgroundColor="White">
+                                        <Label Text="{Binding nombreUsuario}" TextColor="Black" FontSize="Medium" FontAttributes="Bold"/>
+                                        <Label Text="{Binding apellidos}" TextColor="Black" FontSize="Medium"/>
+                                        <Label Text="{Binding correo,StringFormat='correo:{0}'}" TextColor="Black"/>
+                                        <Label Text="{Binding fechaNacimiento,StringFormat='Fecha de Nacimiento:{0}'}" TextColor="Black"/>
+                                        <Label Text="{Binding sitioWeb,StringFormat='Sitio Web:{0}'}" TextColor="Black"/>
+                                        <Label Text="{Binding telefono,StringFormat='Telefono:{0}'}" TextColor="Black"/>
+
+                                        <Label Text="Idiomas:"/>
+                                        <CollectionView ItemsSource="{Binding listaIdiomas}">
+                                            <CollectionView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackLayout>
+
+                                                        <Label Text="{Binding idioma,StringFormat='Idioma:{0}'}" TextColor="Black" />
+                                                        <Label Text="{Binding nivel,StringFormat='Nivel:{0}'}" TextColor="Black"/>
+                                                    </StackLayout>
+                                                </DataTemplate>
+                                            </CollectionView.ItemTemplate>
+                                        </CollectionView>
+
+                                        <Label Text="Habilidades:"/>
+                                        <CollectionView ItemsSource="{Binding listaHabilidades}">
+                                            <CollectionView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackLayout>
+
+                                                        <Label Text="{Binding categoria}" TextColor="Black" />
+                                                        <Label Text="{Binding descripcion,StringFormat='Descripcion:{0}'}" TextColor="Black" />
+                                                    </StackLayout>
+                                                </DataTemplate>
+                                            </CollectionView.ItemTemplate>
+                                        </CollectionView>
+
+                                        <Label Text="Experiencia Laboral:"/>
+                                        <CollectionView ItemsSource="{Binding listaExperienciaLaboral}">
+                                            <CollectionView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackLayout>
+                                                        <Label Text="{Binding puesto,StringFormat='Puesto:{0}'}" TextColor="Black" />
+                                                        <Label Text="{Binding nombreEmpresa,StringFormat='Empresa:{0}'}" TextColor="Black" />
+                                                        <Label Text="{Binding responsabilidades,StringFormat='Responsabilidades:{0}'}" TextColor="Black" />
+                                                        <Label Text="{Binding fechaInicio,StringFormat='Fecha de Inicio:{0}'}" TextColor="Black" />
+                                                        <Label Text="{Binding fechaFinalizacion,StringFormat='Fecha de Finalizacion:{0}'}" TextColor="Black" />
+                                                    </StackLayout>
+                                                </DataTemplate>
+                                            </CollectionView.ItemTemplate>
+                                        </CollectionView>
+                                        <Label Text="Archivos adjuntos:"/>
+                                        <CollectionView ItemsSource="{Binding listaArchivosUsuario}">
+                                            <CollectionView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackLayout>
+                                                        <Label Text="{Binding nombreArchivo}" TextColor="Black" />
+         
+                                                    </StackLayout>
+                                                </DataTemplate>
+                                            </CollectionView.ItemTemplate>
+                                        </CollectionView>
+
+
+                                        <Button
+     x:Name="btnAplicar"
+     Text="Aplicar a este trabajo"
+     Clicked="btnAplicar_Clicked" BackgroundColor="Black" TextColor="White"/>
+                                    </VerticalStackLayout>
+                                </Frame>
+
+                            </Grid>
+                        </ViewCell>
+
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+
+
+
+        </VerticalStackLayout>
+    </ScrollView>
+
 </ContentPage>

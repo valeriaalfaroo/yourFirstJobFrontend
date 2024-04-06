@@ -100,6 +100,8 @@ public partial class VerEmpleo : ContentPage
 
     private void btnAplicar_Clicked(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new Aplicar()); 
+        var selectedItem = (sender as Button).BindingContext as Empleo;
+        int idOfertas = selectedItem.idOfertas;
+        Navigation.PushAsync(new Aplicar(idOfertas)); 
     }
 }
