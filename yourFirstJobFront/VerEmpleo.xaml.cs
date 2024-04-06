@@ -85,12 +85,12 @@ public partial class VerEmpleo : ContentPage
    
     private void Searchbtn_Clicked(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new MainPage());
+        Navigation.PushAsync(new BuscarPorTitulo());
     }
 
     private void Applicationbtn_Clicked(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new MainPage());
+        Navigation.PushAsync(new VerAplicaciones());
     }
 
     private void Profilebtn_Clicked(object sender, EventArgs e)

@@ -11,9 +11,11 @@ public partial class Aplicar : ContentPage
 {
     String laURL = "https://localhost:44364/";
     Usuario usuario = new Usuario();
+    int idOfertas; 
     public Aplicar(int idOfertas)
 	{
 		InitializeComponent();
+        this.idOfertas = idOfertas;
         LoadUsuario(); 
 	}
 
@@ -83,7 +85,8 @@ public partial class Aplicar : ContentPage
                 ReqIngresarAplicacion req = new ReqIngresarAplicacion();
 
             req.estadoAplicacion = "Enviado";
-          //  req.idOfertaEmpleo = idOfertas; 
+            req.idOfertaEmpleo = idOfertas;
+            req.idUsuario = Sesion.usuarioSesion.idUsuario;
 
                 var jsonContent= new StringContent(JsonConvert.SerializeObject(req), Encoding.UTF8, "application/json");
 
@@ -107,7 +110,7 @@ public partial class Aplicar : ContentPage
                 }
                     else
                     {
-                        await DisplayAlert("Incorrecto", "¡Usuario o contraseña incorrecto!", "Aceptar");
+                        await DisplayAlert("Error en el servidor", "No se pudo enviar la aplicacion", "Aceptar");
                     }
                 }
                 else
