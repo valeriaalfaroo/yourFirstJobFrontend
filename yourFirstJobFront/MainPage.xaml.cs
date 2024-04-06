@@ -90,7 +90,7 @@ namespace yourFirstJobFront
 
         private void Profilebtn_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new MainPage());
+            Navigation.PushAsync(new Perfil());
         }
     }
 

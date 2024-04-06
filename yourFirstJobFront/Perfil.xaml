@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="yourFirstJobFront.Perfil"
+             Title="Perfil">
+    
+    <ScrollView>
+
+        <HorizontalStackLayout>
+
+            <VerticalStackLayout Spacing="25"  HorizontalOptions="Center">
+
+                <Image Source="profile.png" WidthRequest="150" HeightRequest="150"/>
+
+                <Label x:Name="lblNombreCompleto" Text="" VerticalOptions="Center" HorizontalOptions="Center" />
+
+                <Label Text="Idomas: " VerticalOptions="Center" HorizontalOptions="Center" />
+
+                <Label Text="Habilidades: " VerticalOptions="Center" HorizontalOptions="Center" />
+
+                <Label Text="Estudios: " VerticalOptions="Center" HorizontalOptions="Center" />
+
+                <Label Text="Experiencia: " VerticalOptions="Center" HorizontalOptions="Center" />
+
+            </VerticalStackLayout>
+            
+        </HorizontalStackLayout>
+        
+    </ScrollView>
+    
+</ContentPage>
