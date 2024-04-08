@@ -238,7 +238,7 @@ public partial class Perfil : ContentPage
         }
         catch (Exception ex)
         {
-            await DisplayAlert("Error Grave", "Elimine la aplicacion" + ex.Message, "Aceptar");
+            await DisplayAlert("Error Grave", "Elimine la aplicacion: " + ex.Message, "Aceptar");
         }
     }
 
@@ -258,5 +258,10 @@ public partial class Perfil : ContentPage
             lblSitioWeb.IsVisible = false;
         }
         
+    }
+
+    private void Button_Clicked_EditarUsuario(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new UpdateUsuario());
     }
 }

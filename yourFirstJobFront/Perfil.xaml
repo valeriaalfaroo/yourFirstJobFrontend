@@ -110,11 +110,16 @@
             <BoxView HeightRequest="1" x:Name="lineExperiencia" Color="Gray" HorizontalOptions="FillAndExpand" Margin="0,5" />
 
             <!-- Botones -->
-            <Button Text="Actualizar Usuario" BackgroundColor="OrangeRed" TextColor="White" HorizontalOptions="FillAndExpand" />
-            <Button Text="Actualizar Idiomas" BackgroundColor="OrangeRed" TextColor="White" HorizontalOptions="FillAndExpand" />
-            <Button Text="Actualizar Habilidades" BackgroundColor="OrangeRed" TextColor="White" HorizontalOptions="FillAndExpand" />
-            <Button Text="Actualizar Estudios" BackgroundColor="OrangeRed" TextColor="White" HorizontalOptions="FillAndExpand" />
-            <Button Text="Actualizar Experiencia" BackgroundColor="OrangeRed" TextColor="White" HorizontalOptions="FillAndExpand" />
+            <Button Text="Editar Usuario" BackgroundColor="OrangeRed" TextColor="White" HorizontalOptions="FillAndExpand" Clicked="Button_Clicked_EditarUsuario" />
+
+            <Button Text="Editar Idiomas" BackgroundColor="OrangeRed" TextColor="White" HorizontalOptions="FillAndExpand" />
+
+            <Button Text="Editar Habilidades" BackgroundColor="OrangeRed" TextColor="White" HorizontalOptions="FillAndExpand" />
+
+            <Button Text="Editar Estudios" BackgroundColor="OrangeRed" TextColor="White" HorizontalOptions="FillAndExpand" />
+
+            <Button Text="Editar Experiencia" BackgroundColor="OrangeRed" TextColor="White" HorizontalOptions="FillAndExpand" />
+            
             <Button Text="Cerrar seccion" BackgroundColor="OrangeRed" TextColor="White" HorizontalOptions="FillAndExpand" />
 
 

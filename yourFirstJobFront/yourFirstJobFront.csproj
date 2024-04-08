@@ -79,6 +79,9 @@
 	  <MauiXaml Update="Perfil.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="UpdateUsuario.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="VerAplicaciones.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

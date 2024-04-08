@@ -8,7 +8,6 @@ namespace yourFirstJobFront.Entidades.Response
 {
     public class ResUpdateUsuario : ResBase
     {
-        public Usuario usuario { get; set; }
 
     }
 }
