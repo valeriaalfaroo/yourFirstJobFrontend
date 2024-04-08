@@ -3,10 +3,51 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="yourFirstJobFront.VerAplicaciones"
              Title="">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <ScrollView>
+
+        <VerticalStackLayout Spacing="30" >
+            <HorizontalStackLayout Spacing="150" HorizontalOptions="Center">
+                <ImageButton x:Name="Homebtn" Source="home.png" Clicked="Homebtn_Clicked"  WidthRequest="30" 
+             HeightRequest="30"/>
+                <ImageButton x:Name="Searchbtn" Source="search.png" Clicked="Searchbtn_Clicked"  WidthRequest="30" 
+HeightRequest="30"/>
+                <ImageButton x:Name="Applicationbtn" Source="application.png" Clicked="Applicationbtn_Clicked"  WidthRequest="30" 
+HeightRequest="30"/>
+                <ImageButton x:Name="Profilebtn" Source="profile.png" Clicked="Profilebtn_Clicked"  WidthRequest="30" 
+HeightRequest="30"/>
+            </HorizontalStackLayout>
+
+            <Label Text="Estados de Aplicaciones" TextColor="Black" FontSize="Large" HorizontalTextAlignment="Center"/>
+            <ListView x:Name="aplicacionesListView">
+
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid x:Name="Contenedor" BackgroundColor="LightGray">
+                                <Frame Margin="20,10,20,10" VerticalOptions="Center" BackgroundColor="White">
+                                    <VerticalStackLayout Spacing="50" VerticalOptions="Center" Padding="10" BackgroundColor="White">
+                                        <Label Text="{Binding empleo.tituloEmpleo}" TextColor="Black" FontSize="Header" FontAttributes="Bold"/>
+                                        <Label Text="{Binding estadoAplicacion}" TextColor="Black" FontSize="Medium" FontAttributes="Bold"/>
+                                        <Label Text="{Binding empleo.descripcionEmpleo,StringFormat='Descripción: {0}'}" TextColor="Black"/>
+
+
+
+
+
+                                    </VerticalStackLayout>
+                                </Frame>
+
+                            </Grid>
+                        </ViewCell>
+
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+
+
+        </VerticalStackLayout>
+    </ScrollView>
+
 </ContentPage>

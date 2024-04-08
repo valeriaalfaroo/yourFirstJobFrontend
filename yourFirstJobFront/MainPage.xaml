@@ -5,7 +5,7 @@
 
     <ScrollView>
 
-        <VerticalStackLayout >
+        <VerticalStackLayout Spacing="30" >
             <HorizontalStackLayout Spacing="150" HorizontalOptions="Center">
                 <ImageButton x:Name="Homebtn" Source="home.png" Clicked="Homebtn_Clicked"  WidthRequest="30" 
              HeightRequest="30"/>
@@ -16,6 +16,9 @@ HeightRequest="30"/>
                 <ImageButton x:Name="Profilebtn" Source="profile.png" Clicked="Profilebtn_Clicked"  WidthRequest="30" 
 HeightRequest="30"/>
             </HorizontalStackLayout>
+
+            <Label Text="Trabajos disponibles" TextColor="Black" FontSize="Large" HorizontalTextAlignment="Center"/>
+
 
             <ListView x:Name="empleosListView">
 

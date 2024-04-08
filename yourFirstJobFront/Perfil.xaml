@@ -120,7 +120,7 @@
 
             <Button Text="Editar Experiencia" BackgroundColor="OrangeRed" TextColor="White" HorizontalOptions="FillAndExpand" />
             
-            <Button Text="Cerrar seccion" BackgroundColor="OrangeRed" TextColor="White" HorizontalOptions="FillAndExpand" />
+            <Button Text="Cerrar sesion" BackgroundColor="OrangeRed" TextColor="White" HorizontalOptions="FillAndExpand" />
 
 
         </StackLayout>
