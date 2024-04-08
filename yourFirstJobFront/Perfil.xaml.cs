@@ -57,33 +57,169 @@ public partial class Perfil : ContentPage
                     usuario.sitioWeb = res.usuario.sitioWeb;
 
 
-                    //Meto Region(***No esta sirviendo***)
-
-                    //Region region = new Region();
+                    ////Meto Region
+                    //yourFirstJobFront.Entidades.entities.Region region = new yourFirstJobFront.Entidades.entities.Region();
 
                     //region.idRegion = res.usuario.region.idRegion;
-                    //region.nombre = res.usuario.region.nombreRegion;
+                    //region.nombreRegion = res.usuario.region.nombreRegion;
 
                     //usuario.region = region;
 
-                    List<Idiomas>listaIdomas = new List<Idiomas>();
+                    displayUserInfo(usuario);
 
-                    foreach (Idiomas item in res.usuario.listaIdiomas)
+                    //Valido idiomas existen
+                    if (res.usuario.listaIdiomas.Any())
                     {
-                        Idiomas idiomas = new Idiomas();
+                        //Hay elementos
 
-                        idiomas.idIdioma = item.idIdioma;
-                        idiomas.idioma = item.idioma;
-                        idiomas.nivel = item.nivel;
+                        //Meto Idiomas
+                        List<Idiomas> listaIdomas = new List<Idiomas>();
 
-                        listaIdomas.Add(idiomas);
+                        foreach (Idiomas item in res.usuario.listaIdiomas)
+                        {
+                            Idiomas idiomas = new Idiomas();
+
+                            idiomas.idIdioma = item.idIdioma;
+                            idiomas.idioma = item.idioma;
+                            idiomas.nivel = item.nivel;
+
+                            listaIdomas.Add(idiomas);
+
+                        }
+
+                        usuario.listaIdiomas = listaIdomas;
+
+                        idiomasListView.ItemsSource = usuario.listaIdiomas;
+
+                    } 
+                    else
+                    {
+                        //No hay elementos
+                        lblIdiomas.IsVisible = false;
+                        lineIdiomas.IsVisible = false;
 
                     }
 
-                    usuario.listaIdiomas = listaIdomas;
+                    //Valido habilidades existen
+                    if (res.usuario.listaHabilidades.Any())
+                    {
+                        //Hay elementos
 
-                    //Test
-                    lblNombreCompleto.Text = "Cambio: " + res.usuario.sitioWeb;
+                        //Meto Habilidades
+                        List<Habilidades> listaHabilidades = new List<Habilidades>();
+
+                        foreach (Habilidades item in res.usuario.listaHabilidades)
+                        {
+                            Habilidades habilidad = new Habilidades();
+
+                            habilidad.idHabilidades = item.idHabilidades;
+                            habilidad.categoria = item.categoria;
+                            habilidad.descripcion = item.descripcion;
+
+                            listaHabilidades.Add(habilidad);
+
+                        }
+
+                        usuario.listaHabilidades = listaHabilidades;
+
+                        habilidadesListView.ItemsSource = usuario.listaHabilidades;
+
+                    }
+                    else
+                    {
+                        //No hay elementos
+                        lblExperiencia.IsVisible = false;
+                        lineExperiencia.IsVisible = false;
+
+                    }
+
+                    //Valido estudios existen
+                    if (res.usuario.listaEstudios.Any())
+                    {
+                        //Hay elementos
+
+                        //Meto Estudios
+                        List<Estudios> listaEstudios = new List<Estudios>();
+
+                        foreach (Estudios item in res.usuario.listaEstudios)
+                        {
+                            Estudios estudio = new Estudios();
+
+                            estudio.idEstudios = item.idEstudios;
+                            estudio.nombreInstitucion = item.nombreInstitucion;
+                            estudio.gradoAcademico = item.gradoAcademico;
+
+                            Profesion profesion = new Profesion();
+
+                            profesion.nombreProfesion = item.profesion.nombreProfesion;
+                            profesion.descripcion = item.profesion.descripcion;
+
+                            estudio.profesion = profesion;
+
+                            estudio.fechaInicio = item.fechaInicio;
+                            estudio.fechaFinalizacion = item.fechaFinalizacion;
+
+                            listaEstudios.Add(estudio);
+
+                        }
+
+                        usuario.listaEstudios = listaEstudios;
+
+                        estudiosListView.ItemsSource = usuario.listaEstudios;
+
+                    }
+                    else
+                    {
+                        //No hay elementos
+                        lblEstudios.IsVisible = false;
+                        lineEstudios.IsVisible = true;
+
+                    }
+
+                    //Valido experiencia existen
+                    if (res.usuario.listaExperienciaLaboral.Any())
+                    {
+                        //Hay elementos
+
+                        //Meto Experiencia Laboral
+                        List<ExperienciaLaboral> listaExperiencia = new List<ExperienciaLaboral>();
+
+                        foreach (ExperienciaLaboral item in res.usuario.listaExperienciaLaboral)
+                        {
+                            ExperienciaLaboral experiencia = new ExperienciaLaboral();
+
+
+                            Profesion profesion = new Profesion();
+
+                            profesion.nombreProfesion = item.profesion.nombreProfesion;
+                            profesion.descripcion = item.profesion.descripcion;
+
+                            experiencia.profesion = profesion;
+
+                            experiencia.puesto = item.puesto;
+                            experiencia.nombreEmpresa = item.nombreEmpresa;
+                            experiencia.responsabilidades = item.responsabilidades;
+                            experiencia.fechaInicio = item.fechaInicio;
+                            experiencia.fechaFinalizacion = item.fechaFinalizacion;
+
+                            listaExperiencia.Add(experiencia);
+
+                        }
+
+                        usuario.listaExperienciaLaboral = listaExperiencia;
+
+                        experienciaListView.ItemsSource = usuario.listaExperienciaLaboral;
+
+                    }
+                    else
+                    {
+                        //No hay elementos
+                        lblExperiencia.IsVisible = false;
+                        lineExperiencia.IsVisible = false;
+
+                    }
+
+                    
 
                 }
 
@@ -102,7 +238,30 @@ public partial class Perfil : ContentPage
         }
         catch (Exception ex)
         {
-            await DisplayAlert("Error Grave", "Elimine la aplicacion" + ex.Message, "Aceptar");
+            await DisplayAlert("Error Grave", "Elimine la aplicacion: " + ex.Message, "Aceptar");
         }
+    }
+
+    private void displayUserInfo(Usuario usuario)
+    {
+        lblCorreo.Text = "Correo: " + usuario.correo;
+        lblTelefono.Text = "Telefono: " + usuario.telefono;
+        lblFechaDeNacimiento.Text = "Fecha de nacimiento: " + usuario.fechaNacimiento;
+        lblRegion.Text = "Region: " + usuario.idRegion;
+
+        if (usuario.sitioWeb != null)
+        {
+            lblSitioWeb.Text = "Sito web: " + usuario.sitioWeb;
+        }
+        else
+        {
+            lblSitioWeb.IsVisible = false;
+        }
+        
+    }
+
+    private void Button_Clicked_EditarUsuario(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new UpdateUsuario());
     }
 }

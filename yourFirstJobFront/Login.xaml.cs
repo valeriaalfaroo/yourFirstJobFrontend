@@ -22,6 +22,10 @@ public partial class Login : ContentPage
             req.username = txtUsername.Text;
             req.password = txtPassword.Text;
 
+            ////Mock
+            //req.username = "Encripto";
+            //req.password = "pato";
+
             var jsonContent = new StringContent(JsonConvert.SerializeObject(req), Encoding.UTF8, "application/json");
 
             HttpClient httpClient = new HttpClient();

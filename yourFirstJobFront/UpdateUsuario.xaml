@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="yourFirstJobFront.UpdateUsuario"
+             Title="Actualizar Usuario">
+   
+
+    <!--Update info usuario-->
+    <ContentPage Title="Usuario" BackgroundColor="White">
+        <ScrollView>
+            <StackLayout Padding="20" Spacing="20">
+                <!-- Actualizar usuario -->
+
+                <!-- Título -->
+                <Label Text="Actualizar Usuario" TextColor="Black" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" />
+
+                <BoxView HeightRequest="1" Color="LightGray" HorizontalOptions="FillAndExpand" />
+
+                <!-- Información de Usuario -->
+                <Label Text="Nombre:" TextColor="#A9A9A9" FontSize="12" />
+                <Entry x:Name="entryNombre" Placeholder="Nombre" TextColor="Black" FontSize="16" BackgroundColor="#F2F2F2" />
+
+                <Label Text="Apellidos:" TextColor="#A9A9A9" FontSize="12" />
+                <Entry x:Name="entryApellidos" Placeholder="Apellidos" TextColor="Black" FontSize="16" BackgroundColor="#F2F2F2" />
+
+                <Label Text="Correo electrónico:" TextColor="#A9A9A9" FontSize="12" />
+                <Entry x:Name="entryCorreo" Placeholder="Correo electrónico" TextColor="Black" FontSize="16" BackgroundColor="#F2F2F2" />
+
+                <Label Text="Teléfono:" TextColor="#A9A9A9" FontSize="12" />
+                <Entry x:Name="entryTelefono" Placeholder="Teléfono" TextColor="Black" FontSize="16"  BackgroundColor="#F2F2F2" />
+
+                <Label Text="Fecha de nacimiento:" TextColor="#A9A9A9" FontSize="12" />
+                <DatePicker x:Name="pikerFecha" MinimumDate="01/01/1900" TextColor="Black" BackgroundColor="#F2F2F2" />
+
+                <!-- Selector de Región -->
+                <Picker x:Name="pickerRegion" Title="Región" TextColor="Black" FontSize="16" BackgroundColor="#F2F2F2">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Costa Rica</x:String>
+                            <x:String>Panama</x:String>
+                            <x:String>Mexico</x:String>
+                            <x:String>Canada</x:String>
+                            <x:String>Colombia</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+
+                <Label Text="Fecha de nacimiento:" TextColor="#A9A9A9" FontSize="12" />
+                <Entry x:Name="entrySitioWeb" Placeholder="Sitio web" TextColor="Black" FontSize="16" BackgroundColor="#F2F2F2" />
+
+                <!-- Botón de Actualizar -->
+                <Button Text="Actualizar" TextColor="White" BackgroundColor="OrangeRed" FontSize="16" FontAttributes="Bold" CornerRadius="5" HorizontalOptions="FillAndExpand" Clicked="btn_Update_Usuario"/>
+
+            </StackLayout>
+        </ScrollView>
+        
+    </ContentPage>
+
+    <!--Update idiomas usuario-->
+    <ContentPage Title="Idiomas" >
+        <StackLayout>
+            <!--actualizar idiomas-->
+
+        </StackLayout>
+    </ContentPage>
+
+    <!--Update habilidades usuario-->
+    <ContentPage Title="Habilidades" >
+        <StackLayout>
+            <!--actualizar habilidades-->
+
+        </StackLayout>
+    </ContentPage>
+
+    <!--Update estudios usuario-->
+    <ContentPage Title="Estudios" >
+        <StackLayout>
+            <!--actualizar estudios-->
+
+        </StackLayout>
+    </ContentPage>
+
+    <!--Update experiencia laboral usuario-->
+    <ContentPage Title="Experiencia" >
+        <StackLayout>
+            <!--actualizar experiencia-->
+
+        </StackLayout>
+    </ContentPage>
+
+    <!--Update archivos usuario-->
+    <ContentPage Title="Archivos" >
+        <StackLayout>
+            <!--actualizar archivos-->
+
+        </StackLayout>
+    </ContentPage>
+
+
+</TabbedPage>

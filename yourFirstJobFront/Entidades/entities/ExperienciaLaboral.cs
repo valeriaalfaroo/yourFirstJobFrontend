@@ -11,8 +11,7 @@ namespace yourFirstJobFront.Entidades.entities
         public int idExperiencia { get; set; }
         //public Usuario usuario { get; set; } 
         public int idUsuario { get; set; }
-
-        //  public Profesion profesion {  get; set; }
+        public Profesion profesion {  get; set; }
         public int idProfesion { get; set; }
         public string puesto { get; set; }
         public string nombreEmpresa { get; set; }
