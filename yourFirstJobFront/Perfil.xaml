@@ -2,30 +2,122 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="yourFirstJobFront.Perfil"
-             Title="">
-    
+             Title="Perfil">
+
     <ScrollView>
+        <StackLayout Spacing="20" Padding="20" BackgroundColor="White">
 
-        <HorizontalStackLayout>
+            <!-- Foto de Perfil -->
+            <Image Source="profile.png" WidthRequest="150" HeightRequest="150" HorizontalOptions="Center"/>
 
-            <VerticalStackLayout Spacing="25"  HorizontalOptions="Center">
+            <!-- Nombre -->
+            <Label x:Name="lblNombreCompleto" Text="" VerticalOptions="Center" HorizontalOptions="Center" TextColor="Black" FontSize="20" FontAttributes="Bold"/>
 
-                <Image Source="profile.png" WidthRequest="150" HeightRequest="150"/>
+            <BoxView HeightRequest="1" Color="Gray" HorizontalOptions="FillAndExpand" Margin="0,5" />
 
-                <Label x:Name="lblNombreCompleto" Text="" VerticalOptions="Center" HorizontalOptions="Center" />
 
-                <Label Text="Idomas: " VerticalOptions="Center" HorizontalOptions="Center" />
+            <!--Info Usuario-->
+            <Label x:Name = "lblCorreo" Text="" TextColor="Black" FontSize="16"/>
+            <Label x:Name = "lblTelefono" Text="" TextColor="Black" FontSize="16"/>
+            <Label x:Name = "lblFechaDeNacimiento" Text="" TextColor="Black" FontSize="16"/>
+            <Label x:Name = "lblRegion" Text="" TextColor="Black" FontSize="16"/>
+            <Label x:Name = "lblSitioWeb" Text="" TextColor="Black" FontSize="16"/>
 
-                <Label Text="Habilidades: " VerticalOptions="Center" HorizontalOptions="Center" />
 
-                <Label Text="Estudios: " VerticalOptions="Center" HorizontalOptions="Center" />
+            <BoxView HeightRequest="1" Color="Gray" HorizontalOptions="FillAndExpand" Margin="0,5" />
 
-                <Label Text="Experiencia: " VerticalOptions="Center" HorizontalOptions="Center" />
+            <!-- Idiomas -->
+            <Label Text="Idiomas" x:Name="lblIdiomas" TextColor="Black" FontSize="18" FontAttributes="Bold"/>
+            <ListView x:Name="idiomasListView" SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="• " TextColor="Black" FontSize="16"/>
+                                <Label Text="{Binding idioma, StringFormat = ' {0}: '}" TextColor="Black" FontSize="16"/>
+                                <Label Text="{Binding nivel,StringFormat = ' {0}'}" TextColor="Black" FontSize="14"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
 
-            </VerticalStackLayout>
+            <BoxView HeightRequest="1" x:Name="lineIdiomas" Color="Gray" HorizontalOptions="FillAndExpand" Margin="0,5" />
             
-        </HorizontalStackLayout>
-        
+            <!-- Habilidades -->
+            <Label Text="Habilidades" x:Name="lblHabilidades" TextColor="Black" FontSize="18" FontAttributes="Bold"/>
+            <ListView x:Name="habilidadesListView" SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="• " TextColor="Black" FontSize="16"/>
+                                <Label Text="{Binding categoria, StringFormat = ' {0}:  '}" TextColor="Black" FontSize="16"/>
+                                <Label Text="{Binding descripcion,StringFormat = '  {0}'}" TextColor="Black" FontSize="14"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <BoxView HeightRequest="1" x:Name="lineHabilidades" Color="Gray" HorizontalOptions="FillAndExpand" Margin="0,5" />
+            
+            <!-- Estudios -->
+            <Label Text="Estudios" x:Name="lblEstudios" TextColor="Black" FontSize="18" FontAttributes="Bold"/>
+            <ListView x:Name="estudiosListView" SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+
+                            <StackLayout Orientation="Vertical" Margin="0,0,0,20">
+                                <Label Text="{Binding profesion.nombreProfesion, StringFormat = '•  {0}  '}" TextColor="Black" FontSize="16" FontAttributes="Bold"/>
+                                <Label Text="{Binding nombreInstitucion, StringFormat = 'Institucion: {0}'}" TextColor="Black" FontSize="14"/>
+                                <Label Text="{Binding gradoAcademico, StringFormat = 'Grado: {0}'}" TextColor="Black" FontSize="14"/>
+                                <Label Text="{Binding profesion.descripcion, StringFormat = 'Descripcion: {0}'}" TextColor="Black" FontSize="14"/>
+                                <Label Text="{Binding fechaInicio, StringFormat = 'Fecha de inicio: {0}'}" TextColor="Black" FontSize="14"/>
+                                <Label Text="{Binding fechaFinalizacion, StringFormat = 'Fecha de finalizacion: {0}'}" TextColor="Black" FontSize="14"/>
+                            </StackLayout>
+
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <BoxView HeightRequest="1" x:Name="lineEstudios" Color="Gray" HorizontalOptions="FillAndExpand" Margin="0,5" />
+            
+            <!-- Experiencia -->
+            <Label Text="Experiencia" x:Name="lblExperiencia" TextColor="Black" FontSize="18" FontAttributes="Bold"/>
+            <ListView x:Name="experienciaListView" SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+
+                            <StackLayout Orientation="Vertical" Margin="0,0,0,20">
+                                <Label Text="{Binding profesion.nombreProfesion, StringFormat = '•  {0}  '}" TextColor="Black" FontSize="16" FontAttributes="Bold"/>
+                                <Label Text="{Binding profesion.descripcion, StringFormat = 'Descripcion: {0}'}" TextColor="Black" FontSize="14"/>
+                                <Label Text="{Binding puesto, StringFormat = 'Puesto: {0}'}" TextColor="Black" FontSize="14"/>
+                                <Label Text="{Binding nombreEmpresa, StringFormat = 'Empresa: {0}'}" TextColor="Black" FontSize="14"/>
+                                <Label Text="{Binding responsabilidades, StringFormat = 'Responsabilidades: {0}'}" TextColor="Black" FontSize="14"/>
+                                <Label Text="{Binding fechaInicio, StringFormat = 'Fecha de inicio: {0}'}" TextColor="Black" FontSize="14"/>
+                                <Label Text="{Binding fechaFinalizacion, StringFormat = 'Fecha de finalizacion: {0}'}" TextColor="Black" FontSize="14"/>
+                            </StackLayout>
+
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <BoxView HeightRequest="1" x:Name="lineExperiencia" Color="Gray" HorizontalOptions="FillAndExpand" Margin="0,5" />
+
+            <!-- Botones -->
+            <Button Text="Actualizar Usuario" BackgroundColor="OrangeRed" TextColor="White" HorizontalOptions="FillAndExpand" />
+            <Button Text="Actualizar Idiomas" BackgroundColor="OrangeRed" TextColor="White" HorizontalOptions="FillAndExpand" />
+            <Button Text="Actualizar Habilidades" BackgroundColor="OrangeRed" TextColor="White" HorizontalOptions="FillAndExpand" />
+            <Button Text="Actualizar Estudios" BackgroundColor="OrangeRed" TextColor="White" HorizontalOptions="FillAndExpand" />
+            <Button Text="Actualizar Experiencia" BackgroundColor="OrangeRed" TextColor="White" HorizontalOptions="FillAndExpand" />
+            <Button Text="Cerrar seccion" BackgroundColor="OrangeRed" TextColor="White" HorizontalOptions="FillAndExpand" />
+
+
+        </StackLayout>
     </ScrollView>
-    
 </ContentPage>
