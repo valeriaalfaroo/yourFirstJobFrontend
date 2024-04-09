@@ -22,7 +22,7 @@ public partial class Login : ContentPage
             req.username = txtUsername.Text;
             req.password = txtPassword.Text;
 
-            //Mock
+            ////Mock
             //req.username = "Encripto";
             //req.password = "pato";
 

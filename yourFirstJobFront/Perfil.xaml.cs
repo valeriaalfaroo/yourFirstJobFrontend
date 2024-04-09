@@ -267,15 +267,12 @@ public partial class Perfil : ContentPage
 
     private void Button_Clicked_CerrarSeccion(object sender, EventArgs e)
     {
-        lblIdiomas.IsVisible = true;
-        lblHabilidades.IsVisible = true;
-        lblEstudios.IsVisible = true;
-        lblExperiencia.IsVisible = true;
-        lineIdiomas.IsVisible = true;
-        lineHabilidades.IsVisible=true;
-        lineEstudios.IsVisible = true;
-        lineExperiencia.IsVisible = true;
+        Sesion.CerrarSeccion();
+        Navigation.PushAsync(new Login());
+    }
 
-        LoadUsuario();
+    private void Button_Clicked(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new Ingresar_Info_Usuario());
     }
 }

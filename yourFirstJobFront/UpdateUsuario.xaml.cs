@@ -12,6 +12,7 @@ public partial class UpdateUsuario : TabbedPage
     String laURL = "https://localhost:44364/";
 
     public Usuario usuario { get; set; }
+    public List<int> idHabilidadVieja {  get; set; }
 
     public UpdateUsuario()
 	{
@@ -104,81 +105,78 @@ public partial class UpdateUsuario : TabbedPage
 
                     }
 
-                    ////Valido habilidades existen
-                    //if (res.usuario.listaHabilidades.Any())
-                    //{
-                    //    //Hay elementos
+                    //Valido habilidades existen
+                    if (res.usuario.listaHabilidades.Any())
+                    {
+                        //Hay elementos
 
-                    //    //Meto Habilidades
-                    //    List<Habilidades> listaHabilidades = new List<Habilidades>();
+                        //Meto Habilidades
+                        List<Habilidades> listaHabilidades = new List<Habilidades>();
 
-                    //    foreach (Habilidades item in res.usuario.listaHabilidades)
-                    //    {
-                    //        Habilidades habilidad = new Habilidades();
+                        foreach (Habilidades item in res.usuario.listaHabilidades)
+                        {
+                            Habilidades habilidad = new Habilidades();
 
-                    //        habilidad.idHabilidades = item.idHabilidades;
-                    //        habilidad.categoria = item.categoria;
-                    //        habilidad.descripcion = item.descripcion;
+                            habilidad.idHabilidades = item.idHabilidades;
+                            habilidad.categoria = item.categoria;
+                            habilidad.descripcion = item.descripcion;
 
-                    //        listaHabilidades.Add(habilidad);
+                            listaHabilidades.Add(habilidad);
 
-                    //    }
+                        }
 
-                    //    usuario.listaHabilidades = listaHabilidades;
+                        usuario.listaHabilidades = listaHabilidades;
 
-                    //    habilidadesListView.ItemsSource = usuario.listaHabilidades;
+                        habilidadesListView.ItemsSource = usuario.listaHabilidades;
 
-                    //}
-                    //else
-                    //{
-                    //    //No hay elementos
-                    //    lblExperiencia.IsVisible = false;
-                    //    lineExperiencia.IsVisible = false;
+                    }
+                    else
+                    {
+                        //No hay elementos
 
-                    //}
+                    }
 
-                    ////Valido estudios existen
-                    //if (res.usuario.listaEstudios.Any())
-                    //{
-                    //    //Hay elementos
+                    //Valido estudios existen
+                    if (res.usuario.listaEstudios.Any())
+                    {
+                        //Hay elementos
 
-                    //    //Meto Estudios
-                    //    List<Estudios> listaEstudios = new List<Estudios>();
+                        //Meto Estudios
+                        List<Estudios> listaEstudios = new List<Estudios>();
 
-                    //    foreach (Estudios item in res.usuario.listaEstudios)
-                    //    {
-                    //        Estudios estudio = new Estudios();
+                        foreach (Estudios item in res.usuario.listaEstudios)
+                        {
+                            Estudios estudio = new Estudios();
 
-                    //        estudio.idEstudios = item.idEstudios;
-                    //        estudio.nombreInstitucion = item.nombreInstitucion;
-                    //        estudio.gradoAcademico = item.gradoAcademico;
+                            estudio.idEstudios = item.idEstudios;
+                            estudio.nombreInstitucion = item.nombreInstitucion;
+                            estudio.gradoAcademico = item.gradoAcademico;
 
-                    //        Profesion profesion = new Profesion();
+                            Profesion profesion = new Profesion();
 
-                    //        profesion.nombreProfesion = item.profesion.nombreProfesion;
-                    //        profesion.descripcion = item.profesion.descripcion;
+                            profesion.nombreProfesion = item.profesion.nombreProfesion;
+                            profesion.descripcion = item.profesion.descripcion;
 
-                    //        estudio.profesion = profesion;
+                            estudio.profesion = profesion;
 
-                    //        estudio.fechaInicio = item.fechaInicio;
-                    //        estudio.fechaFinalizacion = item.fechaFinalizacion;
+                            estudio.fechaInicio = item.fechaInicio;
+                            estudio.fechaFinalizacion = item.fechaFinalizacion;
 
-                    //        listaEstudios.Add(estudio);
+                            listaEstudios.Add(estudio);
 
-                    //    }
+                        }
 
-                    //    usuario.listaEstudios = listaEstudios;
+                        usuario.listaEstudios = listaEstudios;
 
-                    //    estudiosListView.ItemsSource = usuario.listaEstudios;
+                        estudiosListView.ItemsSource = usuario.listaEstudios;
 
-                    //}
-                    //else
-                    //{
-                    //    //No hay elementos
-                    //    lblEstudios.IsVisible = false;
-                    //    lineEstudios.IsVisible = true;
+                    }
+                    else
+                    {
+                        //No hay elementos
+                        
 
-                    //}
+                    }
 
                     ////Valido experiencia existen
                     //if (res.usuario.listaExperienciaLaboral.Any())
@@ -327,6 +325,7 @@ public partial class UpdateUsuario : TabbedPage
 
     }
 
+    //Actualizar idiomas de usuario
     private async void btn_Update_Idiomas(object sender, EventArgs e)
     {
         try
@@ -400,4 +399,199 @@ public partial class UpdateUsuario : TabbedPage
         }
 
     }
+
+    //Actualizar idiomas de usuario
+    private async void btn_Update_Habilidades(object sender, EventArgs e)
+    {
+        try
+        {
+
+            List<ReqUpdateUsuarioHabilidades> lstReq = new List<ReqUpdateUsuarioHabilidades>();
+
+            foreach (Habilidades habilidad in habilidadesListView.ItemsSource)
+            {
+                ReqUpdateUsuarioHabilidades req = new ReqUpdateUsuarioHabilidades();
+;
+                // Busca el Picker dentro de la celda
+                var cell = habilidadesListView.ItemTemplate.CreateContent() as ViewCell;
+                cell.BindingContext = habilidad;     
+                var picker = cell.View.FindByName<Picker>("pickerHabilidad");
+
+                //Seteo
+                req.idHabilidadNueva = picker.SelectedIndex + 1;
+                req.idHabilidad = habilidad.idHabilidades;
+                req.idUsuario = Sesion.usuarioSesion.idUsuario;
+
+                lstReq.Add(req);
+
+            }
+
+
+            var jsonContent = new StringContent(JsonConvert.SerializeObject(lstReq), Encoding.UTF8, "application/json");
+            HttpClient httpClient = new HttpClient();
+
+            var response = await httpClient.PostAsync(laURL + "api/usuario/actualizarUsuarioHabilidad", jsonContent);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var responseContent = await response.Content.ReadAsStringAsync();
+                ResUpdateUsuarioHabilidades res = new ResUpdateUsuarioHabilidades();
+
+                res = JsonConvert.DeserializeObject<ResUpdateUsuarioHabilidades>(responseContent);
+
+                if (res.resultado)
+                {
+
+                    await DisplayAlert("Exito", "¡El usuario se actualizo correctamente!", "Aceptar");
+                    await Navigation.PushAsync(new Perfil());
+
+                }
+                else
+                {
+                    await DisplayAlert("Error", "El usuario fallo al actualizar: " + res.listaDeErrores.FirstOrDefault(), "Aceptar");
+                }
+            }
+            else
+            {
+                await DisplayAlert("Error", "Error en el servidor", "Aceptar");
+
+            }
+
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error Grave", "Elimine la aplicacion: " + ex, "Aceptar");
+        }
+    }
+
+    //Actualizar idiomas de usuario
+    private async void btn_Update_Estudios(object sender, EventArgs e)
+    {
+        try
+        {
+
+            List<ReqUpdateUsuarioEstudios> lstReq = new List<ReqUpdateUsuarioEstudios>();
+
+            foreach (Estudios estudio in estudiosListView.ItemsSource)
+            {
+                ReqUpdateUsuarioEstudios req = new ReqUpdateUsuarioEstudios();
+
+                // Busca el Picker dentro de la celda
+                var cell = estudiosListView.ItemTemplate.CreateContent() as ViewCell;
+                cell.BindingContext = estudio;
+                var picker = cell.View.FindByName<Picker>("pickerProfesion");
+
+                //Seteo 
+                Estudios estudios = new Estudios();
+
+                req.idUsuario = Sesion.usuarioSesion.idUsuario;
+                estudios.idEstudios = estudio.idEstudios;
+
+                estudios.nombreInstitucion = estudio.nombreInstitucion;
+                estudios.gradoAcademico = estudio.gradoAcademico;
+                estudios.fechaInicio = estudio.fechaInicio;
+                estudios.fechaFinalizacion = estudio.fechaFinalizacion;
+
+                Profesion profesion = new Profesion();
+
+                profesion.idProfesion = picker.SelectedIndex + 1;
+
+                estudios.profesion = profesion;
+
+                
+
+                req.estudios = estudios;
+
+                lstReq.Add(req);
+
+            }
+
+
+            var jsonContent = new StringContent(JsonConvert.SerializeObject(lstReq), Encoding.UTF8, "application/json");
+            HttpClient httpClient = new HttpClient();
+
+            var response = await httpClient.PostAsync(laURL + "api/usuario/actualizarUsuarioEstudio", jsonContent);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var responseContent = await response.Content.ReadAsStringAsync();
+                ResUpdateUsuarioEstudios res = new ResUpdateUsuarioEstudios();
+
+                res = JsonConvert.DeserializeObject<ResUpdateUsuarioEstudios>(responseContent);
+
+                if (res.resultado)
+                {
+
+                    await DisplayAlert("Exito", "¡El usuario se actualizo correctamente!", "Aceptar");
+                    await Navigation.PushAsync(new Perfil());
+
+                }
+                else
+                {
+                    await DisplayAlert("Error", "El usuario fallo al actualizar: " + res.listaDeErrores.FirstOrDefault(), "Aceptar");
+                }
+            }
+            else
+            {
+                await DisplayAlert("Error", "Error en el servidor", "Aceptar");
+
+            }
+
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error Grave", "Elimine la aplicacion: " + ex, "Aceptar");
+        }
+    }
+
+    //Borrrar idioma
+    private async void btn_Borrar_Idioma(object sender, EventArgs e)
+    {
+        ReqEliminarIdiomaUsuario req = new ReqEliminarIdiomaUsuario();
+
+        var selectedItem = (sender as Button).BindingContext as Idiomas;
+
+        req.idIdioma = selectedItem.idIdioma;
+        req.idUsuario = Sesion.usuarioSesion.idUsuario;
+
+        try
+        {
+
+            var jsonContent = new StringContent(JsonConvert.SerializeObject(req), Encoding.UTF8, "application/json");
+            HttpClient httpClient = new HttpClient();
+
+            var response = await httpClient.PostAsync(laURL + "api/usuario/eliminarIdiomaUsuario", jsonContent);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var responseContent = await response.Content.ReadAsStringAsync();
+                ResEliminarIdiomaUsuario res = new ResEliminarIdiomaUsuario();
+
+                res = JsonConvert.DeserializeObject<ResEliminarIdiomaUsuario>(responseContent);
+
+                if (res.resultado)
+                {
+
+                    await DisplayAlert("Exito", "¡El usuario se actualizo correctamente!", "Aceptar");
+                    await Navigation.PushAsync(new Perfil());
+
+                }
+                else
+                {
+                    await DisplayAlert("Error", "El usuario fallo al actualizar: " + res.listaDeErrores.FirstOrDefault(), "Aceptar");
+                }
+            }
+            else
+            {
+                await DisplayAlert("Error", "Error en el servidor", "Aceptar");
+
+            }
+
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error Grave", "Elimine la aplicacion: " + ex, "Aceptar");
+        }
+    }
+    
 }
