@@ -128,8 +128,8 @@ public partial class Perfil : ContentPage
                     else
                     {
                         //No hay elementos
-                        lblExperiencia.IsVisible = false;
-                        lineExperiencia.IsVisible = false;
+                        lblHabilidades.IsVisible = false;
+                        lineHabilidades.IsVisible = false;
 
                     }
 
@@ -263,5 +263,19 @@ public partial class Perfil : ContentPage
     private void Button_Clicked_EditarUsuario(object sender, EventArgs e)
     {
         Navigation.PushAsync(new UpdateUsuario());
+    }
+
+    private void Button_Clicked_CerrarSeccion(object sender, EventArgs e)
+    {
+        lblIdiomas.IsVisible = true;
+        lblHabilidades.IsVisible = true;
+        lblEstudios.IsVisible = true;
+        lblExperiencia.IsVisible = true;
+        lineIdiomas.IsVisible = true;
+        lineHabilidades.IsVisible=true;
+        lineEstudios.IsVisible = true;
+        lineExperiencia.IsVisible = true;
+
+        LoadUsuario();
     }
 }

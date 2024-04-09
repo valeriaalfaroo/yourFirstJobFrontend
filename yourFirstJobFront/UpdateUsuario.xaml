@@ -57,12 +57,58 @@
     </ContentPage>
 
     <!--Update idiomas usuario-->
-    <ContentPage Title="Idiomas" >
-        <StackLayout>
-            <!--actualizar idiomas-->
+    <ContentPage Title="Idiomas" BackgroundColor="#F5F5F5">
+        <ScrollView>
+            <StackLayout Margin="20">
+                
+                <!-- Título -->
+                <Label Text="Actualizar Usuario" TextColor="Black" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" />
 
-        </StackLayout>
+                <BoxView HeightRequest="1" Color="LightGray" HorizontalOptions="FillAndExpand" Margin="0,10,0,20"/>
+
+                <!-- Idiomas de Usuario -->
+                <Label Text="Idiomas" TextColor="Black" FontSize="18" FontAttributes="Bold"/>
+                
+                <ListView x:Name="idiomasListView" SeparatorVisibility="None">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal" Margin="0,10">
+                                    
+                                    <!-- Picker de Idioma -->
+                                    <Picker x:Name="pickerIdioma" Title="Idioma" TextColor="Black" FontSize="16" BackgroundColor="#EDEDED" SelectedItem="{Binding idioma}">
+                                        <Picker.ItemsSource>
+                                            <x:Array Type="{x:Type x:String}">
+                                                <x:String>ingles</x:String>
+                                                <x:String>portugues</x:String>
+                                                <x:String>espanol</x:String>
+                                            </x:Array>
+                                        </Picker.ItemsSource>
+                                    </Picker>
+
+                                    <!-- Picker de Nivel -->
+                                    <Picker x:Name="pickerNivel" Title="Nivel" TextColor="Black" FontSize="16" BackgroundColor="#EDEDED" SelectedItem="{Binding nivel}">
+                                        <Picker.ItemsSource>
+                                            <x:Array Type="{x:Type x:String}">
+                                                <x:String>nativo</x:String>
+                                                <x:String>avanzado</x:String>
+                                                <x:String>basico</x:String>
+                                            </x:Array>
+                                        </Picker.ItemsSource>
+                                    </Picker>
+                                    
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <!-- Botón de Actualizar -->
+                <Button Text="Actualizar" TextColor="White" BackgroundColor="#FF5733" FontSize="16" FontAttributes="Bold" CornerRadius="5" Margin="0,30,0,0" HorizontalOptions="FillAndExpand" Clicked="btn_Update_Idiomas"/>
+            </StackLayout>
+        </ScrollView>
     </ContentPage>
+
 
     <!--Update habilidades usuario-->
     <ContentPage Title="Habilidades" >

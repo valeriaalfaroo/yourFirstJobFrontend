@@ -112,15 +112,7 @@
             <!-- Botones -->
             <Button Text="Editar Usuario" BackgroundColor="OrangeRed" TextColor="White" HorizontalOptions="FillAndExpand" Clicked="Button_Clicked_EditarUsuario" />
 
-            <Button Text="Editar Idiomas" BackgroundColor="OrangeRed" TextColor="White" HorizontalOptions="FillAndExpand" />
-
-            <Button Text="Editar Habilidades" BackgroundColor="OrangeRed" TextColor="White" HorizontalOptions="FillAndExpand" />
-
-            <Button Text="Editar Estudios" BackgroundColor="OrangeRed" TextColor="White" HorizontalOptions="FillAndExpand" />
-
-            <Button Text="Editar Experiencia" BackgroundColor="OrangeRed" TextColor="White" HorizontalOptions="FillAndExpand" />
-            
-            <Button Text="Cerrar sesion" BackgroundColor="OrangeRed" TextColor="White" HorizontalOptions="FillAndExpand" />
+            <Button Text="Cerrar sesion" BackgroundColor="OrangeRed" TextColor="White" HorizontalOptions="FillAndExpand" Clicked="Button_Clicked_CerrarSeccion"/>
 
 
         </StackLayout>
