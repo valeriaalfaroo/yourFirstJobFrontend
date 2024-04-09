@@ -10,5 +10,13 @@ namespace yourFirstJobFront.Utilitarios
     public class Sesion
     {
         public static Usuario usuarioSesion = new Usuario();
+
+
+        public static void CerrarSeccion()
+        {
+            Sesion.usuarioSesion = null;
+        }
     }
+
+    
 }

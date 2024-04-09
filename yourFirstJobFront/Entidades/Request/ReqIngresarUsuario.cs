@@ -8,6 +8,8 @@ namespace yourFirstJobFront.Entidades.Request
 {
     public class ReqIngresarUsuario
     {
+        public Usuario usuario {  get; set; }
+
 
         public string nombreUsuario {  get; set; }
         public string apellidos { get; set; }

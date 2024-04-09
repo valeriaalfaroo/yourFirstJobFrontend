@@ -21,13 +21,17 @@ namespace yourFirstJobFront
             {
                 ReqIngresarUsuario req = new ReqIngresarUsuario();
 
-                req.nombreUsuario = txtUsername.Text;
-                req.apellidos = txtApellidos.Text;
-                req.correo = txtCorreo.Text;
-                req.telefono = int.Parse(txtTelefono.Text);
-                req.fechaNacimiento = DateTime.Parse(txtFechaNacimiento.Text);
-                req.idRegion = selectedRadio;
-                req.contrasena = txtPassword.Text;
+                Usuario usuario = new Usuario();
+
+                usuario.nombreUsuario = txtUsername.Text;
+                usuario.apellidos = txtApellidos.Text;
+                usuario.correo = txtCorreo.Text;
+                usuario.telefono = int.Parse(txtTelefono.Text);
+                usuario.fechaNacimiento = DateTime.Parse(txtFechaNacimiento.Text);
+                usuario.idRegion = selectedRadio;
+                usuario.contrasena = txtPassword.Text;
+
+                req.usuario = usuario;
 
 
                 var jsonContent = new StringContent(JsonConvert.SerializeObject(req), Encoding.UTF8, "application/json");
@@ -45,8 +49,8 @@ namespace yourFirstJobFront
 
                     if (res.resultado)
                     {
-
-                        Navigation.PushAsync(new MainPage());
+                        await DisplayAlert("Exito", "El usuario se registro con exito", "Aceptar");
+                        Navigation.PushAsync(new Login());
 
                     }
                     else
