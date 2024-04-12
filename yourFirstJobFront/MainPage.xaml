@@ -5,8 +5,8 @@
 
     <ScrollView>
 
-        <VerticalStackLayout Spacing="30" >
-            <HorizontalStackLayout Spacing="150" HorizontalOptions="Center">
+        <VerticalStackLayout Spacing="30" Margin="10,0,10,0" >
+            <HorizontalStackLayout Spacing="50" HorizontalOptions="Center">
                 <ImageButton x:Name="Homebtn" Source="home.png" Clicked="Homebtn_Clicked"  WidthRequest="30" 
              HeightRequest="30"/>
                 <ImageButton x:Name="Searchbtn" Source="search.png" Clicked="Searchbtn_Clicked"  WidthRequest="30" 
