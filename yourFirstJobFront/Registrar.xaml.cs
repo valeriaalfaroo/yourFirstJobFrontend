@@ -8,7 +8,7 @@ namespace yourFirstJobFront
 {
     public partial class Registrar : ContentPage
     {
-        String laURL = "https://localhost:44364/";
+        String laURL = "https://yourfirstjobback.azurewebsites.net/";
         int selectedRadio = -1;
         public Registrar()
         {

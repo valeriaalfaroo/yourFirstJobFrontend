@@ -9,7 +9,7 @@ namespace yourFirstJobFront;
 
 public partial class VerEmpleo : ContentPage
 {
-    String laURL = "https://localhost:44364/";
+    String laURL = "https://yourfirstjobback.azurewebsites.net/";
     Empleo empleo = new Empleo();
     public VerEmpleo(int idOfertas)
 	{

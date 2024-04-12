@@ -9,7 +9,7 @@ namespace yourFirstJobFront;
 
 public partial class Ingresar_Info_Usuario : TabbedPage
 {
-    String laURL = "https://localhost:44364/";
+    String laURL = "https://yourfirstjobback.azurewebsites.net/";
 
     public Ingresar_Info_Usuario()
 	{

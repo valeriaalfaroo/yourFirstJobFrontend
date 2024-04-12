@@ -9,7 +9,7 @@ namespace yourFirstJobFront;
 
 public partial class UpdateUsuario : TabbedPage
 {
-    String laURL = "https://localhost:44364/";
+    String laURL = "https://yourfirstjobback.azurewebsites.net/";
 
     public Usuario usuario { get; set; }
     public List<int> idHabilidadVieja {  get; set; }

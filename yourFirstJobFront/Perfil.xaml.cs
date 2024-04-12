@@ -9,7 +9,7 @@ namespace yourFirstJobFront;
 
 public partial class Perfil : ContentPage
 {
-    String laURL = "https://localhost:44364/";
+    String laURL = "https://yourfirstjobback.azurewebsites.net/";
 	public Usuario usuario {  get; set; }
 
     public Perfil()

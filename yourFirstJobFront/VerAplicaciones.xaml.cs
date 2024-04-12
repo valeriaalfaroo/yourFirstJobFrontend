@@ -9,7 +9,7 @@ namespace yourFirstJobFront;
 
 public partial class VerAplicaciones : ContentPage
 {
-    String laURL = "https://localhost:44364/";
+    String laURL = "https://yourfirstjobback.azurewebsites.net/";
     public List<Aplicaciones> Aplicaciones { get; set; }
     public VerAplicaciones()
 	{

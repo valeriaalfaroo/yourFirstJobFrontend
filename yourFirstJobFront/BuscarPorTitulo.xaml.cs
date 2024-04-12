@@ -9,7 +9,7 @@ namespace yourFirstJobFront;
 
 public partial class BuscarPorTitulo : ContentPage
 {
-    String laURL = "https://localhost:44364/";
+    String laURL = "https://yourfirstjobback.azurewebsites.net/";
     public List<Empleo> Empleos { get; set; }
     public BuscarPorTitulo()
 	{
