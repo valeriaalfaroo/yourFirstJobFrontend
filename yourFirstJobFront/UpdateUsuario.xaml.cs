@@ -1,16 +1,17 @@
-using yourFirstJobFront.Entidades.entities;
+ï»¿using yourFirstJobFront.Entidades.entities;
 using yourFirstJobFront.Entidades.Request;
 using yourFirstJobFront.Entidades.Response;
 using yourFirstJobFront.Utilitarios;
 using Newtonsoft.Json;
 using System.Text;
+using archivos.Entidades.request;
+using yourFirstJobFront.Entidades.response;
 
 namespace yourFirstJobFront;
 
 public partial class UpdateUsuario : TabbedPage
 {
     String laURL = "https://yourfirstjobback.azurewebsites.net/";
-
     public Usuario usuario { get; set; }
     public List<int> idHabilidadVieja {  get; set; }
 
@@ -128,7 +129,7 @@ public partial class UpdateUsuario : TabbedPage
                         usuario.listaHabilidades = listaHabilidades;
 
                         habilidadesListView.ItemsSource = usuario.listaHabilidades;
-
+                        
                     }
                     else
                     {
@@ -219,6 +220,25 @@ public partial class UpdateUsuario : TabbedPage
 
                     //}
 
+                    //valido si archvios existen
+                    if(res.usuario.listaArchivosUsuarios.Any()) {
+                        //Hay elementos
+
+                        //Meto archvios
+                        List<ArchivosUsuario> listaArchivos = new List<ArchivosUsuario>();
+
+                        foreach (ArchivosUsuario item in res.usuario.listaArchivosUsuarios)
+                        {
+                            ArchivosUsuario archivos = new ArchivosUsuario();
+                            archivos.nombreArchivo = item.nombreArchivo;
+                            archivos.archivo = item.archivo;
+                            archivos.tipo = item.tipo;
+                        }
+                        usuario.listaArchivosUsuarios = listaArchivos;
+                       ArchivosListView.ItemsSource = usuario.listaArchivosUsuarios;
+
+                    }
+
                     #endregion
 
 
@@ -241,6 +261,47 @@ public partial class UpdateUsuario : TabbedPage
         catch (Exception ex)
         {
             await DisplayAlert("Error Grave", "Elimine la aplicacion" + ex.Message, "Aceptar");
+        }
+    }
+
+    //carga los archivos --opcional
+    //obtener los archivos
+    private async void cargarArchivos()
+    {
+
+        try
+        {
+            ReqObtenerArchivosUsuario req = new ReqObtenerArchivosUsuario
+            {
+                idUsuario = Sesion.usuarioSesion.idUsuario //  ID del usuario correspondiente
+            };
+
+            var jsonContent = new StringContent(JsonConvert.SerializeObject(req), Encoding.UTF8, "application/json");
+            HttpClient httpClient = new HttpClient();
+            var response = await httpClient.PostAsync(laURL + "api/usuario/obtenerArchivoUsuario", jsonContent);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var responseContent = await response.Content.ReadAsStringAsync();
+                var res = JsonConvert.DeserializeObject<ResObtenerArchviosUsuario>(responseContent);
+
+                if (res.resultado)
+                {
+                    ArchivosListView.ItemsSource = res.listaArchivosUsuario;
+                }
+                else
+                {
+                    await DisplayAlert("Error", string.Join(Environment.NewLine, res.listaDeErrores), "Aceptar");
+                }
+            }
+            else
+            {
+                await DisplayAlert("Error", "Error en el servidor", "Aceptar");
+            }
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error Grave", "Elimine la aplicaciï¿½n: " + ex.Message, "Aceptar");
         }
     }
 
@@ -303,7 +364,7 @@ public partial class UpdateUsuario : TabbedPage
                 if (res.resultado)
                 {
 
-                    await DisplayAlert("Exito", "¡El usuario se actualizo correctamente!", "Aceptar");
+                    await DisplayAlert("Exito", "Â¡El usuario se actualizo correctamente!", "Aceptar");
 
                 }
                 else
@@ -377,7 +438,7 @@ public partial class UpdateUsuario : TabbedPage
                 if (res.resultado)
                 {
 
-                    await DisplayAlert("Exito", "¡El usuario se actualizo correctamente!", "Aceptar");
+                    await DisplayAlert("Exito", "Â¡El usuario se actualizo correctamente!", "Aceptar");
                     await Navigation.PushAsync(new Perfil());
 
                 }
@@ -442,7 +503,7 @@ public partial class UpdateUsuario : TabbedPage
                 if (res.resultado)
                 {
 
-                    await DisplayAlert("Exito", "¡El usuario se actualizo correctamente!", "Aceptar");
+                    await DisplayAlert("Exito", "Â¡El usuario se actualizo correctamente!", "Aceptar");
                     await Navigation.PushAsync(new Perfil());
 
                 }
@@ -522,7 +583,7 @@ public partial class UpdateUsuario : TabbedPage
                 if (res.resultado)
                 {
 
-                    await DisplayAlert("Exito", "¡El usuario se actualizo correctamente!", "Aceptar");
+                    await DisplayAlert("Exito", "Â¡El usuario se actualizo correctamente!", "Aceptar");
                     await Navigation.PushAsync(new Perfil());
 
                 }
@@ -572,7 +633,7 @@ public partial class UpdateUsuario : TabbedPage
                 if (res.resultado)
                 {
 
-                    await DisplayAlert("Exito", "¡El usuario se actualizo correctamente!", "Aceptar");
+                    await DisplayAlert("Exito", "Â¡El usuario se actualizo correctamente!", "Aceptar");
                     await Navigation.PushAsync(new Perfil());
 
                 }
@@ -593,5 +654,9 @@ public partial class UpdateUsuario : TabbedPage
             await DisplayAlert("Error Grave", "Elimine la aplicacion: " + ex, "Aceptar");
         }
     }
-    
+
+    private void Button_Clicked(object sender, EventArgs e)
+    {
+
+    }
 }
