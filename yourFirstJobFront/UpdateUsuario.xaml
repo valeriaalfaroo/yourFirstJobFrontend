@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:root="clr-namespace:yourFirstJobFront"
              x:Class="yourFirstJobFront.UpdateUsuario"
              Title="Actualizar Usuario">
    
@@ -241,9 +242,45 @@
     </ContentPage>
 
     <!--Update archivos usuario-->
-    <ContentPage Title="Archivos" >
+    <ContentPage Title="Archivos" BackgroundColor="White">
+        <ContentPage.Resources>
+            <root:BytesToImageConverter x:Key="ToImage"/>
+        </ContentPage.Resources>
+        
         <StackLayout>
             <!--actualizar archivos-->
+
+            <!-- Título -->
+            <Label Text="Ver Archivos" TextColor="Black" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" />
+            <BoxView HeightRequest="1" Color="White" HorizontalOptions="FillAndExpand" Margin="0,10,0,20"/>
+
+            <!-- ARCHIVOS -->
+            <Label Text="Archivos" x:Name="lblArchivos" TextColor="Black" FontSize="18" FontAttributes="Bold"/>
+            <ListView x:Name="ArchivosListView" SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Vertical">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="• " TextColor="Black" FontSize="16"/>
+                                    <Label Text="{Binding nombreArchivo, StringFormat = ' {0}: '}" TextColor="Black" FontSize="16"/>
+                                    <Image
+                            Source="{Binding archivo, Converter={StaticResource ToImage}}"
+                            Aspect="AspectFill"
+                            HeightRequest="200"
+                        />
+                                    <Label Text="{Binding tipo,StringFormat = ' {0}'}" TextColor="Black" FontSize="14"/>
+                                </StackLayout>
+
+                                <!-- ELIMINAR UN ARCHVIO -->
+
+                                <Button Text="Eliminar" TextColor="White" BackgroundColor="OrangeRed" FontSize="16" FontAttributes="Bold" CornerRadius="5" HorizontalOptions="FillAndExpand" 
+                                            Clicked="Button_Clicked" CommandParameter="{Binding .}"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
 
         </StackLayout>
     </ContentPage>

@@ -4,19 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace yourFirstJobFront.Entidades.entities
+namespace yourFirstJobFront.Entidades.request
 {
-    public class ArchivosUsuario
+    public class ReqIngresarArchivoUsuario
     {
-        public int idArchivosUsuarios { get; set; }
-        public int idUsuario { get; set; }
+
         public string nombreArchivo { get; set; }
 
-        public byte [] archivo { get; set; }
+        public byte[] archivo { get; set; }
 
         public string tipo { get; set; }
 
-
+        public int idUsuario { get; set; }
 
     }
 }
