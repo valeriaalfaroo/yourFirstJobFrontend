@@ -234,7 +234,8 @@ public partial class UpdateUsuario : TabbedPage
                             archivos.archivo = item.archivo;
                             archivos.tipo = item.tipo;
                         }
-                        usuario.listaArchivosUsuarios = listaArchivos;
+                        //
+                        usuario.listaArchivosUsuarios = res.usuario.listaArchivosUsuarios;
                        ArchivosListView.ItemsSource = usuario.listaArchivosUsuarios;
 
                     }

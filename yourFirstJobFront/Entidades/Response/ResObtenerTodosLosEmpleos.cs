@@ -9,6 +9,7 @@ namespace yourFirstJobFront.Entidades.Response
     public class ResObtenerTodosLosEmpleos : ResBase
     {
         public List<Empleo> empleos { get; set; }
+       
     }
 
 }

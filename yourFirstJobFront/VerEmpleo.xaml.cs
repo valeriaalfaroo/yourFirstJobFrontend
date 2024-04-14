@@ -10,6 +10,7 @@ namespace yourFirstJobFront;
 public partial class VerEmpleo : ContentPage
 {
     String laURL = "https://yourfirstjobback.azurewebsites.net/";
+    string newUrl = "https://localhost:44364/";
     Empleo empleo = new Empleo();
     public VerEmpleo(int idOfertas)
 	{
@@ -30,7 +31,7 @@ public partial class VerEmpleo : ContentPage
 
             HttpClient httpClient = new HttpClient();
 
-            var response = await httpClient.PostAsync(laURL + "api/empleo/obtenerUnEmpleo",jsonContent);
+            var response = await httpClient.PostAsync(newUrl + "api/empleo/obtenerUnEmpleo",jsonContent);
 
             if (response.IsSuccessStatusCode)
             {

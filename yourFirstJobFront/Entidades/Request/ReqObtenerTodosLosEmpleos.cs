@@ -8,5 +8,6 @@ namespace yourFirstJobFront.Entidades.Request
 {
     public class ReqObtenerTodosLosEmpleos
     {
+
     }
 }
