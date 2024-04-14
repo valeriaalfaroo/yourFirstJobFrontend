@@ -56,18 +56,7 @@
             <Label Text="Nombre del archivo:" TextColor="#A9A9A9" FontSize="12" />
             <Entry x:Name="entryNombre" Placeholder="escriba el nombre" TextColor="Black" FontSize="16" BackgroundColor="#F2F2F2" />
 
-            <!-- Picker de tipo archvio -->
-            <Picker x:Name="pickerTipo" Title="Tipo de archivo" TextColor="Black" FontSize="16" BackgroundColor="#EDEDED" SelectedItem="{Binding tipo}">
-                <Picker.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>png</x:String>
-                        <x:String>jpg</x:String>
-                        <x:String>jpeg</x:String>
-                        <x:String>PDF</x:String>
-                        <x:String>Word</x:String>
-                    </x:Array>
-                </Picker.ItemsSource>
-            </Picker>
+           
 
             <!-- Botón de enviar archivo -->
             <Button x:Name="btnEnviarArchivos" Text="Enviar Archivos" Clicked="btnEnviarArchivos_Clicked" />
