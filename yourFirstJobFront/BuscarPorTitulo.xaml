@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                           xmlns:root="clr-namespace:yourFirstJobFront"
+
              x:Class="yourFirstJobFront.BuscarPorTitulo"
              Title="">
 
+    <ContentPage.Resources>
+        <root:BytesToImageConverter x:Key="ToImage"/>
+    </ContentPage.Resources>
+    
     <ScrollView>
 
         <VerticalStackLayout Spacing="50" Margin="10,0,10,0">
@@ -32,6 +38,25 @@ HeightRequest="30"/>
                             <Grid x:Name="Contenedor" BackgroundColor="LightGray">
                                 <Frame Margin="20,10,20,10" VerticalOptions="Center" BackgroundColor="White">
                                     <VerticalStackLayout Spacing="50" VerticalOptions="Center" Padding="10" BackgroundColor="White">
+
+
+                                        <Label Text="archvios"/>
+                                        <CollectionView ItemsSource="{Binding lstArchivos}">
+                                            <CollectionView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackLayout HorizontalOptions="Start">
+
+                                                        <Image
+ Source="{Binding archivo, Converter={StaticResource ToImage}}"
+Aspect="AspectFit"
+HeightRequest="100"
+ />
+                                                    </StackLayout>
+                                                </DataTemplate>
+                                            </CollectionView.ItemTemplate>
+                                        </CollectionView>
+
+
                                         <Label Text="{Binding tituloEmpleo}" TextColor="Black" FontSize="Header" FontAttributes="Bold"/>
                                         <Label Text="{Binding ubicacionEmpleo, StringFormat='Ubicación del empleo: {0}'}" TextColor="Black"/>
                                         <Label Text="{Binding tipoEmpleo, StringFormat='Tipo de Empleo: {0}'}" TextColor="Black"/>

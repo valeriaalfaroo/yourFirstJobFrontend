@@ -10,6 +10,8 @@ namespace yourFirstJobFront;
 public partial class BuscarPorTitulo : ContentPage
 {
     String laURL = "https://yourfirstjobback.azurewebsites.net/";
+    string newUrl = "https://localhost:44364/";
+
     public List<Empleo> Empleos { get; set; }
     public BuscarPorTitulo()
 	{
@@ -37,7 +39,7 @@ public partial class BuscarPorTitulo : ContentPage
 
             HttpClient httpClient = new HttpClient();
 
-            var response = await httpClient.PostAsync(laURL + "api/empleo/obtenerEmpleosTitulo", jsonContent);
+            var response = await httpClient.PostAsync(newUrl + "api/empleo/obtenerEmpleosTitulo", jsonContent);
 
             if (response.IsSuccessStatusCode)
             {
@@ -82,7 +84,7 @@ public partial class BuscarPorTitulo : ContentPage
 
             HttpClient httpClient = new HttpClient();
 
-            var response = await httpClient.GetAsync(laURL + "api/empleo/obtenerTodosLosEmpleos");
+            var response = await httpClient.GetAsync(newUrl + "api/empleo/obtenerTodosLosEmpleos");
 
             if (response.IsSuccessStatusCode)
             {

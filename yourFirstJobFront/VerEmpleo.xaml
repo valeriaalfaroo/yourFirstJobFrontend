@@ -2,7 +2,12 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="yourFirstJobFront.VerEmpleo"
+                           xmlns:root="clr-namespace:yourFirstJobFront"
              Title="">
+
+    <ContentPage.Resources>
+        <root:BytesToImageConverter x:Key="ToImage"/>
+    </ContentPage.Resources>
 
     <ScrollView>
 
@@ -27,6 +32,24 @@ HeightRequest="30"/>
                             <Grid x:Name="Contenedor" BackgroundColor="LightGray">
                                 <Frame Margin="20,10,20,10" VerticalOptions="Center" BackgroundColor="White">
                                     <VerticalStackLayout Spacing="20" VerticalOptions="Center" Padding="10" BackgroundColor="White">
+                                        <!-- mostrar archvios de imagen-->
+
+                                        <Label Text="archvios"/>
+                                        <CollectionView ItemsSource="{Binding lstArchivos}">
+                                            <CollectionView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackLayout HorizontalOptions="Start">
+
+                                                        <Image
+                     Source="{Binding archivo, Converter={StaticResource ToImage}}"
+                    Aspect="AspectFit"
+                    HeightRequest="100"
+                     />
+                                                    </StackLayout>
+                                                </DataTemplate>
+                                            </CollectionView.ItemTemplate>
+                                        </CollectionView>
+
                                         <Label Text="{Binding tituloEmpleo}" TextColor="Black" FontSize="Header" FontAttributes="Bold"/>
                                         <Label Text="{Binding descripcionEmpleo, StringFormat='Descripción: {0}'}" TextColor="Black"/>
                                         <Label Text="{Binding ubicacionEmpleo, StringFormat='Ubicación del empleo: {0}'}" TextColor="Black"/>
@@ -46,6 +69,8 @@ HeightRequest="30"/>
                                                 </DataTemplate>
                                             </CollectionView.ItemTemplate>
                                         </CollectionView>
+                                        
+                                        
 
                                         <Label Text="Habilidades preferidas"/>
                                         <CollectionView ItemsSource="{Binding lstHabilidades}">

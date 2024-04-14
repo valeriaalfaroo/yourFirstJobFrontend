@@ -10,8 +10,8 @@ namespace yourFirstJobFront
     public partial class MainPage : ContentPage
     {
         String laURL = "https://yourfirstjobback.azurewebsites.net/";
+        string newUrl = "https://localhost:44364/";
         public List<Empleo> Empleos { get; set; }
-
         public MainPage()
         {
             InitializeComponent();
@@ -30,7 +30,7 @@ namespace yourFirstJobFront
 
                 HttpClient httpClient = new HttpClient();
 
-                var response = await httpClient.GetAsync(laURL + "api/empleo/obtenerTodosLosEmpleos");
+                var response = await httpClient.GetAsync(newUrl + "api/empleo/obtenerTodosLosEmpleos");
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -45,8 +45,12 @@ namespace yourFirstJobFront
                         {
                             Empleos.Add(empleo);
                         }
-                        empleosListView.ItemsSource = Empleos;
+                       
+                        empleosListView.ItemsSource = Empleos;  
+                        
                     }
+
+                    
                     else
                     {
                         await DisplayAlert("Error", "Error en la conexion", "Aceptar");
