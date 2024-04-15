@@ -166,7 +166,13 @@ public partial class Ingresar_Info_Usuario : TabbedPage
         ReqIngresarArchivoUsuario req = new ReqIngresarArchivoUsuario();
         byte[] archivoBase64 = await ConvertirArchivoABase64(archivoSeleccionado);
         req.idUsuario = Sesion.usuarioSesion.idUsuario;
-        req.nombreArchivo = entryNombre.Text;
+        string nombreArchivo = entryNombre.Text;
+        if (tipoArchivo == "pdf" && !nombreArchivo.EndsWith(".pdf", StringComparison.OrdinalIgnoreCase))
+        {
+            nombreArchivo += ".pdf";
+        }
+        req.nombreArchivo = nombreArchivo;
+
         req.tipo = tipoArchivo; // Set the file type as "png" for images or "pdf" for PDF files
         req.archivo = archivoBase64;
 
