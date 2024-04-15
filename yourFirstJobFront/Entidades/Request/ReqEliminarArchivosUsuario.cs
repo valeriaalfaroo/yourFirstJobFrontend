@@ -10,5 +10,6 @@ namespace yourFirstJobFront.Entidades.request
     {
         public int idArchivosUsuarios { get; set; }
 
+
     }
 }

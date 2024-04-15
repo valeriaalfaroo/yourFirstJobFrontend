@@ -275,7 +275,7 @@
                                 <!-- ELIMINAR UN ARCHVIO -->
 
                                 <Button Text="Eliminar" TextColor="White" BackgroundColor="OrangeRed" FontSize="16" FontAttributes="Bold" CornerRadius="5" HorizontalOptions="FillAndExpand" 
-                                            Clicked="Button_Clicked" CommandParameter="{Binding .}"/>
+                                            Clicked="Button_Clicked" />
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

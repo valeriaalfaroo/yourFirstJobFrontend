@@ -6,20 +6,22 @@ using Newtonsoft.Json;
 using System.Text;
 using archivos.Entidades.request;
 using yourFirstJobFront.Entidades.response;
+using yourFirstJobFront.Entidades.request;
 
 namespace yourFirstJobFront;
 
 public partial class UpdateUsuario : TabbedPage
 {
     String laURL = "https://yourfirstjobback.azurewebsites.net/";
-    public Usuario usuario { get; set; }
-    public List<int> idHabilidadVieja {  get; set; }
+    string url= "https://localhost:44364/";
+        public Usuario usuario { get; set; }
+    public List<int> idHabilidadVieja { get; set; }
 
     public UpdateUsuario()
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
         LoadUsuario();
-	}
+    }
 
     //Carga el usuario
     private async void LoadUsuario()
@@ -102,7 +104,7 @@ public partial class UpdateUsuario : TabbedPage
                     else
                     {
                         //No hay elementos
-                        
+
 
                     }
 
@@ -129,7 +131,7 @@ public partial class UpdateUsuario : TabbedPage
                         usuario.listaHabilidades = listaHabilidades;
 
                         habilidadesListView.ItemsSource = usuario.listaHabilidades;
-                        
+
                     }
                     else
                     {
@@ -175,7 +177,7 @@ public partial class UpdateUsuario : TabbedPage
                     else
                     {
                         //No hay elementos
-                        
+
 
                     }
 
@@ -221,7 +223,7 @@ public partial class UpdateUsuario : TabbedPage
                     //}
 
                     //valido si archvios existen
-                    if(res.usuario.listaArchivosUsuarios.Any()) {
+                    if (res.usuario.listaArchivosUsuarios.Any()) {
                         //Hay elementos
 
                         //Meto archvios
@@ -236,7 +238,7 @@ public partial class UpdateUsuario : TabbedPage
                         }
                         //
                         usuario.listaArchivosUsuarios = res.usuario.listaArchivosUsuarios;
-                       ArchivosListView.ItemsSource = usuario.listaArchivosUsuarios;
+                        ArchivosListView.ItemsSource = usuario.listaArchivosUsuarios;
 
                     }
 
@@ -326,15 +328,15 @@ public partial class UpdateUsuario : TabbedPage
     //Actualiza info de usuario
     private async void btn_Update_Usuario(object sender, EventArgs e)
     {
-        
+
 
         try
         {
 
 
             ReqUpdateUsuario req = new ReqUpdateUsuario();
-   
-            Usuario user = new Usuario(); 
+
+            Usuario user = new Usuario();
 
             user.idUsuario = Sesion.usuarioSesion.idUsuario;
             user.nombreUsuario = entryNombre.Text;
@@ -473,10 +475,10 @@ public partial class UpdateUsuario : TabbedPage
             foreach (Habilidades habilidad in habilidadesListView.ItemsSource)
             {
                 ReqUpdateUsuarioHabilidades req = new ReqUpdateUsuarioHabilidades();
-;
+                ;
                 // Busca el Picker dentro de la celda
                 var cell = habilidadesListView.ItemTemplate.CreateContent() as ViewCell;
-                cell.BindingContext = habilidad;     
+                cell.BindingContext = habilidad;
                 var picker = cell.View.FindByName<Picker>("pickerHabilidad");
 
                 //Seteo
@@ -560,7 +562,7 @@ public partial class UpdateUsuario : TabbedPage
 
                 estudios.profesion = profesion;
 
-                
+
 
                 req.estudios = estudios;
 
@@ -656,8 +658,55 @@ public partial class UpdateUsuario : TabbedPage
         }
     }
 
-    private void Button_Clicked(object sender, EventArgs e)
+    private async void Button_Clicked(object sender, EventArgs e)
     {
+
+        ReqEliminarArchivosUsuario req = new ReqEliminarArchivosUsuario();
+
+        var selectedItem = (sender as Button).BindingContext as ArchivosUsuario;
+
+        req.idArchivosUsuarios = selectedItem.idArchivosUsuarios;
+        try
+        {
+            var jsonContent = new StringContent(JsonConvert.SerializeObject(req), Encoding.UTF8, "application/json");
+            HttpClient httpClient = new HttpClient();
+            var request = new HttpRequestMessage(HttpMethod.Delete, url + "api/usuario/borrarArchivoUsuario");
+            request.Content = jsonContent;
+
+            var response = await httpClient.SendAsync(request);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var responseContent = await response.Content.ReadAsStringAsync();
+                ResEliminarArchivosUsuarios res = new ResEliminarArchivosUsuarios();
+
+                res = JsonConvert.DeserializeObject<ResEliminarArchivosUsuarios>(responseContent);
+
+                if (res.resultado)
+                {
+
+                    await DisplayAlert("Exito", "¡El archivo se elimino correctamente!", "Aceptar");
+              //      await Navigation.PushAsync(new UpdateUsuario());
+
+                }
+                else
+                {
+                    await DisplayAlert("Error", "El archvio fallo al eliminar: " + res.listaDeErrores.FirstOrDefault(), "Aceptar");
+                }
+            }
+           else
+            {
+                var statusCode = response.StatusCode;
+                var responseContent = await response.Content.ReadAsStringAsync();
+                // Log or inspect statusCode and responseContent
+                await DisplayAlert("Error", $"Server responded with status code: {statusCode}\nResponse content: {responseContent}", "Aceptar");
+            }
+
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error Grave", "Elimine la aplicacion: " + ex, "Aceptar");
+        }
 
     }
 }
