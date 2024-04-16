@@ -181,46 +181,48 @@ public partial class UpdateUsuario : TabbedPage
 
                     }
 
-                    ////Valido experiencia existen
-                    //if (res.usuario.listaExperienciaLaboral.Any())
-                    //{
-                    //    //Hay elementos
+                    //Valido experiencia existen
+                    if (res.usuario.listaExperienciaLaboral.Any())
+                    {
+                        //Hay elementos
 
-                    //    //Meto Experiencia Laboral
-                    //    List<ExperienciaLaboral> listaExperiencia = new List<ExperienciaLaboral>();
+                        //Meto Experiencia Laboral
+                        List<ExperienciaLaboral> listaExperiencia = new List<ExperienciaLaboral>();
 
-                    //    foreach (ExperienciaLaboral item in res.usuario.listaExperienciaLaboral)
-                    //    {
-                    //        ExperienciaLaboral experiencia = new ExperienciaLaboral();
+                        foreach (ExperienciaLaboral item in res.usuario.listaExperienciaLaboral)
+                        {
 
+                            ExperienciaLaboral experiencia = new ExperienciaLaboral();
 
-                    //        Profesion profesion = new Profesion();
+                            experiencia.idExperiencia = item.idExperiencia;
 
-                    //        profesion.nombreProfesion = item.profesion.nombreProfesion;
-                    //        profesion.descripcion = item.profesion.descripcion;
+                            Profesion profesion = new Profesion();
 
-                    //        experiencia.profesion = profesion;
+                            profesion.nombreProfesion = item.profesion.nombreProfesion;
+                            profesion.descripcion = item.profesion.descripcion;
 
-                    //        experiencia.puesto = item.puesto;
-                    //        experiencia.nombreEmpresa = item.nombreEmpresa;
-                    //        experiencia.responsabilidades = item.responsabilidades;
-                    //        experiencia.fechaInicio = item.fechaInicio;
-                    //        experiencia.fechaFinalizacion = item.fechaFinalizacion;
+                            experiencia.profesion = profesion;
 
-                    //        listaExperiencia.Add(experiencia);
+                            experiencia.puesto = item.puesto;
+                            experiencia.nombreEmpresa = item.nombreEmpresa;
+                            experiencia.responsabilidades = item.responsabilidades;
+                            experiencia.fechaInicio = item.fechaInicio;
+                            experiencia.fechaFinalizacion = item.fechaFinalizacion;
 
-                    //    }
+                            listaExperiencia.Add(experiencia);
 
-                    //    usuario.listaExperienciaLaboral = listaExperiencia;
+                        }
 
-                    //    experienciaListView.ItemsSource = usuario.listaExperienciaLaboral;
+                        usuario.listaExperienciaLaboral = listaExperiencia;
 
-                    //}
-                    //else
-                    //{
-                    //    //No hay elementos
+                        experienciaListView.ItemsSource = usuario.listaExperienciaLaboral;
 
-                    //}
+                    }
+                    else
+                    {
+                        //No hay elementos
+
+                    }
 
                     //valido si archvios existen
                     if (res.usuario.listaArchivosUsuarios.Any()) {
@@ -464,7 +466,7 @@ public partial class UpdateUsuario : TabbedPage
 
     }
 
-    //Actualizar idiomas de usuario
+    //Actualizar habilidades de usuario
     private async void btn_Update_Habilidades(object sender, EventArgs e)
     {
         try
@@ -528,7 +530,7 @@ public partial class UpdateUsuario : TabbedPage
         }
     }
 
-    //Actualizar idiomas de usuario
+    //Actualizar estudios de usuario
     private async void btn_Update_Estudios(object sender, EventArgs e)
     {
         try
@@ -607,6 +609,88 @@ public partial class UpdateUsuario : TabbedPage
             await DisplayAlert("Error Grave", "Elimine la aplicacion: " + ex, "Aceptar");
         }
     }
+
+    //Actualizar experiencia de usuario
+    private async void btn_Update_Experiencia(object sender, EventArgs e)
+    {
+        try
+        {
+
+            List<ReqUpdateUsuarioExperiencia> lstReq = new List<ReqUpdateUsuarioExperiencia>();
+
+            foreach (ExperienciaLaboral experiencia in experienciaListView.ItemsSource)
+            {
+                ReqUpdateUsuarioExperiencia req = new ReqUpdateUsuarioExperiencia();
+
+                // Busca el Picker dentro de la celda
+                var cell = experienciaListView.ItemTemplate.CreateContent() as ViewCell;
+                cell.BindingContext = experiencia;
+                var picker = cell.View.FindByName<Picker>("pickerProfesionExp");
+
+                //Seteo 
+                ExperienciaLaboral experienciaLaboral = new ExperienciaLaboral();
+
+                req.idUsuario = Sesion.usuarioSesion.idUsuario;
+                experienciaLaboral.idExperiencia = experiencia.idExperiencia;
+
+                experienciaLaboral.puesto = experiencia.puesto;
+                experienciaLaboral.nombreEmpresa = experiencia.nombreEmpresa;
+                experienciaLaboral.responsabilidades = experiencia.responsabilidades;
+                experienciaLaboral.fechaInicio = experiencia.fechaInicio;
+                experienciaLaboral.fechaFinalizacion = experiencia.fechaFinalizacion;
+
+                Profesion profesion = new Profesion();
+
+                profesion.idProfesion = picker.SelectedIndex + 1;
+
+                experienciaLaboral.profesion = profesion;
+
+
+
+                req.experienciaLaboral = experienciaLaboral;
+
+                lstReq.Add(req);
+
+            }
+
+
+            var jsonContent = new StringContent(JsonConvert.SerializeObject(lstReq), Encoding.UTF8, "application/json");
+            HttpClient httpClient = new HttpClient();
+
+            var response = await httpClient.PostAsync(laURL + "api/usuario/actualizarUsuarioExperiencia", jsonContent);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var responseContent = await response.Content.ReadAsStringAsync();
+                ResUpdateUsuarioExperiencia res = new ResUpdateUsuarioExperiencia();
+
+                res = JsonConvert.DeserializeObject<ResUpdateUsuarioExperiencia>(responseContent);
+
+                if (res.resultado)
+                {
+
+                    await DisplayAlert("Exito", "¡El usuario se actualizo correctamente!", "Aceptar");
+                    await Navigation.PushAsync(new Perfil());
+
+                }
+                else
+                {
+                    await DisplayAlert("Error", "El usuario fallo al actualizar: " + res.listaDeErrores.FirstOrDefault(), "Aceptar");
+                }
+            }
+            else
+            {
+                await DisplayAlert("Error", "Error en el servidor", "Aceptar");
+
+            }
+
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error Grave", "Elimine la aplicacion: " + ex, "Aceptar");
+        }
+    }
+
 
     //Borrrar idioma
     private async void btn_Borrar_Idioma(object sender, EventArgs e)
@@ -709,4 +793,6 @@ public partial class UpdateUsuario : TabbedPage
         }
 
     }
+
+    
 }

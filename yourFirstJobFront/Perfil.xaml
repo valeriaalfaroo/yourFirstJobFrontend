@@ -130,8 +130,8 @@
             <BoxView HeightRequest="1" x:Name="lineArchivos" Color="Gray" HorizontalOptions="FillAndExpand" Margin="0,5" />
 
             <!-- Botones -->
+            <Button Text="Ingresar" BackgroundColor="OrangeRed" TextColor="White" HorizontalOptions="FillAndExpand" Clicked="Button_Clicked_IngresarInfo" />
             <Button Text="Editar" BackgroundColor="OrangeRed" TextColor="White" HorizontalOptions="FillAndExpand" Clicked="Button_Clicked_EditarUsuario" />
-            <Button Text="Ingresar" BackgroundColor="OrangeRed" TextColor="White" HorizontalOptions="FillAndExpand" Clicked="Button_Clicked" />
             <Button Text="Cerrar sesion" BackgroundColor="OrangeRed" TextColor="White" HorizontalOptions="FillAndExpand" Clicked="Button_Clicked_CerrarSeccion"/>
 
 

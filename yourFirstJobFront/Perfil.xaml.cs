@@ -97,7 +97,7 @@ public partial class Perfil : ContentPage
 
                         idiomasListView.ItemsSource = usuario.listaIdiomas;
 
-                    } 
+                    }
                     else
                     {
                         //No hay elementos
@@ -266,11 +266,10 @@ public partial class Perfil : ContentPage
 
                 }
 
-
-                    else
-                    {
-                        await DisplayAlert("Error", "Error en la conexion", "Aceptar");
-                    }
+                else
+                {
+                    await DisplayAlert("Error", "Error en la conexion", "Aceptar");
+                }
             }
             else
             {
@@ -324,8 +323,10 @@ public partial class Perfil : ContentPage
         Navigation.PushAsync(new Login());
     }
 
-    private void Button_Clicked(object sender, EventArgs e)
+    private void Button_Clicked_IngresarInfo(object sender, EventArgs e)
     {
         Navigation.PushAsync(new Ingresar_Info_Usuario());
     }
+
+
 }
