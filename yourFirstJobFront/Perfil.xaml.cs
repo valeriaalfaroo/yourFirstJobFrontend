@@ -4,13 +4,18 @@ using yourFirstJobFront.Entidades.Response;
 using yourFirstJobFront.Utilitarios;
 using Newtonsoft.Json;
 using System.Text;
+using System.Windows.Input;
 
 namespace yourFirstJobFront;
 
 public partial class Perfil : ContentPage
 {
     String laURL = "https://yourfirstjobback.azurewebsites.net/";
+    string url = "https://localhost:44364/";
 	public Usuario usuario {  get; set; }
+   
+
+
 
     public Perfil()
 	{
@@ -19,7 +24,8 @@ public partial class Perfil : ContentPage
 		lblNombreCompleto.Text = Sesion.usuarioSesion.nombreUsuario + " " + Sesion.usuarioSesion.apellidos;
 
         LoadUsuario();
-	}
+
+    }
 
     private async void LoadUsuario()
 	{
@@ -34,7 +40,7 @@ public partial class Perfil : ContentPage
 
             HttpClient httpClient = new HttpClient();
 
-            var response = await httpClient.PostAsync(laURL + "api/usuario/ObtenerUsuario", jsonContent);
+            var response = await httpClient.PostAsync(url + "api/usuario/ObtenerUsuario", jsonContent);
 
             if (response.IsSuccessStatusCode)
             {
@@ -219,15 +225,52 @@ public partial class Perfil : ContentPage
 
                     }
 
-                    
+                    //archviso
+                    /* if (res.usuario.listaArchivosUsuarios.Any())
+                     {
+                         //Hay elementos
+
+                         List<ArchivosUsuario> listaArchivos = new List<ArchivosUsuario>();
+
+                         foreach (ArchivosUsuario item in res.usuario.listaArchivosUsuarios)
+                         {
+                             ArchivosUsuario archivos = new ArchivosUsuario();
+                             archivos.idArchivosUsuarios = item.idArchivosUsuarios;
+                             archivos.nombreArchivo = item.nombreArchivo;
+                             archivos.archivo = item.archivo;
+                             archivos.tipo = item.tipo;
+
+                             listaArchivos.Add(archivos);
+                         }
+                         usuario.listaArchivosUsuarios = listaArchivos;
+                         archivosListView.ItemsSource = usuario.listaArchivosUsuarios ;
+
+                     }*/
+
+
+                    if (res.usuario.listaArchivosUsuarios.Any())
+                    {
+                        List<ArchivosUsuario> listaArchivos = res.usuario.listaArchivosUsuarios
+                            .Where(item => item.tipo.ToLower() == "pdf") // Filter for PDF files only
+                            .Select(item => new ArchivosUsuario
+                            {
+                                idArchivosUsuarios = item.idArchivosUsuarios,
+                                nombreArchivo = item.nombreArchivo,
+                                archivo = item.archivo,
+                                tipo = item.tipo
+                            }).ToList();
+
+                        usuario.listaArchivosUsuarios = listaArchivos;
+                        archivosListView.ItemsSource = usuario.listaArchivosUsuarios; // Bind the filtered list to the ListView
+                    }
 
                 }
 
 
-                else
-                {
-                    await DisplayAlert("Error", "Error en la conexion", "Aceptar");
-                }
+                    else
+                    {
+                        await DisplayAlert("Error", "Error en la conexion", "Aceptar");
+                    }
             }
             else
             {
@@ -259,6 +302,16 @@ public partial class Perfil : ContentPage
         }
         
     }
+
+
+    public static void SaveFile(byte[] fileContent, string filePath)
+    {
+        File.WriteAllBytes(filePath, fileContent);
+    }
+
+   
+
+   
 
     private void Button_Clicked_EditarUsuario(object sender, EventArgs e)
     {

@@ -109,6 +109,26 @@
 
             <BoxView HeightRequest="1" x:Name="lineExperiencia" Color="Gray" HorizontalOptions="FillAndExpand" Margin="0,5" />
 
+
+            <!-- archvios -->
+            <Label Text="Archivos" x:Name="lblArchivos" TextColor="Black" FontSize="18" FontAttributes="Bold"/>
+            <ListView x:Name="archivosListView" SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame Padding="10" Margin="5" CornerRadius="10" HasShadow="True">
+                                <StackLayout Orientation="Horizontal" Spacing="10">
+                                    <Label Text="{Binding nombreArchivo, StringFormat = ' {0} '}" TextColor="White" FontSize="16" VerticalOptions="Center"/>
+                                    <Button Text="Download" Command="{Binding DownloadCommand}" BackgroundColor="#4CAF50" TextColor="White" CornerRadius="20" Padding="10" VerticalOptions="End"/>
+                                </StackLayout>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <BoxView HeightRequest="1" x:Name="lineArchivos" Color="Gray" HorizontalOptions="FillAndExpand" Margin="0,5" />
+
             <!-- Botones -->
             <Button Text="Editar" BackgroundColor="OrangeRed" TextColor="White" HorizontalOptions="FillAndExpand" Clicked="Button_Clicked_EditarUsuario" />
             <Button Text="Ingresar" BackgroundColor="OrangeRed" TextColor="White" HorizontalOptions="FillAndExpand" Clicked="Button_Clicked" />
