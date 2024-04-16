@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="yourFirstJobFront.Ingresar_Info_Usuario"
              Title="Ingresar informacion usuario">
-    
+
+    <!--ingresar idiomas usuario-->
     <ContentPage Title="Idiomas" BackgroundColor="#F5F5F5">
         <ScrollView>
             <StackLayout Margin="20">
@@ -38,6 +39,140 @@
 
                 <!-- Botón de Actualizar -->
                 <Button Text="Ingresar" TextColor="White" BackgroundColor="#FF5733" FontSize="16" FontAttributes="Bold" CornerRadius="5" Margin="0,30,0,0" HorizontalOptions="FillAndExpand" Clicked="btn_Ingresar_Idioma"/>
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage>
+
+    <!--ingresar habilidad usuario-->
+    <ContentPage Title="Habilidades" BackgroundColor="#F5F5F5">
+        <ScrollView>
+            <StackLayout Margin="20">
+
+                <!-- Título -->
+                <Label Text="Ingresar Habilidad" TextColor="Black" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" />
+
+                <BoxView HeightRequest="1" Color="LightGray" HorizontalOptions="FillAndExpand" Margin="0,10,0,20"/>
+
+                <!-- Picker de Habilidad -->
+                <Picker x:Name="pickerHabilidad" Title="Habilidad" TextColor="Black" FontSize="16" BackgroundColor="#EDEDED">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Trabajo en equipo</x:String>
+                            <x:String>Comunicacion efectiva</x:String>
+                            <x:String>Colaboración</x:String>
+                            <x:String>Flexibilidad</x:String>
+                            <x:String>Empatía</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+
+                <!-- Botón de Actualizar -->
+                <Button Text="Ingresar" TextColor="White" BackgroundColor="#FF5733" FontSize="16" FontAttributes="Bold" CornerRadius="5" Margin="0,30,0,0" HorizontalOptions="FillAndExpand" Clicked="btn_Ingresar_Habilidad"/>
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage>
+
+    <!--ingresar estudios usuario-->
+    <ContentPage Title="Estudios" BackgroundColor="#F5F5F5">
+        <ScrollView>
+            <StackLayout Margin="20">
+
+                <!-- Título -->
+                <Label Text="Ingresar Estudios" TextColor="Black" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" />
+
+                <BoxView HeightRequest="1" Color="LightGray" HorizontalOptions="FillAndExpand" Margin="0,10,0,20"/>
+
+                <!-- Informacion -->
+                <Label Text="Nombre de la institucion:" TextColor="#A9A9A9" FontSize="12" />
+                <Entry x:Name="entryInstitucion" Placeholder="institucion" Text="" TextColor="Black" FontSize="16" BackgroundColor="#F2F2F2" />
+
+                <!-- Picker de grado -->
+                <Label Text="Grado academico:" TextColor="#A9A9A9" FontSize="12" />
+                <Picker x:Name="pickerGrado" TextColor="Black" FontSize="16" BackgroundColor="#EDEDED">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Diplomado</x:String>
+                            <x:String>Bachillerato</x:String>
+                            <x:String>Licenciatura</x:String>
+                            <x:String>Maestria</x:String>
+                            <x:String>Doctorado</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+
+
+                <!-- Picker de Profesion -->
+                <Label Text="Profesion:" TextColor="#A9A9A9" FontSize="12" />
+                <Picker x:Name="pickerProfesion" TextColor="Black" FontSize="16" BackgroundColor="#EDEDED">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Software Engineer</x:String>
+                            <x:String>Electrical  Engineer</x:String>
+                            <x:String>Industrial Engineer</x:String>
+                            <x:String>Civil Engineer</x:String>
+                            <x:String>Doctor</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+
+                <Label Text="Fecha de inicio:" TextColor="#A9A9A9" FontSize="12" />
+                <DatePicker x:Name="pikerFechaInicio" MinimumDate="01/01/1900" TextColor="Black" BackgroundColor="#F2F2F2"/>
+
+                <Label Text="Fecha de finalizacion:" TextColor="#A9A9A9" FontSize="12" />
+                <DatePicker x:Name="pikerFechaFinal" MinimumDate="01/01/1900" TextColor="Black" BackgroundColor="#F2F2F2"/>
+
+                <!-- Botón de Actualizar -->
+                <Button Text="Ingresar" TextColor="White" BackgroundColor="#FF5733" FontSize="16" FontAttributes="Bold" CornerRadius="5" Margin="0,30,0,0" HorizontalOptions="FillAndExpand" Clicked="btn_Ingresar_Estudio"/>
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage>
+
+    <!--ingresar experiencia usuario-->
+    <ContentPage Title="Experiencia" BackgroundColor="#F5F5F5">
+        <ScrollView>
+            <StackLayout Margin="20">
+
+                <!-- Título -->
+                <Label Text="Ingresar experiencia laboral" TextColor="Black" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" />
+
+                <BoxView HeightRequest="1" Color="LightGray" HorizontalOptions="FillAndExpand" Margin="0,10,0,20"/>
+
+                <!--Info-->
+                <!-- Picker de Profesion -->
+                <Label Text="Profesion:" TextColor="#A9A9A9" FontSize="12" />
+                <Picker x:Name="pickerProfesionExp" TextColor="Black" FontSize="16" BackgroundColor="#EDEDED">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Software Engineer</x:String>
+                            <x:String>Electrical  Engineer</x:String>
+                            <x:String>Industrial Engineer</x:String>
+                            <x:String>Civil Engineer</x:String>
+                            <x:String>Doctor</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+
+                <Label Text="Puesto:" TextColor="#A9A9A9" FontSize="12" />
+                <Entry x:Name="entryPuesto" Placeholder="puesto" Text="" TextColor="Black" FontSize="16" BackgroundColor="#F2F2F2" />
+
+                <Label Text="Nombre de la Empresa:" TextColor="#A9A9A9" FontSize="12" />
+                <Entry x:Name="entryNombreEmpresa" Placeholder="empresa" Text="" TextColor="Black" FontSize="16" BackgroundColor="#F2F2F2" />
+
+                <Label Text="Responsabilidades:" TextColor="#A9A9A9" FontSize="12" />
+                <Entry x:Name="entryResponsabilidades" Placeholder="responsabilidad" Text="" TextColor="Black" FontSize="16" BackgroundColor="#F2F2F2" />
+
+
+                <Label Text="Fecha de inicio:" TextColor="#A9A9A9" FontSize="12" />
+                <DatePicker x:Name="pikerFechaInicioExp" MinimumDate="01/01/1900" TextColor="Black" BackgroundColor="#F2F2F2"/>
+
+                <Label Text="Fecha de finalizacion:" TextColor="#A9A9A9" FontSize="12" />
+                <DatePicker x:Name="pikerFechaFinalExp" MinimumDate="01/01/1900" TextColor="Black" BackgroundColor="#F2F2F2"/>
+
+                <!-- Botón de Actualizar -->
+                <Button Text="Ingresar" TextColor="White" BackgroundColor="#FF5733" FontSize="16" FontAttributes="Bold" CornerRadius="5" Margin="0,30,0,0" HorizontalOptions="FillAndExpand" Clicked="btn_Ingresar_Experiencia"/>
 
             </StackLayout>
         </ScrollView>

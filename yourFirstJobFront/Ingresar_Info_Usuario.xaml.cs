@@ -13,7 +13,7 @@ namespace yourFirstJobFront;
 public partial class Ingresar_Info_Usuario : TabbedPage
 {
     String laURL = "https://yourfirstjobback.azurewebsites.net/";
-   // String laURL = "https://localhost:44364/";
+    String url = "https://localhost:44364/";
 
 
     public Ingresar_Info_Usuario()
@@ -54,7 +54,7 @@ public partial class Ingresar_Info_Usuario : TabbedPage
             };
 
 
-            ReqEliminarIdiomaUsuario req = new ReqEliminarIdiomaUsuario();
+            ReqIngresarIdiomaUsuario req = new ReqIngresarIdiomaUsuario();
 
             Tuple<string, string> opcionSeleccionada = new Tuple<string, string>(pickerIdioma.SelectedItem.ToString(), pickerNivel.SelectedItem.ToString());
 
@@ -74,6 +74,190 @@ public partial class Ingresar_Info_Usuario : TabbedPage
                 ResIngresarIdiomaUsuario res = new ResIngresarIdiomaUsuario();
 
                 res = JsonConvert.DeserializeObject<ResIngresarIdiomaUsuario>(responseContent);
+
+                if (res.resultado)
+                {
+
+                    await DisplayAlert("Exito", "¡El usuario se actualizo correctamente!", "Aceptar");
+                    await Navigation.PushAsync(new Perfil());
+
+                }
+                else
+                {
+                    await DisplayAlert("Error", "El usuario fallo al actualizar: " + res.listaDeErrores.FirstOrDefault(), "Aceptar");
+                }
+            }
+            else
+            {
+                await DisplayAlert("Error", "Error en el servidor", "Aceptar");
+
+            }
+
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error Grave", "Elimine la aplicacion: " + ex, "Aceptar");
+        }
+    }
+
+    private async void btn_Ingresar_Habilidad(object sender, EventArgs e)
+    {
+        try
+        {
+            
+            ReqIngresarHabilidadUsuario req = new ReqIngresarHabilidadUsuario();
+
+            req.idUsuario = Sesion.usuarioSesion.idUsuario;
+            
+            Habilidades habilidad = new Habilidades();
+
+            habilidad.idHabilidades = pickerHabilidad.SelectedIndex + 1;
+
+            req.habilidades = habilidad;
+
+
+            var jsonContent = new StringContent(JsonConvert.SerializeObject(req), Encoding.UTF8, "application/json");
+            HttpClient httpClient = new HttpClient();
+
+            var response = await httpClient.PostAsync(laURL + "api/usuario/insertHabilidadUsuario", jsonContent);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var responseContent = await response.Content.ReadAsStringAsync();
+                ResIngresarHabilidadUsuario res = new ResIngresarHabilidadUsuario();
+
+                res = JsonConvert.DeserializeObject<ResIngresarHabilidadUsuario>(responseContent);
+
+                if (res.resultado)
+                {
+
+                    await DisplayAlert("Exito", "¡El usuario se actualizo correctamente!", "Aceptar");
+                    await Navigation.PushAsync(new Perfil());
+
+                }
+                else
+                {
+                    await DisplayAlert("Error", "El usuario fallo al actualizar: " + res.listaDeErrores.FirstOrDefault(), "Aceptar");
+                }
+            }
+            else
+            {
+                await DisplayAlert("Error", "Error en el servidor", "Aceptar");
+
+            }
+
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error Grave", "Elimine la aplicacion: " + ex, "Aceptar");
+        }
+
+    }
+
+    private async void btn_Ingresar_Estudio(object sender, EventArgs e)
+    {
+        try
+        {
+
+            ReqIngresarEstudioUsuario req = new ReqIngresarEstudioUsuario();
+
+            req.idUsuario = Sesion.usuarioSesion.idUsuario;
+
+            Estudios estudio = new Estudios();
+
+            estudio.nombreInstitucion = entryInstitucion.Text;
+
+            estudio.gradoAcademico = pickerGrado.SelectedItem.ToString();
+
+            Profesion profesion = new Profesion();
+
+            profesion.idProfesion = pickerProfesion.SelectedIndex + 1;
+
+            estudio.profesion = profesion;
+
+            estudio.fechaInicio = pikerFechaInicio.Date;
+            estudio.fechaFinalizacion = pikerFechaFinal.Date;
+
+            req.estudio = estudio;
+
+
+            var jsonContent = new StringContent(JsonConvert.SerializeObject(req), Encoding.UTF8, "application/json");
+            HttpClient httpClient = new HttpClient();
+
+            var response = await httpClient.PostAsync(laURL + "api/usuario/insertEstudioUsuario", jsonContent);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var responseContent = await response.Content.ReadAsStringAsync();
+                ResIngresarEstudioUsuario res = new ResIngresarEstudioUsuario();
+
+                res = JsonConvert.DeserializeObject<ResIngresarEstudioUsuario>(responseContent);
+
+                if (res.resultado)
+                {
+
+                    await DisplayAlert("Exito", "¡El usuario se actualizo correctamente!", "Aceptar");
+                    await Navigation.PushAsync(new Perfil());
+
+                }
+                else
+                {
+                    await DisplayAlert("Error", "El usuario fallo al actualizar: " + res.listaDeErrores.FirstOrDefault(), "Aceptar");
+                }
+            }
+            else
+            {
+                await DisplayAlert("Error", "Error en el servidor", "Aceptar");
+
+            }
+
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error Grave", "Elimine la aplicacion: " + ex, "Aceptar");
+        }
+    }
+
+    private async void btn_Ingresar_Experiencia(object sender, EventArgs e)
+    {
+        try
+        {
+
+            ReqIngresarExperienciaUsuario req = new ReqIngresarExperienciaUsuario();
+
+            req.idUsuario = Sesion.usuarioSesion.idUsuario;
+
+            ExperienciaLaboral experiencia = new ExperienciaLaboral();
+
+            Profesion profesion = new Profesion();
+
+            profesion.idProfesion = pickerProfesionExp.SelectedIndex + 1;
+
+            experiencia.profesion = profesion;
+
+            experiencia.puesto = entryPuesto.Text;
+
+            experiencia.nombreEmpresa = entryNombreEmpresa.Text;
+
+            experiencia.responsabilidades = entryResponsabilidades.Text;
+
+            experiencia.fechaInicio = pikerFechaInicioExp.Date;
+            experiencia.fechaFinalizacion = pikerFechaFinalExp.Date;
+
+            req.experiencia = experiencia;
+
+
+            var jsonContent = new StringContent(JsonConvert.SerializeObject(req), Encoding.UTF8, "application/json");
+            HttpClient httpClient = new HttpClient();
+
+            var response = await httpClient.PostAsync(url + "api/usuario/insertExperienciaUsuario", jsonContent);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var responseContent = await response.Content.ReadAsStringAsync();
+                ResIngresarExperienciaUsuario res = new ResIngresarExperienciaUsuario();
+
+                res = JsonConvert.DeserializeObject<ResIngresarExperienciaUsuario>(responseContent);
 
                 if (res.resultado)
                 {
@@ -193,5 +377,5 @@ public partial class Ingresar_Info_Usuario : TabbedPage
         }
     }
 
-
+    
 }
