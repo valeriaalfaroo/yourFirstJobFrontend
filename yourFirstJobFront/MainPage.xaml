@@ -26,52 +26,50 @@ HeightRequest="30"/>
             <Label Text="Trabajos disponibles" TextColor="Black" FontSize="Large" HorizontalTextAlignment="Center"/>
 
 
-            <ListView x:Name="empleosListView">
+            <CollectionView x:Name="empleosListView">
 
 
-                <ListView.ItemTemplate>
+                <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
-                            <Grid x:Name="Contenedor" BackgroundColor="LightGray">
-                                <Frame Margin="20,10,20,10" VerticalOptions="Center" BackgroundColor="White">
-                                    <VerticalStackLayout Spacing="50" VerticalOptions="Center" Padding="10" BackgroundColor="White">
 
-<!-- mostrar archvios de imagen-->
-                                        <Label Text="archvios"/>
-                                        <CollectionView ItemsSource="{Binding lstArchivos}">
-                                            <CollectionView.ItemTemplate>
-                                                <DataTemplate>
-                                                    <StackLayout HorizontalOptions="Start">
+                        <Grid x:Name="Contenedor" BackgroundColor="LightGray">
+                            <Frame Margin="20,10,20,10" VerticalOptions="Center" BackgroundColor="White">
+                                <VerticalStackLayout Spacing="50" VerticalOptions="Center" Padding="10" BackgroundColor="White">
 
-                                                        <Image
- Source="{Binding archivo, Converter={StaticResource ToImage}}"
-Aspect="AspectFit"
-HeightRequest="100"
- />
-                                                    </StackLayout>
-                                                </DataTemplate>
-                                            </CollectionView.ItemTemplate>
-                                        </CollectionView>
-                                        <Label Text="{Binding tituloEmpleo}" TextColor="Black" FontSize="Header" FontAttributes="Bold"/>
-                                        
-                                        <Label Text="{Binding ubicacionEmpleo, StringFormat='Ubicación del empleo: {0}'}" TextColor="Black"/>
-                                        <Label Text="{Binding tipoEmpleo, StringFormat='Tipo de Empleo: {0}'}" TextColor="Black"/>
-                                        <Label Text="{Binding descripcionEmpleo,StringFormat='Descripción: {0}'}" TextColor="Black"/>
+                                    <!-- mostrar archvios de imagen-->
+                                   
+                                    <CollectionView ItemsSource="{Binding lstArchivos}" HorizontalOptions="Start">
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackLayout HorizontalOptions="Start">
 
-                                        <Button
-                x:Name="btnIngresarOfertaEmpleo"
-                Text="Ver Oferta de Empleo"
-                Clicked="btnIngresarOfertaEmpleo_Clicked" BackgroundColor="Black" TextColor="White"/>
-                                    </VerticalStackLayout>
-                                </Frame>
+                                                    <Image
+                                                     Source="{Binding archivo, Converter={StaticResource ToImage}}"
+                                                     Aspect="AspectFit"
+                                                     HeightRequest="100"
+                                                     />
+                                                </StackLayout>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+                                    <Label Text="{Binding tituloEmpleo}" TextColor="Black" FontSize="Header" FontAttributes="Bold"/>
 
-                            </Grid>
-                        </ViewCell>
+                                    <Label Text="{Binding ubicacionEmpleo, StringFormat='Ubicación del empleo: {0}'}" TextColor="Black"/>
+                                    <Label Text="{Binding tipoEmpleo, StringFormat='Tipo de Empleo: {0}'}" TextColor="Black"/>
+                                    <Label Text="{Binding descripcionEmpleo,StringFormat='Descripción: {0}'}" TextColor="Black"/>
 
+                                    <Button
+                                    x:Name="btnIngresarOfertaEmpleo"
+                                    Text="Ver Oferta de Empleo"
+                                    Clicked="btnIngresarOfertaEmpleo_Clicked" BackgroundColor="Black" TextColor="White"/>
+                                </VerticalStackLayout>
+                            </Frame>
+
+                        </Grid>
                     </DataTemplate>
-                </ListView.ItemTemplate>
+                </CollectionView.ItemTemplate>
 
-            </ListView>
+            </CollectionView>
 
            
         </VerticalStackLayout>

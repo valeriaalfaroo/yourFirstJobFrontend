@@ -9,8 +9,8 @@ namespace yourFirstJobFront
 {
     public partial class MainPage : ContentPage
     {
-        String laURL = "https://yourfirstjobback.azurewebsites.net/";
-        string newUrl = "https://localhost:44364/";
+        String url = "https://yourfirstjobback.azurewebsites.net/";
+      //  string newUrl = "https://localhost:44364/";
         public List<Empleo> Empleos { get; set; }
         public MainPage()
         {
@@ -30,7 +30,7 @@ namespace yourFirstJobFront
 
                 HttpClient httpClient = new HttpClient();
 
-                var response = await httpClient.GetAsync(newUrl + "api/empleo/obtenerTodosLosEmpleos");
+                var response = await httpClient.GetAsync(url + "api/empleo/obtenerTodosLosEmpleos");
 
                 if (response.IsSuccessStatusCode)
                 {
