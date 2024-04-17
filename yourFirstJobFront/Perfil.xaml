@@ -2,14 +2,32 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="yourFirstJobFront.Perfil"
+                         xmlns:root="clr-namespace:yourFirstJobFront"
+
              Title="Perfil">
+    <ContentPage.Resources>
+        <root:BytesToImageConverter x:Key="ToImage"/>
+    </ContentPage.Resources>
 
     <ScrollView>
         <StackLayout Spacing="20" Padding="20" BackgroundColor="White">
-
             <!-- Foto de Perfil -->
-            <Image Source="profile.png" WidthRequest="150" HeightRequest="150" HorizontalOptions="Center"/>
+            <StackLayout>
+                <ImageButton
+                    x:Name="ImagenImageButton"
+            Source="{Binding archivo, Converter={StaticResource ToImage}}"
+            Aspect="AspectFill"
+            HeightRequest="200"
+            WidthRequest="200"
+            Clicked="ImageButton_Clicked"
+            HorizontalOptions="Center"
+            VerticalOptions="CenterAndExpand" />
+            </StackLayout>
 
+            <!--  <Image Source="profile.png" WidthRequest="150" HeightRequest="150" HorizontalOptions="Center"/> -->
+          
+            
+            
             <!-- Nombre -->
             <Label x:Name="lblNombreCompleto" Text="" VerticalOptions="Center" HorizontalOptions="Center" TextColor="Black" FontSize="20" FontAttributes="Bold"/>
 

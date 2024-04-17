@@ -4,8 +4,8 @@ using yourFirstJobFront.Entidades.Response;
 using yourFirstJobFront.Utilitarios;
 using Newtonsoft.Json;
 using System.Text;
-using Microsoft.Maui.Storage;
-using yourFirstJobFront.Entidades.request; //implementar para archivos del cel
+using Microsoft.Maui.Storage; //implementar para archivos del cel
+using yourFirstJobFront.Entidades.request; 
 
 
 namespace yourFirstJobFront;
@@ -308,7 +308,7 @@ public partial class Ingresar_Info_Usuario : TabbedPage
 
                 if (archivoSeleccionado != null)
                 {
-                    await EnviarArchivo(archivoSeleccionado, "png");
+                    await EnviarArchivo(archivoSeleccionado, "imagen");
                 }
                 else
                 {
