@@ -5,6 +5,7 @@ using yourFirstJobFront.Utilitarios;
 using Newtonsoft.Json;
 using System.Text;
 using System.Windows.Input;
+using yourFirstJobFront.Entidades.request;
 
 namespace yourFirstJobFront;
 
@@ -13,8 +14,6 @@ public partial class Perfil : ContentPage
     String laURL = "https://yourfirstjobback.azurewebsites.net/";
     string url = "https://localhost:44364/";
 	public Usuario usuario {  get; set; }
-   
-
 
 
     public Perfil()
@@ -27,10 +26,24 @@ public partial class Perfil : ContentPage
 
     }
 
+    //realizar la conversion para envio a la base de datos
+    public async Task<byte[]> ConvertirArchivoABase64(FileResult archivo)
+    {
+        using (var stream = await archivo.OpenReadAsync())
+        {
+            var bytes = new byte[stream.Length];
+            await stream.ReadAsync(bytes);
+            return bytes;
+        }
+    }
+    public int selectedImageId; // Variable to store the ID of the selected image
+
+
     private async void LoadUsuario()
 	{
         try
         {
+
 
             ReqObtenerUsuario req = new ReqObtenerUsuario();
 
@@ -225,28 +238,7 @@ public partial class Perfil : ContentPage
 
                     }
 
-                    //archviso
-                    /* if (res.usuario.listaArchivosUsuarios.Any())
-                     {
-                         //Hay elementos
-
-                         List<ArchivosUsuario> listaArchivos = new List<ArchivosUsuario>();
-
-                         foreach (ArchivosUsuario item in res.usuario.listaArchivosUsuarios)
-                         {
-                             ArchivosUsuario archivos = new ArchivosUsuario();
-                             archivos.idArchivosUsuarios = item.idArchivosUsuarios;
-                             archivos.nombreArchivo = item.nombreArchivo;
-                             archivos.archivo = item.archivo;
-                             archivos.tipo = item.tipo;
-
-                             listaArchivos.Add(archivos);
-                         }
-                         usuario.listaArchivosUsuarios = listaArchivos;
-                         archivosListView.ItemsSource = usuario.listaArchivosUsuarios ;
-
-                     }*/
-
+                    //mostrar archvios pdf
 
                     if (res.usuario.listaArchivosUsuarios.Any())
                     {
@@ -261,8 +253,42 @@ public partial class Perfil : ContentPage
                             }).ToList();
 
                         usuario.listaArchivosUsuarios = listaArchivos;
-                        archivosListView.ItemsSource = usuario.listaArchivosUsuarios; // Bind the filtered list to the ListView
+                        archivosListView.ItemsSource = usuario.listaArchivosUsuarios; 
                     }
+
+                    
+
+                    if (res.usuario.listaArchivosUsuarios.Any())
+                    {
+                        List<ArchivosUsuario> listaArchivos = res.usuario.listaArchivosUsuarios
+                            .Where(item => item.nombreArchivo.ToLower() == "fotoperfil") // Filter for fotoperfil file only
+                            .Select(item =>
+                            {
+                                selectedImageId = item.idArchivosUsuarios; // Set the selectedImageId to the idArchivosUsuarios value
+                                return new ArchivosUsuario
+                                {
+                                    idArchivosUsuarios = item.idArchivosUsuarios, // idArchivo here
+                                    nombreArchivo = item.nombreArchivo,
+                                    archivo = item.archivo,
+                                    tipo = item.tipo
+                                };
+                            }).ToList();
+
+                        usuario.listaArchivosUsuarios = listaArchivos;
+                        if (usuario.listaArchivosUsuarios.Count > 0)
+                        {
+                            var Archivo = usuario.listaArchivosUsuarios[0]; // Access the element to display
+
+                            // Convert the byte array to an ImageSource
+                            ImageSource imagenSource = ImageSource.FromStream(() => new MemoryStream(Archivo.archivo));
+                            ImagenImageButton.Source = imagenSource; // Assign the image to the ImageButton Source
+                        }
+                    }
+
+
+
+
+
 
                 }
 
@@ -308,10 +334,6 @@ public partial class Perfil : ContentPage
         File.WriteAllBytes(filePath, fileContent);
     }
 
-   
-
-   
-
     private void Button_Clicked_EditarUsuario(object sender, EventArgs e)
     {
         Navigation.PushAsync(new UpdateUsuario());
@@ -328,5 +350,75 @@ public partial class Perfil : ContentPage
         Navigation.PushAsync(new Ingresar_Info_Usuario());
     }
 
+   
 
+    //buton para la foto perfil
+    private async void ImageButton_Clicked(object sender, EventArgs e)
+     {
+
+         try
+         {         
+             // Show options to pick file type
+             string[] options = { "Seleccionar imagen"};
+             string selectedOption = await DisplayActionSheet("Foto de perfil", "Cancelar", null, options);
+
+             if (selectedOption == "Seleccionar imagen")
+             {
+                 // Code for selecting image file
+                 FileResult archivoSeleccionado = await FilePicker.Default.PickAsync(new PickOptions
+                 {
+                     FileTypes = new FilePickerFileType(new Dictionary<DevicePlatform, IEnumerable<string>>
+                 {
+                     { DevicePlatform.iOS, new[] { "public.image" } },
+                     { DevicePlatform.Android, new[] { "image/*" } },
+                     { DevicePlatform.WinUI, new[] { ".jpg", ".jpeg", ".png" } }
+                 }),
+                     PickerTitle = "Seleccionar imagen"
+                 });
+
+                 if (archivoSeleccionado != null)
+                 {
+                   //  idImagen = usuario.listaArchivosUsuarios[0].idArchivosUsuarios; 
+
+                     await EnviarArchivo( archivoSeleccionado, selectedImageId); 
+                 }
+                 else
+                 {
+                     await DisplayAlert("Advertencia", "No se seleccionó ninguna imagen", "Aceptar");
+                 }
+             }
+
+             }
+         catch(Exception) { }
+     }
+
+
+
+    private async Task EnviarArchivo( FileResult archivoSeleccionado, int electedImageId)
+    {
+        ReqActualizarFotoPerfil req = new ReqActualizarFotoPerfil();
+        byte[] archivoBase64 = await ConvertirArchivoABase64(archivoSeleccionado);
+        req.idUsuario = Sesion.usuarioSesion.idUsuario;
+        //  req.idArchivo = req.idArchivo;
+        req.idArchivo = electedImageId;  
+        req.archivo = archivoBase64;
+
+        var jsonContent = new StringContent(JsonConvert.SerializeObject(req), Encoding.UTF8, "application/json");
+        HttpClient httpClient = new HttpClient();
+
+        // Enviar la solicitud al servidor
+        var response = await httpClient.PostAsync(url + "api/usuario/actualizarFotoPerfil", jsonContent);
+
+        if (response.IsSuccessStatusCode)
+        {
+            var responseContent = await response.Content.ReadAsStringAsync();
+            await DisplayAlert("Exitoso", "Foto actualizada correctamente", "Aceptar");
+            await Navigation.PushAsync(new MainPage());
+
+        }
+        else
+        {
+            await DisplayAlert("Error", "Error en el servidor", "Aceptar");
+        }
+    }
 }

@@ -9,6 +9,7 @@ namespace yourFirstJobFront
     public partial class Registrar : ContentPage
     {
         String laURL = "https://yourfirstjobback.azurewebsites.net/";
+        string url = "https://localhost:44364/";
         int selectedRadio = -1;
         public Registrar()
         {
@@ -38,7 +39,7 @@ namespace yourFirstJobFront
 
                 HttpClient httpClient = new HttpClient();
 
-                var response = await httpClient.PostAsync(laURL + "api/usuario/ingresarUsuario", jsonContent);
+                var response = await httpClient.PostAsync(url + "api/usuario/ingresarUsuario", jsonContent);
 
                 if (response.IsSuccessStatusCode)
                 {
