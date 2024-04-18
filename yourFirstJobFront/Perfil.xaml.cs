@@ -12,6 +12,7 @@ namespace yourFirstJobFront;
 public partial class Perfil : ContentPage
 {
     String url = "https://yourfirstjobback.azurewebsites.net/";
+    string newU = "https://localhost:44364/";
     
 	public Usuario usuario {  get; set; }
 
@@ -261,7 +262,7 @@ public partial class Perfil : ContentPage
                     if (res.usuario.listaArchivosUsuarios.Any())
                     {
                         List<ArchivosUsuario> listaArchivos = res.usuario.listaArchivosUsuarios
-                            .Where(item => item.nombreArchivo.ToLower() == "fotoperfil") // Filter for fotoperfil file only
+                            .Where(item => item.tipo.ToLower() == "perfil") // Filter for fotoperfil file only
                             .Select(item =>
                             {
                                 selectedImageId = item.idArchivosUsuarios; // Set the selectedImageId to the idArchivosUsuarios value
@@ -407,7 +408,7 @@ public partial class Perfil : ContentPage
         HttpClient httpClient = new HttpClient();
 
         // Enviar la solicitud al servidor
-        var response = await httpClient.PostAsync(url + "api/usuario/actualizarFotoPerfil", jsonContent);
+        var response = await httpClient.PostAsync(newU + "api/usuario/actualizarFotoPerfil", jsonContent);
 
         if (response.IsSuccessStatusCode)
         {

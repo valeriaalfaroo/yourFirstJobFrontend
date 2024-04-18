@@ -308,7 +308,7 @@ public partial class Ingresar_Info_Usuario : TabbedPage
 
                 if (archivoSeleccionado != null)
                 {
-                    await EnviarArchivo(archivoSeleccionado, "imagen");
+                    await EnviarArchivo(archivoSeleccionado, "png");
                 }
                 else
                 {
