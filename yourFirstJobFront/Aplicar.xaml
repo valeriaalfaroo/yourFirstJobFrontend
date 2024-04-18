@@ -17,12 +17,12 @@ HeightRequest="30"/>
 HeightRequest="30"/>
             </HorizontalStackLayout>
 
-            <ListView x:Name="usuarioListView">
+            <CollectionView x:Name="usuarioListView">
 
 
-                <ListView.ItemTemplate>
+                <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
+                        
                             <Grid x:Name="Contenedor" BackgroundColor="LightGray">
                                 <Frame Margin="20,10,20,10" VerticalOptions="Center" BackgroundColor="White">
                                     <VerticalStackLayout Spacing="20" VerticalOptions="Center" Padding="10" BackgroundColor="White">
@@ -94,12 +94,12 @@ HeightRequest="30"/>
                                 </Frame>
 
                             </Grid>
-                        </ViewCell>
+                       
 
                     </DataTemplate>
-                </ListView.ItemTemplate>
+                </CollectionView.ItemTemplate>
 
-            </ListView>
+            </CollectionView>
 
 
 

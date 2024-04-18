@@ -9,8 +9,8 @@ namespace yourFirstJobFront;
 
 public partial class VerAplicaciones : ContentPage
 {
-    String laURL = "https://yourfirstjobback.azurewebsites.net/";
-    string newUrl = "https://localhost:44364/";
+    String url = "https://yourfirstjobback.azurewebsites.net/";
+   
 
     public List<Aplicaciones> Aplicaciones { get; set; }
     public VerAplicaciones()
@@ -34,7 +34,7 @@ public partial class VerAplicaciones : ContentPage
 
             HttpClient httpClient = new HttpClient();
 
-            var response = await httpClient.PostAsync(newUrl + "api/aplicacion/obtenerAplicacionesUsuario", jsonContent);
+            var response = await httpClient.PostAsync(url + "api/aplicacion/obtenerAplicacionesUsuario", jsonContent);
 
             if (response.IsSuccessStatusCode)
             {

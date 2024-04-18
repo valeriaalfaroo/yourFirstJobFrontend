@@ -46,46 +46,46 @@
 
             <!-- Idiomas -->
             <Label Text="Idiomas" x:Name="lblIdiomas" TextColor="Black" FontSize="18" FontAttributes="Bold"/>
-            <ListView x:Name="idiomasListView" SeparatorVisibility="None">
-                <ListView.ItemTemplate>
+            <CollectionView x:Name="idiomasListView" >
+                <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
+                        
                             <StackLayout Orientation="Horizontal">
                                 <Label Text="• " TextColor="Black" FontSize="16"/>
                                 <Label Text="{Binding idioma, StringFormat = ' {0}: '}" TextColor="Black" FontSize="16"/>
                                 <Label Text="{Binding nivel,StringFormat = ' {0}'}" TextColor="Black" FontSize="14"/>
                             </StackLayout>
-                        </ViewCell>
+                        
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
             <BoxView HeightRequest="1" x:Name="lineIdiomas" Color="Gray" HorizontalOptions="FillAndExpand" Margin="0,5" />
             
             <!-- Habilidades -->
             <Label Text="Habilidades" x:Name="lblHabilidades" TextColor="Black" FontSize="18" FontAttributes="Bold"/>
-            <ListView x:Name="habilidadesListView" SeparatorVisibility="None">
-                <ListView.ItemTemplate>
+            <CollectionView x:Name="habilidadesListView">
+                <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
+                        
                             <StackLayout Orientation="Horizontal">
                                 <Label Text="• " TextColor="Black" FontSize="16"/>
                                 <Label Text="{Binding categoria, StringFormat = ' {0}:  '}" TextColor="Black" FontSize="16"/>
                                 <Label Text="{Binding descripcion,StringFormat = '  {0}'}" TextColor="Black" FontSize="14"/>
                             </StackLayout>
-                        </ViewCell>
+                        
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
             <BoxView HeightRequest="1" x:Name="lineHabilidades" Color="Gray" HorizontalOptions="FillAndExpand" Margin="0,5" />
             
             <!-- Estudios -->
             <Label Text="Estudios" x:Name="lblEstudios" TextColor="Black" FontSize="18" FontAttributes="Bold"/>
-            <ListView x:Name="estudiosListView" SeparatorVisibility="None">
-                <ListView.ItemTemplate>
+            <CollectionView x:Name="estudiosListView" >
+                <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
+                        
 
                             <StackLayout Orientation="Vertical" Margin="0,0,0,20">
                                 <Label Text="{Binding profesion.nombreProfesion, StringFormat = '•  {0}  '}" TextColor="Black" FontSize="16" FontAttributes="Bold"/>
@@ -96,19 +96,19 @@
                                 <Label Text="{Binding fechaFinalizacion, StringFormat = 'Fecha de finalizacion: {0}'}" TextColor="Black" FontSize="14"/>
                             </StackLayout>
 
-                        </ViewCell>
+                        
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
             <BoxView HeightRequest="1" x:Name="lineEstudios" Color="Gray" HorizontalOptions="FillAndExpand" Margin="0,5" />
             
             <!-- Experiencia -->
             <Label Text="Experiencia" x:Name="lblExperiencia" TextColor="Black" FontSize="18" FontAttributes="Bold"/>
-            <ListView x:Name="experienciaListView" SeparatorVisibility="None">
-                <ListView.ItemTemplate>
+            <CollectionView x:Name="experienciaListView" >
+                <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
+                        
 
                             <StackLayout Orientation="Vertical" Margin="0,0,0,20">
                                 <Label Text="{Binding profesion.nombreProfesion, StringFormat = '•  {0}  '}" TextColor="Black" FontSize="16" FontAttributes="Bold"/>
@@ -120,30 +120,30 @@
                                 <Label Text="{Binding fechaFinalizacion, StringFormat = 'Fecha de finalizacion: {0}'}" TextColor="Black" FontSize="14"/>
                             </StackLayout>
 
-                        </ViewCell>
+                        
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
             <BoxView HeightRequest="1" x:Name="lineExperiencia" Color="Gray" HorizontalOptions="FillAndExpand" Margin="0,5" />
 
 
             <!-- archvios -->
             <Label Text="Archivos" x:Name="lblArchivos" TextColor="Black" FontSize="18" FontAttributes="Bold"/>
-            <ListView x:Name="archivosListView" SeparatorVisibility="None">
-                <ListView.ItemTemplate>
+            <CollectionView x:Name="archivosListView" >
+                <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
+                        
                             <Frame Padding="10" Margin="5" CornerRadius="10" HasShadow="True">
                                 <StackLayout Orientation="Horizontal" Spacing="10">
                                     <Label Text="{Binding nombreArchivo, StringFormat = ' {0} '}" TextColor="White" FontSize="16" VerticalOptions="Center"/>
                                     <Button Text="Download" Command="{Binding DownloadCommand}" BackgroundColor="#4CAF50" TextColor="White" CornerRadius="20" Padding="10" VerticalOptions="End"/>
                                 </StackLayout>
                             </Frame>
-                        </ViewCell>
+                       
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
             <BoxView HeightRequest="1" x:Name="lineArchivos" Color="Gray" HorizontalOptions="FillAndExpand" Margin="0,5" />
 
