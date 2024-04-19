@@ -314,33 +314,23 @@
 
             <!-- ARCHIVOS -->
             <Label Text="Archivos" x:Name="lblArchivos" TextColor="Black" FontSize="18" FontAttributes="Bold"/>
-            <ListView x:Name="ArchivosListView" SeparatorVisibility="None">
-                <ListView.ItemTemplate>
+            <CollectionView x:Name="ArchivosListView" ItemsSource="{Binding Archivos}">
+                <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
-                            <StackLayout Orientation="Vertical">
-                                <StackLayout Orientation="Horizontal">
-                                    <Label Text="• " TextColor="Black" FontSize="16"/>
-                                    <Label Text="{Binding nombreArchivo, StringFormat = ' {0}: '}" TextColor="Black" FontSize="16"/>
-                                    <Image
-                            Source="{Binding archivo, Converter={StaticResource ToImage}}"
-                            Aspect="AspectFill"
-                            HeightRequest="200"
-                        />
-                                    <Label Text="{Binding tipo,StringFormat = ' {0}'}" TextColor="Black" FontSize="14"/>
-                                </StackLayout>
-
-                                <!-- ELIMINAR UN ARCHVIO -->
-
-                                <Button Text="Eliminar" TextColor="White" BackgroundColor="OrangeRed" FontSize="16" FontAttributes="Bold" CornerRadius="5" HorizontalOptions="FillAndExpand" 
-                                            Clicked="Button_Clicked" />
+                        <StackLayout Orientation="Vertical">
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="• " TextColor="Black" FontSize="16"/>
+                                <Label Text="{Binding nombreArchivo, StringFormat = ' {0}: '}" TextColor="Black" FontSize="16"/>
+                                <Image Source="{Binding archivo, Converter={StaticResource ToImage}}" Aspect="AspectFill" HeightRequest="200"/>
+                                <Label Text="{Binding tipo,StringFormat = ' {0}'}" TextColor="Black" FontSize="14"/>
                             </StackLayout>
-                        </ViewCell>
+                            <Button Text="Eliminar" TextColor="White" BackgroundColor="OrangeRed" FontSize="16" FontAttributes="Bold" CornerRadius="5" HorizontalOptions="FillAndExpand" Clicked="Button_Clicked" />
+                        </StackLayout>
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
-        </StackLayout>
+    </StackLayout>
     </ContentPage>
 
 

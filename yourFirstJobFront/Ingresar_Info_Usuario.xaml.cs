@@ -370,6 +370,8 @@ public partial class Ingresar_Info_Usuario : TabbedPage
         {
             var responseContent = await response.Content.ReadAsStringAsync();
             await DisplayAlert("Exitoso", "Archivo enviado correctamente", "Aceptar");
+           // await Navigation.PushAsync(new Perfil());
+
         }
         else
         {
