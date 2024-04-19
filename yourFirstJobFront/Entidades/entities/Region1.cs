@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace yourFirstJobFront.Entidades.entities
 {
-    public class Region
+    public class Region1
     {
         public int idRegion { get; set; }
         public string nombreRegion { get; set; }

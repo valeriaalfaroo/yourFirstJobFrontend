@@ -77,13 +77,13 @@ public partial class Perfil : ContentPage
                     usuario.sitioWeb = res.usuario.sitioWeb;
 
 
-                    ////Meto Region
-                    //yourFirstJobFront.Entidades.entities.Region region = new yourFirstJobFront.Entidades.entities.Region();
+                    //Meto Region
+                    Region1 region = new Region1();
 
-                    //region.idRegion = res.usuario.region.idRegion;
-                    //region.nombreRegion = res.usuario.region.nombreRegion;
+                    region.idRegion = res.usuario.region.idRegion;
+                    region.nombreRegion = res.usuario.region.nombreRegion;
 
-                    //usuario.region = region;
+                    usuario.region = region;
 
                     displayUserInfo(usuario);
 
@@ -316,7 +316,7 @@ public partial class Perfil : ContentPage
         lblCorreo.Text = "Correo: " + usuario.correo;
         lblTelefono.Text = "Telefono: " + usuario.telefono;
         lblFechaDeNacimiento.Text = "Fecha de nacimiento: " + usuario.fechaNacimiento;
-        lblRegion.Text = "Region: " + usuario.idRegion;
+        lblRegion.Text = "Region: " + usuario.region.nombreRegion;
 
         if (usuario.sitioWeb != null)
         {

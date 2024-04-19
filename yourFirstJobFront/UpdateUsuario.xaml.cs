@@ -14,8 +14,10 @@ public partial class UpdateUsuario : TabbedPage
 {
     String laURL = "https://yourfirstjobback.azurewebsites.net/";
     string url= "https://localhost:44364/";
-        public Usuario usuario { get; set; }
-    public List<int> idHabilidadVieja { get; set; }
+
+    public Usuario usuario { get; set; }
+    public int SelectedIndexHabilidad { get; set; }
+
 
     public UpdateUsuario()
     {
@@ -59,19 +61,7 @@ public partial class UpdateUsuario : TabbedPage
                     usuario.idRegion = res.usuario.idRegion;
                     usuario.sitioWeb = res.usuario.sitioWeb;
 
-
-                    ////Meto Region
-                    //yourFirstJobFront.Entidades.entities.Region region = new yourFirstJobFront.Entidades.entities.Region();
-
-                    //region.idRegion = res.usuario.region.idRegion;
-                    //region.nombreRegion = res.usuario.region.nombreRegion;
-
-                    //usuario.region = region;
-
                     displayUserInfo(usuario);
-
-
-                    //**********Temporalmente comentado******************
 
                     #region
 
@@ -370,6 +360,7 @@ public partial class UpdateUsuario : TabbedPage
                 {
 
                     await DisplayAlert("Exito", "¡El usuario se actualizo correctamente!", "Aceptar");
+                    await Navigation.PushAsync(new Perfil());
 
                 }
                 else
@@ -477,14 +468,11 @@ public partial class UpdateUsuario : TabbedPage
             foreach (Habilidades habilidad in habilidadesListView.ItemsSource)
             {
                 ReqUpdateUsuarioHabilidades req = new ReqUpdateUsuarioHabilidades();
-                ;
-                // Busca el Picker dentro de la celda
-                var cell = habilidadesListView.ItemTemplate.CreateContent() as ViewCell;
-                cell.BindingContext = habilidad;
-                var picker = cell.View.FindByName<Picker>("pickerHabilidad");
+
+                
 
                 //Seteo
-                req.idHabilidadNueva = picker.SelectedIndex + 1;
+                //req.idHabilidadNueva = pickerHabilidad.SelectedIndex + 1;
                 req.idHabilidad = habilidad.idHabilidades;
                 req.idUsuario = Sesion.usuarioSesion.idUsuario;
 
@@ -542,10 +530,10 @@ public partial class UpdateUsuario : TabbedPage
             {
                 ReqUpdateUsuarioEstudios req = new ReqUpdateUsuarioEstudios();
 
-                // Busca el Picker dentro de la celda
-                var cell = estudiosListView.ItemTemplate.CreateContent() as ViewCell;
-                cell.BindingContext = estudio;
-                var picker = cell.View.FindByName<Picker>("pickerProfesion");
+                //// Busca el Picker dentro de la celda
+                //var cell = estudiosListView.ItemTemplate.CreateContent() as ViewCell;
+                //cell.BindingContext = estudio;
+                //var picker = cell.View.FindByName<Picker>("pickerProfesion");
 
                 //Seteo 
                 Estudios estudios = new Estudios();
@@ -560,7 +548,7 @@ public partial class UpdateUsuario : TabbedPage
 
                 Profesion profesion = new Profesion();
 
-                profesion.idProfesion = picker.SelectedIndex + 1;
+                //profesion.idProfesion = picker.SelectedIndex + 1;
 
                 estudios.profesion = profesion;
 
@@ -622,10 +610,10 @@ public partial class UpdateUsuario : TabbedPage
             {
                 ReqUpdateUsuarioExperiencia req = new ReqUpdateUsuarioExperiencia();
 
-                // Busca el Picker dentro de la celda
-                var cell = experienciaListView.ItemTemplate.CreateContent() as ViewCell;
-                cell.BindingContext = experiencia;
-                var picker = cell.View.FindByName<Picker>("pickerProfesionExp");
+                //// Busca el Picker dentro de la celda
+                //var cell = experienciaListView.ItemTemplate.CreateContent() as ViewCell;
+                //cell.BindingContext = experiencia;
+                //var picker = cell.View.FindByName<Picker>("pickerProfesionExp");
 
                 //Seteo 
                 ExperienciaLaboral experienciaLaboral = new ExperienciaLaboral();
@@ -641,7 +629,7 @@ public partial class UpdateUsuario : TabbedPage
 
                 Profesion profesion = new Profesion();
 
-                profesion.idProfesion = picker.SelectedIndex + 1;
+                //profesion.idProfesion = picker.SelectedIndex + 1;
 
                 experienciaLaboral.profesion = profesion;
 
@@ -691,7 +679,6 @@ public partial class UpdateUsuario : TabbedPage
         }
     }
 
-
     //Borrrar idioma
     private async void btn_Borrar_Idioma(object sender, EventArgs e)
     {
@@ -716,6 +703,156 @@ public partial class UpdateUsuario : TabbedPage
                 ResEliminarIdiomaUsuario res = new ResEliminarIdiomaUsuario();
 
                 res = JsonConvert.DeserializeObject<ResEliminarIdiomaUsuario>(responseContent);
+
+                if (res.resultado)
+                {
+
+                    await DisplayAlert("Exito", "¡El usuario se actualizo correctamente!", "Aceptar");
+                    await Navigation.PushAsync(new Perfil());
+
+                }
+                else
+                {
+                    await DisplayAlert("Error", "El usuario fallo al actualizar: " + res.listaDeErrores.FirstOrDefault(), "Aceptar");
+                }
+            }
+            else
+            {
+                await DisplayAlert("Error", "Error en el servidor", "Aceptar");
+
+            }
+
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error Grave", "Elimine la aplicacion: " + ex, "Aceptar");
+        }
+    }
+
+    //Borrrar habilidad
+    private async void btn_Borrar_Habilidad(object sender, EventArgs e)
+    {
+        ReqEliminarHabilidadUsuario req = new ReqEliminarHabilidadUsuario();
+
+        var selectedItem = (sender as Button).BindingContext as Habilidades;
+
+        req.idHabilidad = selectedItem.idHabilidades;
+        req.idUsuario = Sesion.usuarioSesion.idUsuario;
+
+        try
+        {
+
+            var jsonContent = new StringContent(JsonConvert.SerializeObject(req), Encoding.UTF8, "application/json");
+            HttpClient httpClient = new HttpClient();
+
+            var response = await httpClient.PostAsync(laURL + "api/usuario/eliminarHabilidadUsuario", jsonContent);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var responseContent = await response.Content.ReadAsStringAsync();
+                ResEliminarHabilidadUsuario res = new ResEliminarHabilidadUsuario();
+
+                res = JsonConvert.DeserializeObject<ResEliminarHabilidadUsuario>(responseContent);
+
+                if (res.resultado)
+                {
+
+                    await DisplayAlert("Exito", "¡El usuario se actualizo correctamente!", "Aceptar");
+                    await Navigation.PushAsync(new Perfil());
+
+                }
+                else
+                {
+                    await DisplayAlert("Error", "El usuario fallo al actualizar: " + res.listaDeErrores.FirstOrDefault(), "Aceptar");
+                }
+            }
+            else
+            {
+                await DisplayAlert("Error", "Error en el servidor", "Aceptar");
+
+            }
+
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error Grave", "Elimine la aplicacion: " + ex, "Aceptar");
+        }
+    }
+
+    //Borrrar estudio
+    private async void btn_Borrar_Estudios(object sender, EventArgs e)
+    {
+        ReqEliminarEstudioUsuario req = new ReqEliminarEstudioUsuario();
+
+        var selectedItem = (sender as Button).BindingContext as Estudios;
+
+        req.idEstudio = selectedItem.idEstudios;
+        req.idUsuario = Sesion.usuarioSesion.idUsuario;
+
+        try
+        {
+
+            var jsonContent = new StringContent(JsonConvert.SerializeObject(req), Encoding.UTF8, "application/json");
+            HttpClient httpClient = new HttpClient();
+
+            var response = await httpClient.PostAsync(laURL + "api/usuario/eliminarEstudiosUsuario", jsonContent);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var responseContent = await response.Content.ReadAsStringAsync();
+                ResEliminarEstudioUsuario res = new ResEliminarEstudioUsuario();
+
+                res = JsonConvert.DeserializeObject<ResEliminarEstudioUsuario>(responseContent);
+
+                if (res.resultado)
+                {
+
+                    await DisplayAlert("Exito", "¡El usuario se actualizo correctamente!", "Aceptar");
+                    await Navigation.PushAsync(new Perfil());
+
+                }
+                else
+                {
+                    await DisplayAlert("Error", "El usuario fallo al actualizar: " + res.listaDeErrores.FirstOrDefault(), "Aceptar");
+                }
+            }
+            else
+            {
+                await DisplayAlert("Error", "Error en el servidor", "Aceptar");
+
+            }
+
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error Grave", "Elimine la aplicacion: " + ex, "Aceptar");
+        }
+    }
+
+    //Borrrar experiencia
+    private async void btn_Borrar_Expereincia(object sender, EventArgs e)
+    {
+        ReqEliminarExperienciaUsuario req = new ReqEliminarExperienciaUsuario();
+
+        var selectedItem = (sender as Button).BindingContext as ExperienciaLaboral;
+
+        req.idExperiencia = selectedItem.idExperiencia;
+        req.idUsuario = Sesion.usuarioSesion.idUsuario;
+
+        try
+        {
+
+            var jsonContent = new StringContent(JsonConvert.SerializeObject(req), Encoding.UTF8, "application/json");
+            HttpClient httpClient = new HttpClient();
+
+            var response = await httpClient.PostAsync(laURL + "api/usuario/eliminarExperienciaUsuario", jsonContent);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var responseContent = await response.Content.ReadAsStringAsync();
+                ResEliminarExperienciaUsuario res = new ResEliminarExperienciaUsuario();
+
+                res = JsonConvert.DeserializeObject<ResEliminarExperienciaUsuario>(responseContent);
 
                 if (res.resultado)
                 {

@@ -20,7 +20,7 @@ namespace yourFirstJobFront.Entidades.entities
         public DateTime fechaRegistro { get; set; }
         public Boolean estado { get; set; }
 
-        public Region region { get; set; }
+        public Region1 region { get; set; }
 
         //agregar listas
 
