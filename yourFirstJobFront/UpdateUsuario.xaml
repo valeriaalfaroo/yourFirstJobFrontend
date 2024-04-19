@@ -70,42 +70,40 @@
                 <!-- Idiomas de Usuario -->
                 <Label Text="Idiomas" TextColor="Black" FontSize="18" FontAttributes="Bold"/>
                 
-                <ListView x:Name="idiomasListView" SeparatorVisibility="None">
-                    <ListView.ItemTemplate>
+                <CollectionView x:Name="idiomasListView">
+                    <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <ViewCell>
-                                <StackLayout Orientation="Horizontal" Margin="0,10">
-                                    
-                                    <!-- Picker de Idioma -->
-                                    <Picker x:Name="pickerIdioma" Title="Idioma" TextColor="Black" FontSize="16" BackgroundColor="#EDEDED" SelectedItem="{Binding idioma}">
-                                        <Picker.ItemsSource>
-                                            <x:Array Type="{x:Type x:String}">
-                                                <x:String>ingles</x:String>
-                                                <x:String>portugues</x:String>
-                                                <x:String>espanol</x:String>
-                                            </x:Array>
-                                        </Picker.ItemsSource>
-                                    </Picker>
+                            <StackLayout Orientation="Horizontal" Spacing="10" Margin="0,10">
 
-                                    <!-- Picker de Nivel -->
-                                    <Picker x:Name="pickerNivel" Title="Nivel" TextColor="Black" FontSize="16" BackgroundColor="#EDEDED" SelectedItem="{Binding nivel}">
-                                        <Picker.ItemsSource>
-                                            <x:Array Type="{x:Type x:String}">
-                                                <x:String>nativo</x:String>
-                                                <x:String>avanzado</x:String>
-                                                <x:String>basico</x:String>
-                                            </x:Array>
-                                        </Picker.ItemsSource>
-                                    </Picker>
-                                    
-                                    <!--Borrar-->
-                                    <Button Text="Borrar" TextColor="White" BackgroundColor="Red" WidthRequest="60" HeightRequest="30" FontSize="12" CornerRadius="3" Clicked="btn_Borrar_Idioma"/>
+                                <!-- Picker de Idioma -->
+                                <Picker x:Name="pickerIdioma" Title="Idioma" TextColor="Black" WidthRequest="150" HeightRequest="50" FontSize="16" BackgroundColor="#EDEDED" SelectedItem="{Binding idioma}">
+                                    <Picker.ItemsSource>
+                                        <x:Array Type="{x:Type x:String}">
+                                            <x:String>ingles</x:String>
+                                            <x:String>portugues</x:String>
+                                            <x:String>espanol</x:String>
+                                        </x:Array>
+                                    </Picker.ItemsSource>
+                                </Picker>
 
-                                </StackLayout>
-                            </ViewCell>
+                                <!-- Picker de Nivel -->
+                                <Picker x:Name="pickerNivel" Title="Nivel" TextColor="Black" WidthRequest="100" HeightRequest="50" FontSize="16" BackgroundColor="#EDEDED" SelectedItem="{Binding nivel}">
+                                    <Picker.ItemsSource>
+                                        <x:Array Type="{x:Type x:String}">
+                                            <x:String>nativo</x:String>
+                                            <x:String>avanzado</x:String>
+                                            <x:String>basico</x:String>
+                                        </x:Array>
+                                    </Picker.ItemsSource>
+                                </Picker>
+
+                                <!--Borrar-->
+                                <Button Text="Borrar" TextColor="White" BackgroundColor="Red" WidthRequest="70" HeightRequest="50" FontSize="12" CornerRadius="3" Clicked="btn_Borrar_Idioma"/>
+
+                            </StackLayout>
                         </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
 
                 <!-- Botón de Actualizar -->
                 <Button Text="Actualizar" TextColor="White" BackgroundColor="#FF5733" FontSize="16" FontAttributes="Bold" CornerRadius="5" Margin="0,30,0,0" HorizontalOptions="FillAndExpand" Clicked="btn_Update_Idiomas"/>
@@ -129,30 +127,31 @@
                     <!-- Habilidades de Usuario -->
                     <Label Text="Habilidades:" TextColor="Black" FontSize="18" FontAttributes="Bold"/>
 
-                    <ListView x:Name="habilidadesListView" SeparatorVisibility="None">
-                        <ListView.ItemTemplate>
+                    <CollectionView x:Name="habilidadesListView">
+                        <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <ViewCell>
-                                    <StackLayout Orientation="Vertical" Margin="0,30">
+                                <StackLayout Orientation="Horizontal" Margin="0,30">
 
-                                        <!-- Picker de Habilidad -->
-                                        <Picker x:Name="pickerHabilidad" Title="Habilidad" TextColor="Black" FontSize="16" BackgroundColor="#EDEDED" SelectedItem="{Binding categoria}">
-                                            <Picker.ItemsSource>
-                                                <x:Array Type="{x:Type x:String}">
-                                                    <x:String>Trabajo en equipo</x:String>
-                                                    <x:String>Comunicacion efectiva</x:String>
-                                                    <x:String>Colaboración</x:String>
-                                                    <x:String>Flexibilidad</x:String>
-                                                    <x:String>Empatía</x:String>
-                                                </x:Array>
-                                            </Picker.ItemsSource>
-                                        </Picker>
+                                    <!-- Picker de Habilidad -->
+                                    <Picker x:Name="pickerHabilidad" Title="Habilidad" TextColor="Black" WidthRequest="250" HeightRequest="50" FontSize="16" BackgroundColor="#EDEDED" SelectedItem="{Binding categoria}">
+                                        <Picker.ItemsSource>
+                                            <x:Array Type="{x:Type x:String}">
+                                                <x:String>Trabajo en equipo</x:String>
+                                                <x:String>Comunicacion efectiva</x:String>
+                                                <x:String>Colaboración</x:String>
+                                                <x:String>Flexibilidad</x:String>
+                                                <x:String>Empatía</x:String>
+                                            </x:Array>
+                                        </Picker.ItemsSource>
+                                    </Picker>
 
-                                    </StackLayout>
-                                </ViewCell>
+                                    <!--Borrar-->
+                                    <Button Text="Borrar" TextColor="White" BackgroundColor="Red" WidthRequest="70" HeightRequest="50" FontSize="12" CornerRadius="3" Clicked="btn_Borrar_Habilidad"/>
+                                </StackLayout>
+
                             </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
 
                     <!-- Botón de Actualizar -->
                     <Button Text="Actualizar" TextColor="White" BackgroundColor="#FF5733" FontSize="16" FontAttributes="Bold" CornerRadius="5" Margin="0,30,0,0" HorizontalOptions="FillAndExpand" Clicked="btn_Update_Habilidades"/>
@@ -163,74 +162,75 @@
 
     <!--Update estudios usuario-->
     <ContentPage Title="Estudios" Background="White">
-        <StackLayout>
-            <!--actualizar habilidades-->
-            <ScrollView>
-                <StackLayout Margin="20">
+        <!--actualizar habilidades-->
+        <ScrollView>
+            <StackLayout Margin="20">
 
-                    <!-- Título -->
-                    <Label Text="Actualizar Usuario" TextColor="Black" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" />
+                <!-- Título -->
+                <Label Text="Actualizar Usuario" TextColor="Black" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" />
 
-                    <BoxView HeightRequest="1" Color="LightGray" HorizontalOptions="FillAndExpand" Margin="0,10,0,20"/>
+                <BoxView HeightRequest="1" Color="LightGray" HorizontalOptions="FillAndExpand" Margin="0,10,0,20"/>
 
-                    <!-- Habilidades de Usuario -->
-                    <Label Text="Estudios:" TextColor="Black" FontSize="18" FontAttributes="Bold"/>
+                <!-- Habilidades de Usuario -->
+                <Label Text="Estudios:" TextColor="Black" FontSize="18" FontAttributes="Bold"/>
 
-                    <ListView x:Name="estudiosListView" SeparatorVisibility="None">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                    <StackLayout Orientation="Vertical" Margin="0,30">
+                <CollectionView x:Name="estudiosListView">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Orientation="Vertical" Margin="0,10">
 
-                                        <Label Text="Nombre de la institucion:" TextColor="#A9A9A9" FontSize="12" />
-                                        <Entry x:Name="entryInstitucion" Placeholder="institucion" Text="{Binding nombreInstitucion}" TextColor="Black" FontSize="16" BackgroundColor="#F2F2F2" />
+                                <Label Text="Nombre de la institucion:" TextColor="#A9A9A9" FontSize="12" />
+                                <Entry x:Name="entryInstitucion" Placeholder="institucion" Text="{Binding nombreInstitucion}" TextColor="Black" FontSize="16" BackgroundColor="#F2F2F2" />
 
-                                        <!-- Picker de grado -->
-                                        <Label Text="Grado academico:" TextColor="#A9A9A9" FontSize="12" />
-                                        <Picker x:Name="pickerGrado" TextColor="Black" FontSize="16" BackgroundColor="#EDEDED" SelectedItem="{Binding gradoAcademico}">
-                                            <Picker.ItemsSource>
-                                                <x:Array Type="{x:Type x:String}">
-                                                    <x:String>Diplomado</x:String>
-                                                    <x:String>Bachillerato</x:String>
-                                                    <x:String>Licenciatura</x:String>
-                                                    <x:String>Maestria</x:String>
-                                                    <x:String>Doctorado</x:String>
-                                                </x:Array>
-                                            </Picker.ItemsSource>
-                                        </Picker>
+                                <!-- Picker de grado -->
+                                <Label Text="Grado academico:" TextColor="#A9A9A9" FontSize="12" />
+                                <Picker x:Name="pickerGrado" TextColor="Black" FontSize="16" BackgroundColor="#EDEDED" SelectedItem="{Binding gradoAcademico}">
+                                    <Picker.ItemsSource>
+                                        <x:Array Type="{x:Type x:String}">
+                                            <x:String>Diplomado</x:String>
+                                            <x:String>Bachillerato</x:String>
+                                            <x:String>Licenciatura</x:String>
+                                            <x:String>Maestria</x:String>
+                                            <x:String>Doctorado</x:String>
+                                        </x:Array>
+                                    </Picker.ItemsSource>
+                                </Picker>
 
 
-                                        <!-- Picker de Profesion -->
-                                        <Label Text="Profesion:" TextColor="#A9A9A9" FontSize="12" />
-                                        <Picker x:Name="pickerProfesion" TextColor="Black" FontSize="16" BackgroundColor="#EDEDED" SelectedItem="{Binding profesion.nombreProfesion}">
-                                            <Picker.ItemsSource>
-                                                <x:Array Type="{x:Type x:String}">
-                                                    <x:String>Software Engineer</x:String>
-                                                    <x:String>Electrical  Engineer</x:String>
-                                                    <x:String>Industrial Engineer</x:String>
-                                                    <x:String>Civil Engineer</x:String>
-                                                    <x:String>Doctor</x:String>
-                                                </x:Array>
-                                            </Picker.ItemsSource>
-                                        </Picker>
+                                <!-- Picker de Profesion -->
+                                <Label Text="Profesion:" TextColor="#A9A9A9" FontSize="12" />
+                                <Picker x:Name="pickerProfesion" TextColor="Black" FontSize="16" BackgroundColor="#EDEDED" SelectedItem="{Binding profesion.nombreProfesion}">
+                                    <Picker.ItemsSource>
+                                        <x:Array Type="{x:Type x:String}">
+                                            <x:String>Software Engineer</x:String>
+                                            <x:String>Electrical  Engineer</x:String>
+                                            <x:String>Industrial Engineer</x:String>
+                                            <x:String>Civil Engineer</x:String>
+                                            <x:String>Doctor</x:String>
+                                        </x:Array>
+                                    </Picker.ItemsSource>
+                                </Picker>
 
-                                        <Label Text="Fecha de inicio:" TextColor="#A9A9A9" FontSize="12" />
-                                        <DatePicker x:Name="pikerFechaInicio" MinimumDate="01/01/1900" TextColor="Black" BackgroundColor="#F2F2F2" Date="{Binding fechaInicio}" />
+                                <Label Text="Fecha de inicio:" TextColor="#A9A9A9" FontSize="12" />
+                                <DatePicker x:Name="pikerFechaInicio" MinimumDate="01/01/1900" TextColor="Black" BackgroundColor="#F2F2F2" Date="{Binding fechaInicio}" />
 
-                                        <Label Text="Fecha de finalizacion:" TextColor="#A9A9A9" FontSize="12" />
-                                        <DatePicker x:Name="pikerFechaFinal" MinimumDate="01/01/1900" TextColor="Black" BackgroundColor="#F2F2F2" Date="{Binding fechaFinalizacion}" />
+                                <Label Text="Fecha de finalizacion:" TextColor="#A9A9A9" FontSize="12" />
+                                <DatePicker x:Name="pikerFechaFinal" MinimumDate="01/01/1900" TextColor="Black" BackgroundColor="#F2F2F2" Date="{Binding fechaFinalizacion}" />
 
-                                    </StackLayout>
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                                <!--Borrar-->
+                                <Button Text="Borrar" TextColor="White" BackgroundColor="Red" FontSize="12" CornerRadius="3" Clicked="btn_Borrar_Estudios"/>
 
-                    <!-- Botón de Actualizar -->
-                    <Button Text="Actualizar" TextColor="White" BackgroundColor="#FF5733" FontSize="16" FontAttributes="Bold" CornerRadius="5" Margin="0,30,0,0" HorizontalOptions="FillAndExpand" Clicked="btn_Update_Estudios"/>
-                </StackLayout>
-            </ScrollView>
-        </StackLayout>
+                                <BoxView HeightRequest="1" Color="LightGray" HorizontalOptions="FillAndExpand" Margin="0,10,0,20"/>
+                                
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <!-- Botón de Actualizar -->
+                <Button Text="Actualizar" TextColor="White" BackgroundColor="#FF5733" FontSize="16" FontAttributes="Bold" CornerRadius="5" Margin="0,30,0,0" HorizontalOptions="FillAndExpand" Clicked="btn_Update_Estudios"/>
+            </StackLayout>
+        </ScrollView>
     </ContentPage>
 
     <!--Update experiencia laboral usuario-->
@@ -248,47 +248,50 @@
                 <!-- Experiencia de Usuario -->
                 <Label Text="Experiencia laboral:" TextColor="Black" FontSize="18" FontAttributes="Bold"/>
 
-                <ListView x:Name="experienciaListView" SeparatorVisibility="None">
-                    <ListView.ItemTemplate>
+                <CollectionView x:Name="experienciaListView">
+                    <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <ViewCell>
-                                <StackLayout Orientation="Vertical" Margin="0,30">
+                            <StackLayout Orientation="Vertical" Margin="0,10">
 
-                                    <!-- Picker de Profesion -->
-                                    <Label Text="Profesion:" TextColor="#A9A9A9" FontSize="12" />
-                                    <Picker x:Name="pickerProfesionExp" TextColor="Black" FontSize="16" BackgroundColor="#EDEDED" SelectedItem="{Binding profesion.nombreProfesion}">
-                                        <Picker.ItemsSource>
-                                            <x:Array Type="{x:Type x:String}">
-                                                <x:String>Software Engineer</x:String>
-                                                <x:String>Electrical  Engineer</x:String>
-                                                <x:String>Industrial Engineer</x:String>
-                                                <x:String>Civil Engineer</x:String>
-                                                <x:String>Doctor</x:String>
-                                            </x:Array>
-                                        </Picker.ItemsSource>
-                                    </Picker>
+                                <!-- Picker de Profesion -->
+                                <Label Text="Profesion:" TextColor="#A9A9A9" FontSize="12" />
+                                <Picker x:Name="pickerProfesionExp" TextColor="Black" FontSize="16" BackgroundColor="#EDEDED" SelectedItem="{Binding profesion.nombreProfesion}">
+                                    <Picker.ItemsSource>
+                                        <x:Array Type="{x:Type x:String}">
+                                            <x:String>Software Engineer</x:String>
+                                            <x:String>Electrical  Engineer</x:String>
+                                            <x:String>Industrial Engineer</x:String>
+                                            <x:String>Civil Engineer</x:String>
+                                            <x:String>Doctor</x:String>
+                                        </x:Array>
+                                    </Picker.ItemsSource>
+                                </Picker>
 
-                                    <Label Text="Puesto:" TextColor="#A9A9A9" FontSize="12" />
-                                    <Entry x:Name="entryPuesto" Placeholder="puesto" Text="{Binding puesto}" TextColor="Black" FontSize="16" BackgroundColor="#F2F2F2" />
+                                <Label Text="Puesto:" TextColor="#A9A9A9" FontSize="12" />
+                                <Entry x:Name="entryPuesto" Placeholder="puesto" Text="{Binding puesto}" TextColor="Black" FontSize="16" BackgroundColor="#F2F2F2" />
 
-                                    <Label Text="Nombre de la Empresa:" TextColor="#A9A9A9" FontSize="12" />
-                                    <Entry x:Name="entryNombreEmpresa" Placeholder="empresa" Text="{Binding nombreEmpresa}" TextColor="Black" FontSize="16" BackgroundColor="#F2F2F2" />
+                                <Label Text="Nombre de la Empresa:" TextColor="#A9A9A9" FontSize="12" />
+                                <Entry x:Name="entryNombreEmpresa" Placeholder="empresa" Text="{Binding nombreEmpresa}" TextColor="Black" FontSize="16" BackgroundColor="#F2F2F2" />
 
-                                    <Label Text="Responsabilidades:" TextColor="#A9A9A9" FontSize="12" />
-                                    <Entry x:Name="entryResponsabilidades" Placeholder="responsabilidades" Text="{Binding responsabilidades}" TextColor="Black" FontSize="16" BackgroundColor="#F2F2F2" />
+                                <Label Text="Responsabilidades:" TextColor="#A9A9A9" FontSize="12" />
+                                <Entry x:Name="entryResponsabilidades" Placeholder="responsabilidades" Text="{Binding responsabilidades}" TextColor="Black" FontSize="16" BackgroundColor="#F2F2F2" />
 
 
-                                    <Label Text="Fecha de inicio:" TextColor="#A9A9A9" FontSize="12" />
-                                    <DatePicker x:Name="pikerFechaInicio" MinimumDate="01/01/1900" TextColor="Black" BackgroundColor="#F2F2F2" Date="{Binding fechaInicio}" />
+                                <Label Text="Fecha de inicio:" TextColor="#A9A9A9" FontSize="12" />
+                                <DatePicker x:Name="pikerFechaInicio" MinimumDate="01/01/1900" TextColor="Black" BackgroundColor="#F2F2F2" Date="{Binding fechaInicio}" />
 
-                                    <Label Text="Fecha de finalizacion:" TextColor="#A9A9A9" FontSize="12" />
-                                    <DatePicker x:Name="pikerFechaFinal" MinimumDate="01/01/1900" TextColor="Black" BackgroundColor="#F2F2F2" Date="{Binding fechaFinalizacion}" />
+                                <Label Text="Fecha de finalizacion:" TextColor="#A9A9A9" FontSize="12" />
+                                <DatePicker x:Name="pikerFechaFinal" MinimumDate="01/01/1900" TextColor="Black" BackgroundColor="#F2F2F2" Date="{Binding fechaFinalizacion}" />
 
-                                </StackLayout>
-                            </ViewCell>
+                                <!--Borrar-->
+                                <Button Text="Borrar" TextColor="White" BackgroundColor="Red" FontSize="12" CornerRadius="3" Clicked="btn_Borrar_Expereincia"/>
+
+                                <BoxView HeightRequest="1" Color="LightGray" HorizontalOptions="FillAndExpand" Margin="0,10,0,20"/>
+
+                            </StackLayout>
                         </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
 
                 <!-- Botón de Actualizar -->
                 <Button Text="Actualizar" TextColor="White" BackgroundColor="#FF5733" FontSize="16" FontAttributes="Bold" CornerRadius="5" Margin="0,30,0,0" HorizontalOptions="FillAndExpand" Clicked="btn_Update_Experiencia"/>
