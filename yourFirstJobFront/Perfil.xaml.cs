@@ -27,7 +27,7 @@ public partial class Perfil : ContentPage
 
     }
 
-    //realizar la conversion para envio a la base de datos
+    //realizar la conversion para envio a la base de datos de imagen
     public async Task<byte[]> ConvertirArchivoABase64(FileResult archivo)
     {
         using (var stream = await archivo.OpenReadAsync())
@@ -258,7 +258,7 @@ public partial class Perfil : ContentPage
                     }
 
                     
-
+                    //mostrar foto de perfil
                     if (res.usuario.listaArchivosUsuarios.Any())
                     {
                         List<ArchivosUsuario> listaArchivos = res.usuario.listaArchivosUsuarios
@@ -285,11 +285,6 @@ public partial class Perfil : ContentPage
                             ImagenImageButton.Source = imagenSource; // Assign the image to the ImageButton Source
                         }
                     }
-
-
-
-
-
 
                 }
 

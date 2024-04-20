@@ -215,23 +215,20 @@ public partial class UpdateUsuario : TabbedPage
                     }
 
                     //valido si archvios existen
-                    if (res.usuario.listaArchivosUsuarios.Any()) {
-                        //Hay elementos
+                    if (res.usuario.listaArchivosUsuarios.Any())
+                    {
+                        List<ArchivosUsuario> listaArchivos = res.usuario.listaArchivosUsuarios
+                            .Where(item => item.tipo.ToLower() == "pdf" || item.tipo.ToLower() == "png") // Filter for PDF and png files only
+                            .Select(item => new ArchivosUsuario
+                            {
+                                idArchivosUsuarios = item.idArchivosUsuarios,
+                                nombreArchivo = item.nombreArchivo,
+                                archivo = item.archivo,
+                                //  tipo = item.tipo
+                            }).ToList();
 
-                        //Meto archvios
-                        List<ArchivosUsuario> listaArchivos = new List<ArchivosUsuario>();
-
-                        foreach (ArchivosUsuario item in res.usuario.listaArchivosUsuarios)
-                        {
-                            ArchivosUsuario archivos = new ArchivosUsuario();
-                            archivos.nombreArchivo = item.nombreArchivo;
-                            archivos.archivo = item.archivo;
-                            archivos.tipo = item.tipo;
-                        }
-                        //
-                        usuario.listaArchivosUsuarios = res.usuario.listaArchivosUsuarios;
+                        usuario.listaArchivosUsuarios = listaArchivos;
                         ArchivosListView.ItemsSource = usuario.listaArchivosUsuarios;
-
                     }
 
                     #endregion
@@ -907,7 +904,7 @@ public partial class UpdateUsuario : TabbedPage
                 {
 
                     await DisplayAlert("Exito", "¡El archivo se elimino correctamente!", "Aceptar");
-              //      await Navigation.PushAsync(new UpdateUsuario());
+                   // await Navigation.PushAsync(new Perfil());
 
                 }
                 else

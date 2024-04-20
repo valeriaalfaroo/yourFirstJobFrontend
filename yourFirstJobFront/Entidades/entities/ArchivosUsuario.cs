@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using System.IO; // Make sure to include this for Path and File classes
-using Microsoft.Maui.Storage; // Include for FileSystem
+using System.IO; //  include  for Path and File classes
+using Microsoft.Maui.Storage;
+using Microsoft.Maui.Controls.PlatformConfiguration; // Include for FileSystem
 
 namespace yourFirstJobFront.Entidades.entities
 {
@@ -26,7 +27,18 @@ namespace yourFirstJobFront.Entidades.entities
         private static void DownloadPdf(ArchivosUsuario archivo)
         {
             // Use 'archivo' to access the properties for the PDF
-            string downloadsPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+            //direccion de descarga para computadora
+            //  string downloadsPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop); 
+
+
+            //direccion de descarga para telefono
+            string downloadsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+#if ANDROID
+downloadsPath = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDownloads).AbsolutePath;
+#endif
+
             string filePath = Path.Combine(downloadsPath, archivo.nombreArchivo);
             SaveFile(archivo.archivo, filePath);
 
@@ -34,7 +46,7 @@ namespace yourFirstJobFront.Entidades.entities
             // Inform the user that the file has been downloaded
             Device.BeginInvokeOnMainThread(async () =>
             {
-                await Application.Current.MainPage.DisplayAlert("Download", "PDF has been downloaded.", "OK");
+                await Application.Current.MainPage.DisplayAlert("Descarga", "El archivo se ha descargado.", "OK");
             });
         }
 

@@ -73,6 +73,8 @@ HeightRequest="30"/>
                                                 </DataTemplate>
                                             </CollectionView.ItemTemplate>
                                         </CollectionView>
+                                        
+                                        <!-- Archivos-->
                                         <Label Text="Archivos adjuntos:"/>
                                         <CollectionView ItemsSource="{Binding listaArchivosUsuario}">
                                             <CollectionView.ItemTemplate>
