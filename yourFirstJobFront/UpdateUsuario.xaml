@@ -46,7 +46,7 @@
                     </Picker.ItemsSource>
                 </Picker>
 
-                <Label Text="Fecha de nacimiento:" TextColor="#A9A9A9" FontSize="12" />
+                <Label Text="Sitio web:" TextColor="#A9A9A9" FontSize="12" />
                 <Entry x:Name="entrySitioWeb" Placeholder="Sitio web" TextColor="Black" FontSize="16" BackgroundColor="#F2F2F2" />
 
                 <!-- Botón de Actualizar -->
