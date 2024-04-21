@@ -459,6 +459,14 @@ public partial class UpdateUsuario : TabbedPage
     {
         try
         {
+            Dictionary<Tuple<string>, int> menuOptionsToIds = new Dictionary<Tuple<string>, int>
+            {
+                { Tuple.Create("Trabajo en equipo"), 1 },
+                { Tuple.Create("Comunicacion efectiva"), 2 },
+                { Tuple.Create("Colaboración"), 3 },
+                { Tuple.Create("Flexibilidad"), 4 },
+                { Tuple.Create("Empatía"), 5 }
+            };
 
             List<ReqUpdateUsuarioHabilidades> lstReq = new List<ReqUpdateUsuarioHabilidades>();
 
@@ -466,10 +474,10 @@ public partial class UpdateUsuario : TabbedPage
             {
                 ReqUpdateUsuarioHabilidades req = new ReqUpdateUsuarioHabilidades();
 
-                
+                Tuple<string> opcionSeleccionada = new Tuple<string>(habilidad.categoria);
 
                 //Seteo
-                //req.idHabilidadNueva = pickerHabilidad.SelectedIndex + 1;
+                req.idHabilidadNueva = menuOptionsToIds[opcionSeleccionada];
                 req.idHabilidad = habilidad.idHabilidades;
                 req.idUsuario = Sesion.usuarioSesion.idUsuario;
 
@@ -521,16 +529,20 @@ public partial class UpdateUsuario : TabbedPage
         try
         {
 
+            Dictionary<Tuple<string>, int> menuOptionsToIds = new Dictionary<Tuple<string>, int>
+            {
+                 { Tuple.Create("Software Engineer"), 1 },
+                 { Tuple.Create("Electrical  Engineer"), 2 },
+                 { Tuple.Create("Industrial Engineer"), 3 },
+                 { Tuple.Create("Civil Engineer"), 4 },
+                 { Tuple.Create("Doctor"), 5 }
+            };
+
             List<ReqUpdateUsuarioEstudios> lstReq = new List<ReqUpdateUsuarioEstudios>();
 
             foreach (Estudios estudio in estudiosListView.ItemsSource)
             {
                 ReqUpdateUsuarioEstudios req = new ReqUpdateUsuarioEstudios();
-
-                //// Busca el Picker dentro de la celda
-                //var cell = estudiosListView.ItemTemplate.CreateContent() as ViewCell;
-                //cell.BindingContext = estudio;
-                //var picker = cell.View.FindByName<Picker>("pickerProfesion");
 
                 //Seteo 
                 Estudios estudios = new Estudios();
@@ -545,7 +557,9 @@ public partial class UpdateUsuario : TabbedPage
 
                 Profesion profesion = new Profesion();
 
-                //profesion.idProfesion = picker.SelectedIndex + 1;
+                Tuple<string> opcionSeleccionada = new Tuple<string>(estudio.profesion.nombreProfesion);
+
+                profesion.idProfesion = menuOptionsToIds[opcionSeleccionada];
 
                 estudios.profesion = profesion;
 
@@ -607,10 +621,14 @@ public partial class UpdateUsuario : TabbedPage
             {
                 ReqUpdateUsuarioExperiencia req = new ReqUpdateUsuarioExperiencia();
 
-                //// Busca el Picker dentro de la celda
-                //var cell = experienciaListView.ItemTemplate.CreateContent() as ViewCell;
-                //cell.BindingContext = experiencia;
-                //var picker = cell.View.FindByName<Picker>("pickerProfesionExp");
+                Dictionary<Tuple<string>, int> menuOptionsToIds = new Dictionary<Tuple<string>, int>
+                {
+                    { Tuple.Create("Software Engineer"), 1 },
+                    { Tuple.Create("Electrical  Engineer"), 2 },
+                    { Tuple.Create("Industrial Engineer"), 3 },
+                    { Tuple.Create("Civil Engineer"), 4 },
+                    { Tuple.Create("Doctor"), 5 }
+                };
 
                 //Seteo 
                 ExperienciaLaboral experienciaLaboral = new ExperienciaLaboral();
@@ -626,7 +644,9 @@ public partial class UpdateUsuario : TabbedPage
 
                 Profesion profesion = new Profesion();
 
-                //profesion.idProfesion = picker.SelectedIndex + 1;
+                Tuple<string> opcionSeleccionada = new Tuple<string>(experiencia.profesion.nombreProfesion);
+
+                profesion.idProfesion = menuOptionsToIds[opcionSeleccionada];
 
                 experienciaLaboral.profesion = profesion;
 

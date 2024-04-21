@@ -4,58 +4,63 @@
              x:Class="yourFirstJobFront.Registrar"
              Title="">
     <ScrollView>
-           <Grid x:Name="Contenedor" BackgroundColor="White">
-    <Frame Margin="10,0,10,0" VerticalOptions="Center">
-        <VerticalStackLayout Spacing="15" VerticalOptions="Center">
-            <Label FontAttributes="Bold"
+        <Grid x:Name="Contenedor" BackgroundColor="White">
+            <Frame Margin="10,0,10,0" VerticalOptions="Center">
+                <VerticalStackLayout Spacing="15" VerticalOptions="Center">
+                    <Label FontAttributes="Bold"
          FontSize="Large"
          HorizontalOptions="Center"
          Text="yourFirstJob."/>
-            <Label Text="Username"/>
-            <Entry
-         x:Name="txtUsername"
+                    <Label Text="Username"/>
+                    <Entry
+                x:Name="txtUsername"
          Keyboard="Text"/>
-                <Label Text="Apellidos"/>
-                <Entry
+                    <Label Text="Apellidos"/>
+                    <Entry
                  x:Name="txtApellidos"
                  Keyboard="Text"/>
-                <Label Text="Correo"/>
-                <Entry
+                    <Label Text="Correo"/>
+                    <Entry
                  x:Name="txtCorreo"
                  Keyboard="Email"/>
-                <Label Text="Telefono"/>
-                <Entry
+                    <Label Text="Telefono"/>
+                    <Entry
                  x:Name="txtTelefono"
                  Keyboard="Telephone"/>
-                <Label Text="Fecha de nacimiento"/>
-                <Entry
-                 x:Name="txtFechaNacimiento"
-                 Keyboard="Numeric"/>
-                <Label Text="Region"/>
+                    
+                    <Label Text="Fecha de nacimiento"/>
+                    <DatePicker x:Name="pikerFecha" MinimumDate="01/01/1900" TextColor="Black" BackgroundColor="#F2F2F2" />
 
-                    <StackLayout Orientation="Vertical">
-                        <RadioButton Content="Costa Rica" GroupName="region" Value="1" CheckedChanged="RadioButton_CheckedChanged" />
-                        <RadioButton Content="Panama" GroupName="region" Value="2" CheckedChanged="RadioButton_CheckedChanged" />
-                        <RadioButton Content="Mexico" GroupName="region" Value="3" CheckedChanged="RadioButton_CheckedChanged" />
-                    </StackLayout>
+                    
+                    <Picker x:Name="pickerRegion" Title="Región" TextColor="Black" FontSize="16" BackgroundColor="#F2F2F2">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Costa Rica</x:String>
+                                <x:String>Panama</x:String>
+                                <x:String>Mexico</x:String>
+                                <x:String>Canada</x:String>
+                                <x:String>Colombia</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
 
 
 
 
 
                     <Label Text="Contraseña"/>
-            <Entry
+                    <Entry
          x:Name="txtPassword"
          IsPassword="True"
          Keyboard="Text"/>
-            <Button 
+                    <Button 
          x:Name="btnIngresar"
          Text="Ingresar"
-         Clicked="btnIngresar_Clicked"/>
-        </VerticalStackLayout>
-    </Frame>
+         Clicked="btnIngresar_Clicked" TextColor="White" BackgroundColor="OrangeRed"/>
+                </VerticalStackLayout>
+            </Frame>
 
-</Grid>
+        </Grid>
     </ScrollView>
-   
+
 </ContentPage>

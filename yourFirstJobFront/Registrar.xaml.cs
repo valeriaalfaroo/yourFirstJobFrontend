@@ -28,8 +28,8 @@ namespace yourFirstJobFront
                 usuario.apellidos = txtApellidos.Text;
                 usuario.correo = txtCorreo.Text;
                 usuario.telefono = int.Parse(txtTelefono.Text);
-                usuario.fechaNacimiento = DateTime.Parse(txtFechaNacimiento.Text);
-                usuario.idRegion = selectedRadio;
+                usuario.fechaNacimiento = pikerFecha.Date;
+                usuario.idRegion = pickerRegion.SelectedIndex + 1;
                 usuario.contrasena = txtPassword.Text;
 
                 req.usuario = usuario;

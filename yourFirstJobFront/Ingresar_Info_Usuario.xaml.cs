@@ -250,7 +250,7 @@ public partial class Ingresar_Info_Usuario : TabbedPage
             var jsonContent = new StringContent(JsonConvert.SerializeObject(req), Encoding.UTF8, "application/json");
             HttpClient httpClient = new HttpClient();
 
-            var response = await httpClient.PostAsync(url + "api/usuario/insertExperienciaUsuario", jsonContent);
+            var response = await httpClient.PostAsync(laURL + "api/usuario/insertExperienciaUsuario", jsonContent);
 
             if (response.IsSuccessStatusCode)
             {
