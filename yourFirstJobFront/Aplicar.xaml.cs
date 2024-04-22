@@ -10,6 +10,7 @@ namespace yourFirstJobFront;
 public partial class Aplicar : ContentPage
 {
     String laURL = "https://yourfirstjobback.azurewebsites.net/";
+    string u = "https://localhost:44364/";
     Usuario usuario = new Usuario();
     int idOfertas; 
     public Aplicar(int idOfertas)
@@ -53,11 +54,27 @@ public partial class Aplicar : ContentPage
                     usuario.listaIdiomas = res.usuario.listaIdiomas;
                     usuario.listaHabilidades = res.usuario.listaHabilidades;
                     usuario.listaExperienciaLaboral = res.usuario.listaExperienciaLaboral;
-                    usuario.listaArchivosUsuarios = res.usuario.listaArchivosUsuarios;
+
+                    if (res.usuario.listaArchivosUsuarios.Any())
+                    {
+                        List<ArchivosUsuario> listaArchivos = res.usuario.listaArchivosUsuarios
+                            .Where(item => item.tipo.ToLower() == "pdf") // Filter for PDF files only
+                            .Select(item => new ArchivosUsuario
+                            {
+                                idArchivosUsuarios = item.idArchivosUsuarios,
+                                nombreArchivo = item.nombreArchivo,
+                                archivo = item.archivo,
+                                tipo = item.tipo
+                            }).ToList();
+
+                        usuario.listaArchivosUsuarios = listaArchivos;
+                    }
+
 
                     List<Usuario> usuarioList = new List<Usuario>();
                     usuarioList.Add(usuario);
                     usuarioListView.ItemsSource = usuarioList;
+
                 }
                 else
                 {
