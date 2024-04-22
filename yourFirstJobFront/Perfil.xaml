@@ -136,7 +136,7 @@
                         
                             <Frame Padding="10" Margin="5" CornerRadius="10" HasShadow="True">
                                 <StackLayout Orientation="Horizontal" Spacing="10">
-                                    <Label Text="{Binding nombreArchivo, StringFormat = ' {0} '}" TextColor="Black" FontSize="16" VerticalOptions="Center"/>
+                                    <Label Text="{Binding nombreArchivo, StringFormat = ' {0} '}" TextColor="White" FontSize="16" VerticalOptions="Center"/>
                                     <Button Text="Download" Command="{Binding DownloadCommand}" BackgroundColor="#4CAF50" TextColor="White" CornerRadius="20" Padding="10" VerticalOptions="End"/>
                                 </StackLayout>
                             </Frame>

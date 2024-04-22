@@ -9,12 +9,10 @@ namespace yourFirstJobFront.Entidades.request
     public class ReqUpdateArchivos
     {
         public int idArchivosUsuarios { get; set; }
+        public int idUsuario { get; set; }
+
         public string nombreArchivo { get; set; }
 
         public byte[] archivo { get; set; }
-
-        public string tipo { get; set; }
-
-        public int idUsuario { get; set; }
     }
 }

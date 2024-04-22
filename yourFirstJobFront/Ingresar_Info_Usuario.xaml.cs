@@ -289,33 +289,10 @@ public partial class Ingresar_Info_Usuario : TabbedPage
         try
         {
             // Show options to pick file type
-            string[] options = { "Seleccionar imagen", "Seleccionar PDF" };
-            string selectedOption = await DisplayActionSheet("Seleccionar tipo de archivo", "Cancelar", null, options);
+            string[] options = { "Seleccionar PDF" };
+            string selectedOption = await DisplayActionSheet("Seleccionar archivo", "Cancelar", null, options);
 
-            if (selectedOption == "Seleccionar imagen")
-            {
-                // Code for selecting image file
-                FileResult archivoSeleccionado = await FilePicker.Default.PickAsync(new PickOptions
-                {
-                    FileTypes = new FilePickerFileType(new Dictionary<DevicePlatform, IEnumerable<string>>
-                {
-                    { DevicePlatform.iOS, new[] { "public.image" } },
-                    { DevicePlatform.Android, new[] { "image/*" } },
-                    { DevicePlatform.WinUI, new[] { ".jpg", ".jpeg", ".png" } }
-                }),
-                    PickerTitle = "Seleccionar imagen"
-                });
-
-                if (archivoSeleccionado != null)
-                {
-                    await EnviarArchivo(archivoSeleccionado, "png");
-                }
-                else
-                {
-                    await DisplayAlert("Advertencia", "No se seleccionó ninguna imagen", "Aceptar");
-                }
-            }
-            else if (selectedOption == "Seleccionar PDF")
+            if (selectedOption == "Seleccionar PDF")
             {
                 // Code for selecting PDF file
                 FileResult archivoSeleccionado = await FilePicker.Default.PickAsync(new PickOptions
@@ -331,13 +308,55 @@ public partial class Ingresar_Info_Usuario : TabbedPage
 
                 if (archivoSeleccionado != null)
                 {
-                    await EnviarArchivo(archivoSeleccionado, "pdf");
+                    ReqIngresarArchivoUsuario req = new ReqIngresarArchivoUsuario();
+                    byte[] archivoBase64 = await ConvertirArchivoABase64(archivoSeleccionado);
+
+                    req.idUsuario = Sesion.usuarioSesion.idUsuario;
+
+                    string nombreArchivo = entryNombre.Text;
+                    if (!nombreArchivo.EndsWith(".pdf", StringComparison.OrdinalIgnoreCase))
+                    {
+                        nombreArchivo += ".pdf";
+                    }
+
+                    req.nombreArchivo = nombreArchivo;
+                    req.tipo = "pdf"; // Set the file type as "pdf" for PDF files
+                    req.archivo = archivoBase64;
+
+                    var jsonContent = new StringContent(JsonConvert.SerializeObject(req), Encoding.UTF8, "application/json");
+                    HttpClient httpClient = new HttpClient();
+
+                    // Enviar la solicitud al servidor
+                    var response = await httpClient.PostAsync(laURL + "api/usuario/ingresarArchivoUsuario", jsonContent);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                         var responseContent = await response.Content.ReadAsStringAsync();
+                        ResIngresarArchivosUsuarios res = new ResIngresarArchivosUsuarios();
+                        
+                        res = JsonConvert.DeserializeObject<ResIngresarArchivosUsuarios>(responseContent);
+                        if (res.resultado)
+
+                        {
+                            await DisplayAlert("Exitoso", "Archivo enviado correctamente", "Aceptar");
+                        await Navigation.PushAsync(new Perfil());
+                        }
+                        else
+                        {
+                            await DisplayAlert("Error", "El usuario fallo al actualizar: " + res.listaDeErrores.FirstOrDefault(), "Aceptar");
+                        }
+                    }
+                    else
+                    {
+                        await DisplayAlert("Error", "Error en el servidor", "Aceptar");
+                    }
                 }
                 else
                 {
-                    await DisplayAlert("Advertencia", "No se seleccionó ningún archivo PDF", "Aceptar");
+                    await DisplayAlert("Advertencia", "No se seleccionó ningún archivo ", "Aceptar");
                 }
             }
+
         }
         catch (Exception ex)
         {
@@ -345,39 +364,7 @@ public partial class Ingresar_Info_Usuario : TabbedPage
         }
     }
 
-    private async Task EnviarArchivo(FileResult archivoSeleccionado, string tipoArchivo)
-    {
-        ReqIngresarArchivoUsuario req = new ReqIngresarArchivoUsuario();
-        byte[] archivoBase64 = await ConvertirArchivoABase64(archivoSeleccionado);
-        req.idUsuario = Sesion.usuarioSesion.idUsuario;
-        string nombreArchivo = entryNombre.Text;
-        if (tipoArchivo == "pdf" && !nombreArchivo.EndsWith(".pdf", StringComparison.OrdinalIgnoreCase))
-        {
-            nombreArchivo += ".pdf";
-        }
-        req.nombreArchivo = nombreArchivo;
-
-        req.tipo = tipoArchivo; // Set the file type as "png" for images or "pdf" for PDF files
-        req.archivo = archivoBase64;
-
-        var jsonContent = new StringContent(JsonConvert.SerializeObject(req), Encoding.UTF8, "application/json");
-        HttpClient httpClient = new HttpClient();
-
-        // Enviar la solicitud al servidor
-        var response = await httpClient.PostAsync(laURL + "api/usuario/ingresarArchivoUsuario", jsonContent);
-
-        if (response.IsSuccessStatusCode)
-        {
-            var responseContent = await response.Content.ReadAsStringAsync();
-            await DisplayAlert("Exitoso", "Archivo enviado correctamente", "Aceptar");
-           // await Navigation.PushAsync(new Perfil());
-
-        }
-        else
-        {
-            await DisplayAlert("Error", "Error en el servidor", "Aceptar");
-        }
-    }
+    
 
     
 }

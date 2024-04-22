@@ -301,9 +301,6 @@
 
     <!--Update archivos usuario-->
     <ContentPage Title="Archivos" BackgroundColor="White">
-        <ContentPage.Resources>
-            <root:BytesToImageConverter x:Key="ToImage"/>
-        </ContentPage.Resources>
         
         <StackLayout>
             <!--actualizar archivos-->
@@ -312,25 +309,24 @@
             <Label Text="Ver Archivos" TextColor="Black" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" />
             <BoxView HeightRequest="1" Color="White" HorizontalOptions="FillAndExpand" Margin="0,10,0,20"/>
 
-            <!-- ARCHIVOS -->
+            <!-- archvios -->
             <Label Text="Archivos" x:Name="lblArchivos" TextColor="Black" FontSize="18" FontAttributes="Bold"/>
-            <CollectionView x:Name="ArchivosListView" ItemsSource="{Binding Archivos}">
+            <CollectionView x:Name="archivosListView" >
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout Orientation="Vertical">
-                            <StackLayout Orientation="Horizontal">
-                                <Label Text="• " TextColor="Black" FontSize="16"/>
-                                <Label Text="{Binding nombreArchivo, StringFormat = ' {0}: '}" TextColor="Black" FontSize="16"/>
-                                <Image Source="{Binding archivo, Converter={StaticResource ToImage}}" Aspect="AspectFill" HeightRequest="200"/>
-                                <Label Text="{Binding tipo,StringFormat = ' {0}'}" TextColor="Black" FontSize="14"/>
+
+                        <Frame Padding="10" Margin="5" CornerRadius="10" HasShadow="True">
+                            <StackLayout Orientation="Horizontal" Spacing="10">
+                                <Label Text="{Binding nombreArchivo, StringFormat = ' {0} '}" TextColor="White" FontSize="16" VerticalOptions="Center"/>
+                                <Button Text="Eliminar" TextColor="White" BackgroundColor="OrangeRed" FontSize="16" FontAttributes="Bold" CornerRadius="5" HorizontalOptions="FillAndExpand" Clicked="Button_Clicked_1" />
                             </StackLayout>
-                            <Button Text="Eliminar" TextColor="White" BackgroundColor="OrangeRed" FontSize="16" FontAttributes="Bold" CornerRadius="5" HorizontalOptions="FillAndExpand" Clicked="Button_Clicked" />
-                        </StackLayout>
+                        </Frame>
+
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-    </StackLayout>
+        </StackLayout>
     </ContentPage>
 
 
