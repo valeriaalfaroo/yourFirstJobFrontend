@@ -1,6 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-	<application android:allowBackup="true" android:icon="@mipmap/appicon" android:roundIcon="@mipmap/appicon_round" android:supportsRtl="true"></application>
+	<application android:allowBackup="true" android:icon="@mipmap/appicon" android:supportsRtl="true"></application>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCOUNT_MANAGER" />
+	<uses-permission android:name="android.permission.BIND_MIDI_DEVICE_SERVICE" />
+	<uses-permission android:name="android.permission.BIND_SCREENING_SERVICE" />
+	<uses-permission android:name="android.permission.CAMERA" />
+	<uses-permission android:name="android.permission.EXECUTE_APP_ACTION" />
+	<uses-permission android:name="android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE" />
+	<uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
+	<uses-permission android:name="android.permission.MANAGE_DEVICE_POLICY_APP_USER_DATA" />
+	<uses-permission android:name="android.permission.MANAGE_DEVICE_POLICY_CAMERA" />
+	<uses-permission android:name="android.permission.MANAGE_DEVICE_POLICY_METERED_DATA" />
+	<uses-permission android:name="android.permission.MANAGE_DEVICE_POLICY_PHYSICAL_MEDIA" />
+	<uses-permission android:name="android.permission.MANAGE_DEVICE_POLICY_PRINTING" />
+	<uses-permission android:name="android.permission.MANAGE_DEVICE_POLICY_RUN_IN_BACKGROUND" />
+	<uses-permission android:name="android.permission.MANAGE_DEVICE_POLICY_SCREEN_CONTENT" />
+	<uses-permission android:name="android.permission.MANAGE_DEVICE_POLICY_USB_DATA_SIGNALLING" />
+	<uses-permission android:name="android.permission.MANAGE_DEVICE_POLICY_USB_FILE_TRANSFER" />
+	<uses-permission android:name="android.permission.MANAGE_DOCUMENTS" />
+	<uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" /> 
+	<uses-permission android:name="android.permission.MANAGE_MEDIA" />
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> 
+	<uses-permission android:name="android.permission.READ_FRAME_BUFFER" />
+	<uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+	<uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+	<uses-permission android:name="android.permission.READ_MEDIA_VISUAL_USER_SELECTED" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="34" />
 </manifest>

@@ -218,17 +218,17 @@ public partial class UpdateUsuario : TabbedPage
                     if (res.usuario.listaArchivosUsuarios.Any())
                     {
                         List<ArchivosUsuario> listaArchivos = res.usuario.listaArchivosUsuarios
-                            .Where(item => item.tipo.ToLower() == "pdf" || item.tipo.ToLower() == "png") // Filter for PDF and png files only
+                            .Where(item => item.tipo.ToLower() == "pdf") // Filter for PDF files only
                             .Select(item => new ArchivosUsuario
                             {
                                 idArchivosUsuarios = item.idArchivosUsuarios,
                                 nombreArchivo = item.nombreArchivo,
                                 archivo = item.archivo,
-                                //  tipo = item.tipo
+                                // tipo = item.tipo
                             }).ToList();
 
                         usuario.listaArchivosUsuarios = listaArchivos;
-                        ArchivosListView.ItemsSource = usuario.listaArchivosUsuarios;
+                        archivosListView.ItemsSource = usuario.listaArchivosUsuarios;
                     }
 
                     #endregion
@@ -256,46 +256,7 @@ public partial class UpdateUsuario : TabbedPage
         }
     }
 
-    //carga los archivos --opcional
-    //obtener los archivos
-    private async void cargarArchivos()
-    {
 
-        try
-        {
-            ReqObtenerArchivosUsuario req = new ReqObtenerArchivosUsuario
-            {
-                idUsuario = Sesion.usuarioSesion.idUsuario //  ID del usuario correspondiente
-            };
-
-            var jsonContent = new StringContent(JsonConvert.SerializeObject(req), Encoding.UTF8, "application/json");
-            HttpClient httpClient = new HttpClient();
-            var response = await httpClient.PostAsync(laURL + "api/usuario/obtenerArchivoUsuario", jsonContent);
-
-            if (response.IsSuccessStatusCode)
-            {
-                var responseContent = await response.Content.ReadAsStringAsync();
-                var res = JsonConvert.DeserializeObject<ResObtenerArchviosUsuario>(responseContent);
-
-                if (res.resultado)
-                {
-                    ArchivosListView.ItemsSource = res.listaArchivosUsuario;
-                }
-                else
-                {
-                    await DisplayAlert("Error", string.Join(Environment.NewLine, res.listaDeErrores), "Aceptar");
-                }
-            }
-            else
-            {
-                await DisplayAlert("Error", "Error en el servidor", "Aceptar");
-            }
-        }
-        catch (Exception ex)
-        {
-            await DisplayAlert("Error Grave", "Elimine la aplicaci�n: " + ex.Message, "Aceptar");
-        }
-    }
 
     //Setea la info usuario
     private void displayUserInfo(Usuario usuario)
@@ -896,22 +857,24 @@ public partial class UpdateUsuario : TabbedPage
         }
     }
 
-    private async void Button_Clicked(object sender, EventArgs e)
+  
+    //borrar archivos
+    private async void Button_Clicked_1(object sender, EventArgs e)
     {
-
         ReqEliminarArchivosUsuario req = new ReqEliminarArchivosUsuario();
 
         var selectedItem = (sender as Button).BindingContext as ArchivosUsuario;
 
+        req.idUsuario = Sesion.usuarioSesion.idUsuario;
         req.idArchivosUsuarios = selectedItem.idArchivosUsuarios;
+
+
         try
         {
             var jsonContent = new StringContent(JsonConvert.SerializeObject(req), Encoding.UTF8, "application/json");
             HttpClient httpClient = new HttpClient();
-            var request = new HttpRequestMessage(HttpMethod.Delete, url + "api/usuario/borrarArchivoUsuario");
-            request.Content = jsonContent;
 
-            var response = await httpClient.SendAsync(request);
+            var response = await httpClient.PostAsync(laURL + "api/usuario/borrarArchivosUsuario", jsonContent);
 
             if (response.IsSuccessStatusCode)
             {
@@ -923,21 +886,19 @@ public partial class UpdateUsuario : TabbedPage
                 if (res.resultado)
                 {
 
-                    await DisplayAlert("Exito", "¡El archivo se elimino correctamente!", "Aceptar");
-                   // await Navigation.PushAsync(new Perfil());
+                    await DisplayAlert("Exito", "¡El usuario se actualizo correctamente!", "Aceptar");
+                    await Navigation.PushAsync(new Perfil());
 
                 }
                 else
                 {
-                    await DisplayAlert("Error", "El archvio fallo al eliminar: " + res.listaDeErrores.FirstOrDefault(), "Aceptar");
+                    await DisplayAlert("Error", "El usuario fallo al actualizar: " + res.listaDeErrores.FirstOrDefault(), "Aceptar");
                 }
             }
-           else
+            else
             {
-                var statusCode = response.StatusCode;
-                var responseContent = await response.Content.ReadAsStringAsync();
-                // Log or inspect statusCode and responseContent
-                await DisplayAlert("Error", $"Server responded with status code: {statusCode}\nResponse content: {responseContent}", "Aceptar");
+                await DisplayAlert("Error", "Error en el servidor", "Aceptar");
+
             }
 
         }
@@ -945,8 +906,5 @@ public partial class UpdateUsuario : TabbedPage
         {
             await DisplayAlert("Error Grave", "Elimine la aplicacion: " + ex, "Aceptar");
         }
-
     }
-
-    
 }
