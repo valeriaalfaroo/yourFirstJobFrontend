@@ -33,8 +33,8 @@ HeightRequest="30"/>
                                         <Label Text="{Binding sitioWeb,StringFormat='Sitio Web:{0}'}" TextColor="Black"/>
                                         <Label Text="{Binding telefono,StringFormat='Telefono:{0}'}" TextColor="Black"/>
 
-                                        <Label Text="Idiomas:"/>
-                                        <CollectionView ItemsSource="{Binding listaIdiomas}">
+                                    <Label Text="Idiomas:" BackgroundColor="Gray"/>
+                                    <CollectionView ItemsSource="{Binding listaIdiomas}" >
                                             <CollectionView.ItemTemplate>
                                                 <DataTemplate>
                                                     <StackLayout>
@@ -46,7 +46,7 @@ HeightRequest="30"/>
                                             </CollectionView.ItemTemplate>
                                         </CollectionView>
 
-                                        <Label Text="Habilidades:"/>
+                                    <Label Text="Habilidades:" BackgroundColor="Gray"/>
                                         <CollectionView ItemsSource="{Binding listaHabilidades}">
                                             <CollectionView.ItemTemplate>
                                                 <DataTemplate>
@@ -59,7 +59,7 @@ HeightRequest="30"/>
                                             </CollectionView.ItemTemplate>
                                         </CollectionView>
 
-                                        <Label Text="Experiencia Laboral:"/>
+                                    <Label Text="Experiencia Laboral:" BackgroundColor="Gray"/>
                                         <CollectionView ItemsSource="{Binding listaExperienciaLaboral}">
                                             <CollectionView.ItemTemplate>
                                                 <DataTemplate>
@@ -75,20 +75,20 @@ HeightRequest="30"/>
                                         </CollectionView>
                                         
                                         <!-- Archivos-->
-                                        <Label Text="Archivos adjuntos:"/>
-                                        <CollectionView ItemsSource="{Binding listaArchivosUsuario}">
-                                            <CollectionView.ItemTemplate>
-                                                <DataTemplate>
-                                                    <StackLayout>
-                                                        <Label Text="{Binding nombreArchivo}" TextColor="Black" />
-         
-                                                    </StackLayout>
-                                                </DataTemplate>
-                                            </CollectionView.ItemTemplate>
-                                        </CollectionView>
+                                        <Label Text="Archivos adjuntos:" BackgroundColor="Gray"/>
+                                    <CollectionView x:Name="usuarioListView" ItemsSource="{Binding listaArchivosUsuarios}">
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackLayout>
+                                                    <!-- Aquí se muestra el nombre del archivo -->
+                                                    <Label Text="{Binding nombreArchivo}" TextColor="Black" />
+                                                </StackLayout>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
 
 
-                                        <Button
+                                    <Button
      x:Name="btnAplicar"
      Text="Aplicar a este trabajo"
      Clicked="btnAplicar_Clicked" BackgroundColor="Black" TextColor="White"/>

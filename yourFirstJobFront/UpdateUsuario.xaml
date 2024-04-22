@@ -314,14 +314,16 @@
             <CollectionView x:Name="archivosListView" >
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-
-                        <Frame Padding="10" Margin="5" CornerRadius="10" HasShadow="True">
-                            <StackLayout Orientation="Horizontal" Spacing="10">
-                                <Label Text="{Binding nombreArchivo, StringFormat = ' {0} '}" TextColor="White" FontSize="16" VerticalOptions="Center"/>
-                                <Button Text="Eliminar" TextColor="White" BackgroundColor="OrangeRed" FontSize="16" FontAttributes="Bold" CornerRadius="5" HorizontalOptions="FillAndExpand" Clicked="Button_Clicked_1" />
+                        <Grid Padding="10" Margin="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Grid.Column="0" Orientation="Horizontal" Spacing="10">
+                                <Label Text="{Binding nombreArchivo}" TextColor="Black" FontSize="16" BackgroundColor="Transparent" HorizontalOptions="StartAndExpand"  />
                             </StackLayout>
-                        </Frame>
-
+                            <Button Grid.Column="1" Text="Eliminar" TextColor="White" BackgroundColor="OrangeRed" FontSize="16" FontAttributes="Bold" CornerRadius="5" Clicked="Button_Clicked_1" />
+                        </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
