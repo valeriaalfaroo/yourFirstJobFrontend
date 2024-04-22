@@ -874,7 +874,7 @@ public partial class UpdateUsuario : TabbedPage
             var jsonContent = new StringContent(JsonConvert.SerializeObject(req), Encoding.UTF8, "application/json");
             HttpClient httpClient = new HttpClient();
 
-            var response = await httpClient.PostAsync(url + "api/usuario/borrarArchivosUsuario", jsonContent);
+            var response = await httpClient.PostAsync(laURL + "api/usuario/borrarArchivosUsuario", jsonContent);
 
             if (response.IsSuccessStatusCode)
             {
