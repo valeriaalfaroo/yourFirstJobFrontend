@@ -8,8 +8,9 @@ namespace yourFirstJobFront.Entidades.request
 {
     public class ReqEliminarArchivosUsuario
     {
-        public int idArchivosUsuarios { get; set; }
+        public int idUsuario { get; set; }
 
+        public int idArchivosUsuarios { get; set; }
 
     }
 }
