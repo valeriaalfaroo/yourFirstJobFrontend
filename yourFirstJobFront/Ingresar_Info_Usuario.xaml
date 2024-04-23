@@ -192,7 +192,7 @@
             <Entry x:Name="entryNombre" Placeholder="Nombre Archivo" TextColor="Black" FontSize="16" BackgroundColor="#F2F2F2"    
                    />
             <!-- Botón de enviar archivo -->
-            <Button x:Name="btnEnviarArchivos" Text="Enviar Archivos" Clicked="btnEnviarArchivos_Clicked" FontSize="16" FontAttributes="Bold" CornerRadius="5" Margin="0,30,0,0" HorizontalOptions="FillAndExpand"/>
+            <Button x:Name="btnEnviarArchivos" BackgroundColor="#FF5733" Text="Enviar Archivos" Clicked="btnEnviarArchivos_Clicked" FontSize="16" FontAttributes="Bold" CornerRadius="5" Margin="0,30,0,0" HorizontalOptions="FillAndExpand"/>
 
         </StackLayout>
     </ContentPage>
