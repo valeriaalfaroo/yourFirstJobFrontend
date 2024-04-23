@@ -192,7 +192,7 @@ public partial class Perfil : ContentPage
                     {
                         //No hay elementos
                         lblEstudios.IsVisible = false;
-                        lineEstudios.IsVisible = true;
+                        lineEstudios.IsVisible = false;
 
                     }
 
@@ -255,6 +255,19 @@ public partial class Perfil : ContentPage
 
                         usuario.listaArchivosUsuarios = listaArchivos;
                         archivosListView.ItemsSource = usuario.listaArchivosUsuarios; 
+
+                        if (res.usuario.listaArchivosUsuarios.Count == 1)
+                        {
+                            //Solo hay foto de perfil no hay pdfs
+                            lblArchivos.IsVisible = false;
+                            lineArchivos.IsVisible = false;
+                        }
+                    } 
+                    else
+                    {
+                        //No hay elementos
+                        lblArchivos.IsVisible = false;
+                        lineArchivos.IsVisible = false;
                     }
 
                     
@@ -374,10 +387,13 @@ public partial class Perfil : ContentPage
 
                  if (archivoSeleccionado != null)
                  {
-                   //  idImagen = usuario.listaArchivosUsuarios[0].idArchivosUsuarios; 
+                    //  idImagen = usuario.listaArchivosUsuarios[0].idArchivosUsuarios; 
 
-                     await EnviarArchivo( archivoSeleccionado, selectedImageId); 
-                 }
+                    await EnviarArchivo(archivoSeleccionado, selectedImageId);
+
+                    await Navigation.PushAsync(new Perfil());
+
+                }
                  else
                  {
                      await DisplayAlert("Advertencia", "No se seleccionó ninguna imagen", "Aceptar");
