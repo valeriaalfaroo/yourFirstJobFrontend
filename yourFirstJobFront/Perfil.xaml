@@ -67,13 +67,16 @@
             <CollectionView x:Name="habilidadesListView">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        
-                            <StackLayout Orientation="Horizontal">
+
+                        <StackLayout Orientation="Vertical" Margin="0,0,0,20">
+                            <HorizontalStackLayout>
                                 <Label Text="• " TextColor="Black" FontSize="16"/>
                                 <Label Text="{Binding categoria, StringFormat = ' {0}:  '}" TextColor="Black" FontSize="16"/>
-                                <Label Text="{Binding descripcion,StringFormat = '  {0}'}" TextColor="Black" FontSize="14"/>
-                            </StackLayout>
-                        
+                            </HorizontalStackLayout>
+
+                            <Label Text="{Binding descripcion,StringFormat = '{0}'}" TextColor="Black" FontSize="14"/>
+                        </StackLayout>
+
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

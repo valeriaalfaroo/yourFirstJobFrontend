@@ -14,7 +14,23 @@ namespace yourFirstJobFront.Utilitarios
 
         public static void CerrarSeccion()
         {
-            Sesion.usuarioSesion = null;
+            Sesion.usuarioSesion.idUsuario = 0;
+            Sesion.usuarioSesion.nombreUsuario = "";
+            Sesion.usuarioSesion.apellidos = "";
+            Sesion.usuarioSesion.correo = "";
+            Sesion.usuarioSesion.telefono = 0;
+            Sesion.usuarioSesion.fechaNacimiento = DateTime.MinValue;
+            Sesion.usuarioSesion.idRegion = 0;
+            Sesion.usuarioSesion.contrasena = "";
+            Sesion.usuarioSesion.sitioWeb = "";
+            Sesion.usuarioSesion.fechaRegistro = DateTime.MinValue;
+            Sesion.usuarioSesion.estado = false;
+            Sesion.usuarioSesion.region = new Region1();
+            Sesion.usuarioSesion.listaIdiomas = new List<Idiomas>();
+            Sesion.usuarioSesion.listaHabilidades = new List<Habilidades>();
+            Sesion.usuarioSesion.listaEstudios = new List<Estudios>();
+            Sesion.usuarioSesion.listaArchivosUsuarios = new List<ArchivosUsuario>();
+            Sesion.usuarioSesion.listaExperienciaLaboral = new List<ExperienciaLaboral>();
         }
     }
 
