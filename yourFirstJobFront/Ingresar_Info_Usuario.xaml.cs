@@ -316,12 +316,12 @@ public partial class Ingresar_Info_Usuario : TabbedPage
                     string nombreArchivo = entryNombre.Text;
                     if (!nombreArchivo.EndsWith(".pdf", StringComparison.OrdinalIgnoreCase))
                     {
-                        nombreArchivo += ".pdf";
+                        nombreArchivo += ".pdf"; 
                     }
 
                     req.nombreArchivo = nombreArchivo;
                     req.tipo = "pdf"; // Set the file type as "pdf" for PDF files
-                    req.archivo = archivoBase64;
+                    req.archivo = archivoBase64; 
 
                     var jsonContent = new StringContent(JsonConvert.SerializeObject(req), Encoding.UTF8, "application/json");
                     HttpClient httpClient = new HttpClient();

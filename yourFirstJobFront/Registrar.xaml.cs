@@ -29,7 +29,7 @@ namespace yourFirstJobFront
                 usuario.correo = txtCorreo.Text;
                 usuario.telefono = int.Parse(txtTelefono.Text);
                 usuario.fechaNacimiento = pikerFecha.Date;
-                usuario.idRegion = pickerRegion.SelectedIndex + 1;
+                usuario.idRegion = pickerRegion.SelectedIndex + 1;  
                 usuario.contrasena = txtPassword.Text;
 
                 req.usuario = usuario;
