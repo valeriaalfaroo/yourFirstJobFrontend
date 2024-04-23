@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace yourFirstJobFront
 {
-    public class BytesToImageConverter : IValueConverter
+    public class BytesToImageConverter : IValueConverter //implementar interfaz
     {
         public BytesToImageConverter() { }
 
@@ -16,9 +16,9 @@ namespace yourFirstJobFront
             if (value == null) return null;
 
             var bytes = (byte[])value;
-            var streamSource = ImageSource.FromStream(() => new MemoryStream(bytes));
+            var streamSource = ImageSource.FromStream(() => new MemoryStream(bytes)); //guarfa array en memoria
 
-            return streamSource;
+            return streamSource; //retorna los bytes
         }
 
         public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

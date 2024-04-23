@@ -17,11 +17,11 @@ namespace yourFirstJobFront.Entidades.entities
         public string nombreArchivo { get; set; }
         public byte[] archivo { get; set; }
         public string tipo { get; set; }
-        public ICommand DownloadCommand { get; private set; }
+        public ICommand DownloadCommand { get; private set; } //
 
         public ArchivosUsuario()
         {
-            DownloadCommand = new Command(() => DownloadPdf(this));
+            DownloadCommand = new Command(() => DownloadPdf(this)); //se crea un nuevo comando
         }
 
         private static void DownloadPdf(ArchivosUsuario archivo)

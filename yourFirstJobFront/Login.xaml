@@ -3,28 +3,35 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="yourFirstJobFront.Login"
              Title="">
-    <Grid x:Name="Contenedor" BackgroundColor="White">
-        <Frame Margin="10,0,10,0" VerticalOptions="Center">
+    <Grid x:Name="Contenedor" BackgroundColor="Azure">
+        <Frame Margin="10,0,10,0" VerticalOptions="Center" BackgroundColor="AntiqueWhite">
             <VerticalStackLayout Spacing="15" VerticalOptions="Center">
                 <Label FontAttributes="Bold"
-             FontSize="Large"
-             HorizontalOptions="Center"
-             Text="yourFirstJob."/>
-                <Label Text="Username"/>
+            FontSize="Large"
+            HorizontalOptions="Center"
+            Text="yourFirstJob."
+            TextColor="Orange"/>
+                <Label Text="Username" TextColor="Black"/>
                 <Entry
-             x:Name="txtUsername"
-             Keyboard="Text"/>
-                <Label Text="Contraseña"/>  
+            x:Name="txtUsername"
+            Keyboard="Text"
+            Placeholder="Ingresa tu nombre de usuario"
+            PlaceholderColor="LightGray"
+            TextColor="Black"/>
+                <Label Text="Contraseña" TextColor="Black"/>
                 <Entry
-             x:Name="txtPassword"
-             IsPassword="True"
-             Keyboard="Text"/>
+            x:Name="txtPassword"
+            IsPassword="True"
+            Keyboard="Text"
+            Placeholder="Ingresa tu contraseña"
+            PlaceholderColor="LightGray"
+            TextColor="Black"/>
                 <Button
              x:Name="btnIngresar"
              Text="Ingresar"
              Clicked="btnIngresar_Clicked" BackgroundColor="OrangeRed"/>
 
-                <Label Text="No tienes una cuenta? Has click en el boton de abajo"  VerticalOptions="Center" />
+                <Label Text="No tienes una cuenta? Has click en el boton de abajo"  VerticalOptions="Center" TextColor="Black" />
                 <Button Text="Registrarse" Clicked="OnRegisterClicked" TextColor="OrangeRed" BackgroundColor="Transparent" BorderColor="Transparent" />
 
             </VerticalStackLayout>

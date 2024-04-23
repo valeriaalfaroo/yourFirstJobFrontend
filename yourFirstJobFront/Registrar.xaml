@@ -8,30 +8,30 @@
             <Frame Margin="10,0,10,0" VerticalOptions="Center">
                 <VerticalStackLayout Spacing="15" VerticalOptions="Center">
                     <Label FontAttributes="Bold"
-         FontSize="Large"
+         FontSize="Large" TextColor="Orange"  
          HorizontalOptions="Center"
          Text="yourFirstJob."/>
-                    <Label Text="Username"/>
-                    <Entry
-                x:Name="txtUsername"
+                    <Label Text="Username" TextColor="Black"/>
+                    <Entry  BackgroundColor="#F2F2F2"
+                x:Name="txtUsername" TextColor="Black"
          Keyboard="Text"/>
-                    <Label Text="Apellidos"/>
-                    <Entry
+                    <Label Text="Apellidos" TextColor="Black"/>
+                    <Entry  BackgroundColor="#F2F2F2"
                  x:Name="txtApellidos"
-                 Keyboard="Text"/>
-                    <Label Text="Correo"/>
+                 Keyboard="Text" TextColor="Black"/>
+                    <Label Text="Correo" TextColor="Black"/>
                     <Entry
-                 x:Name="txtCorreo"
-                 Keyboard="Email"/>
-                    <Label Text="Telefono"/>
+                 x:Name="txtCorreo"  BackgroundColor="#F2F2F2"
+                 Keyboard="Email" TextColor="Black"/>
+                    <Label Text="Telefono" TextColor="Black"/>
                     <Entry
-                 x:Name="txtTelefono"
-                 Keyboard="Telephone"/>
-                    
-                    <Label Text="Fecha de nacimiento"/>
+                 x:Name="txtTelefono"  BackgroundColor="#F2F2F2"
+                 Keyboard="Telephone" TextColor="Black"/>
+
+                    <Label Text="Fecha de nacimiento" TextColor="Black"/>
                     <DatePicker x:Name="pikerFecha" MinimumDate="01/01/1900" TextColor="Black" BackgroundColor="#F2F2F2" />
 
-                    
+
                     <Picker x:Name="pickerRegion" Title="Región" TextColor="Black" FontSize="16" BackgroundColor="#F2F2F2">
                         <Picker.ItemsSource>
                             <x:Array Type="{x:Type x:String}">
@@ -44,15 +44,11 @@
                         </Picker.ItemsSource>
                     </Picker>
 
-
-
-
-
-                    <Label Text="Contraseña"/>
+                    <Label Text="Contraseña" TextColor="Black"/>
                     <Entry
-         x:Name="txtPassword"
+         x:Name="txtPassword"  BackgroundColor="#F2F2F2"
          IsPassword="True"
-         Keyboard="Text"/>
+         Keyboard="Text" TextColor="Black"/>
                     <Button 
          x:Name="btnIngresar"
          Text="Ingresar"
