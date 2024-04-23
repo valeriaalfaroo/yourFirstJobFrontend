@@ -403,7 +403,7 @@ public partial class Perfil : ContentPage
         HttpClient httpClient = new HttpClient();
 
         // Enviar la solicitud al servidor
-        var response = await httpClient.PostAsync(newU + "api/usuario/actualizarFotoPerfil", jsonContent);
+        var response = await httpClient.PostAsync(url + "api/usuario/actualizarFotoPerfil", jsonContent);
 
         if (response.IsSuccessStatusCode)
         {
