@@ -321,6 +321,7 @@ public partial class Perfil : ContentPage
 
     private void displayUserInfo(Usuario usuario)
     {
+        lblNombreCompleto.Text = usuario.nombreUsuario + " " + usuario.apellidos;
         lblCorreo.Text = "Correo: " + usuario.correo;
         lblTelefono.Text = "Telefono: " + usuario.telefono;
         lblFechaDeNacimiento.Text = "Fecha de nacimiento: " + usuario.fechaNacimiento;
