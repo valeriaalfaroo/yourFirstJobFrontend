@@ -180,19 +180,19 @@
 
     <!--ingresar archivos usuario-->
     <ContentPage Title="Archivos" >
-        <StackLayout>
+        <StackLayout Margin="20">
 
             <!-- Título -->
-            <Label Text="Ingresar Archvio" TextColor="Black" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" />
+            <Label Text="Ingresar Archivo" TextColor="Black" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" />
 
             <BoxView HeightRequest="1" Color="LightGray" HorizontalOptions="FillAndExpand" Margin="0,10,0,20"/>
 
             <!-- nombreArchvio -->
             <Label Text="Nombre del archivo:" TextColor="#A9A9A9" FontSize="12" />
-            <Entry x:Name="entryNombre" Placeholder="escriba el nombre" TextColor="Black" FontSize="16" BackgroundColor="#F2F2F2"    
+            <Entry x:Name="entryNombre" Placeholder="Nombre Archivo" TextColor="Black" FontSize="16" BackgroundColor="#F2F2F2"    
                    />
             <!-- Botón de enviar archivo -->
-            <Button x:Name="btnEnviarArchivos" Text="Enviar Archivos" Clicked="btnEnviarArchivos_Clicked" />
+            <Button x:Name="btnEnviarArchivos" Text="Enviar Archivos" Clicked="btnEnviarArchivos_Clicked" FontSize="16" FontAttributes="Bold" CornerRadius="5" Margin="0,30,0,0" HorizontalOptions="FillAndExpand"/>
 
         </StackLayout>
     </ContentPage>

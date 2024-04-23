@@ -327,7 +327,7 @@ public partial class Ingresar_Info_Usuario : TabbedPage
                     HttpClient httpClient = new HttpClient();
 
                     // Enviar la solicitud al servidor
-                    var response = await httpClient.PostAsync(laURL + "api/usuario/ingresarArchivoUsuario", jsonContent);
+                    var response = await httpClient.PostAsync(url + "api/usuario/ingresarArchivoUsuario", jsonContent);
 
                     if (response.IsSuccessStatusCode)
                     {
